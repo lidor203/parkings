@@ -1,0 +1,20 @@
+{
+  "mode": "development",
+  "scripts": {
+    "build": "webpack watch",
+    "client": "webpack serve --open"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "axios": "^1.2.1",
+    "https": "^1.0.0",
+    "https-browserify": "^1.0.0"
+  }
+}
