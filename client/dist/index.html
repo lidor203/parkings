@@ -30,27 +30,27 @@
             <div id="formContent">
                 <div class="inputDiv">
                     <label for="inputRegisterId">:תז/מא</label>
-                    <input type="text" class="textInput" id="inputRegisterId">
+                    <input type="text" class="textInput" id="inputRegisterId" required>
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterName">:שם מלא</label>
-                    <input type="text" class="textInput" id="inputRegisterName">
+                    <input type="text" class="textInput" id="inputRegisterName" required>
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterPhone">:טלפון</label>
-                    <input type="text" class="textInput" id="inputRegisterPhone">
+                    <input type="text" class="textInput" id="inputRegisterPhone" required>
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterCarNumber">:מספר רכב</label>
-                    <input type="text" class="textInput" id="inputRegisterCarNumber">
+                    <input type="text" class="textInput" id="inputRegisterCarNumber" required>
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterLeaveTime">:זמן עזיבה משוער</label>
-                    <input type="time" id="inputRegisterLeaveTime">
+                    <input type="time" id="inputRegisterLeaveTime" required>
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterPassword">:סיסמה</label>
-                    <input type="text" class="textInput" id="inputRegisterPassword">
+                    <input type="text" class="textInput" id="inputRegisterPassword" required>
                 </div>
                 <button id="registerButton">הרשם</button>
             </div>
@@ -69,7 +69,6 @@
         </div>
     </div>
     <div id="dialogs">
-        <datalist id="rolesList"></datalist>
         <div class="dialog" id="showJobsDialog">
             <h2>ניהול בעלי תפקידים</h2>
             <div class="autocomplete" style="width:300px;">
@@ -100,7 +99,10 @@
                     </tr>
                     <tr>
                         <td><label for="userRoleForJob">תפקיד:</label></td>
-                        <td><input list="rolesList" id="userRoleForJob"><br></td>
+                        <td class="rolesInput">
+                            <input list="" autocomplete="off" id="userRoleForJob">
+                            <div class="roles hidden" id="rolesDatalistForJob"></div><br>
+                        </td>                        
                     </tr>
                 </table>
             </div>
@@ -174,7 +176,10 @@
                     </tr>
                     <tr>
                         <td><label for="userRoleForJob">תפקיד:</label></td>
-                        <td><input list="rolesList" id="userRoleForUsers"><br></td>
+                        <td class="rolesInput">
+                            <input list="" autocomplete="off" id="userRoleForUsers">
+                            <div class="roles hidden" id="rolesDatalistForUsers"></div><br>
+                        </td>
                     </tr>
                 </table>
             </div>

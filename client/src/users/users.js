@@ -132,14 +132,36 @@ export class UsersFunctionality {
                 if (res.status === 200)
                 {
                     const rolesDescriptions = res.data;
-                    const rolesList = document.getElementById("rolesList");
-                    const keys = Object.keys(rolesDescriptions);
+                    const inputElement = document.getElementById("userRoleForUsers");
+                    const rolesElement = document.getElementById("rolesDatalistForUsers");
+                    const roles = Object.values(rolesDescriptions);
 
-                    for (let i = 0; i < keys.length; i++) {
-                        const listOption = document.createElement("option");
-                        listOption.value = rolesDescriptions[keys[i]]["value"];
-                        rolesList.appendChild(listOption);
-                    }
+                    inputElement.addEventListener('focus', () => {
+                        rolesElement.classList.remove('hidden');
+                    });
+
+                    document.addEventListener('click', (event) => {
+                        if (!event.composedPath().includes(inputElement.parentElement)) {
+                            rolesElement.classList.add('hidden');
+                        }
+                    });
+
+                    const selectOption = (event) => {
+                        inputElement.value = event.target.textContent;
+                        rolesElement.classList.add('hidden');
+                    };
+
+                    const roleElements = roles.map(role => {
+                        const listOption = document.createElement("div");
+                        listOption.className = 'role';
+                        listOption.textContent = role["value"];                        
+                        listOption.addEventListener('click', selectOption);
+
+                        return listOption;
+                    });
+
+                    rolesElement.textContent = '';
+                    rolesElement.append(...roleElements);
                 } 
             })
             .catch(err=>{

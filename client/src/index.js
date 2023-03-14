@@ -62,3 +62,15 @@ document.getElementById("loginButton").onclick = login;
 document.getElementById("toLoginButton").onclick = gotoLogin;
 document.getElementById("registerButton").onclick = register;
 document.getElementById("toRegisterButton").onclick = gotoRegister;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input[required]');
+    
+    inputs.forEach(input => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'requiredInputWrapper';
+        
+        input.parentNode.insertBefore(wrapper, input);
+        wrapper.appendChild(input);
+    });
+});

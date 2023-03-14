@@ -39,7 +39,6 @@ body {
 }
 
 input[type=text] {
-  background-color: #f1f1f1;
   width: 100%;
 }
 input[type=submit] {
@@ -431,4 +430,47 @@ ul {
     -webkit-transition: 0.1s;
     -o-transition: 0.1s;
     transition: 0.1s;
+  }
+
+  .rolesInput {
+    position: relative;
+  }
+
+  .rolesInput .roles {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 1;
+    text-align: right;
+    background: white;
+
+    border: 1px solid black;
+  }
+
+  .rolesInput .roles.hidden {
+    display: none;
+  }
+
+  .rolesInput .role {
+    cursor: pointer;
+  }
+
+  .rolesInput .role:hover {
+    background-color: rgba(0,0,0,0.1);
+  }
+
+  .requiredInputWrapper {
+    position: relative;
+    --padding: 4px; 
+  }
+
+  .requiredInputWrapper::after {
+    content: 'חובה';
+    position: absolute;
+    top: calc(-0.5em - var(--padding) / 2);
+    left: 4px;
+    font-size: 12px;
+    transform: translateY(-25%);
+    background: white;
+    padding: 0 4px;
   }
