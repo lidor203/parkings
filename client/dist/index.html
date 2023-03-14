@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <title>Shalishut</title>
+</head>
+<body>
+    <script>
+        function autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+            the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function(e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) { 
+                    return false;
+                }
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                /*for each item in the array...*/
+                for (i = 0; i < arr.length; i++) {
+                /*check if the item starts with the same letters as the text field value:*/
+                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function(e) {
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            inp.dispatchEvent(new KeyboardEvent('keyup', {'key': 'Enter'}));
+                            /*close the list of autocompleted values,
+                            (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function(e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) {
+                    x = x.getElementsByTagName("div");
+                }
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } 
+                else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } 
+                else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        /*and simulate a click on the "active" item:*/
+                        if (x) {
+                            x[currentFocus].click();
+                        }
+                    }
+                }
+            });
+
+            function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x) {
+                    return false;
+                }
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length) {
+                    currentFocus = 0;
+                }
+                if (currentFocus < 0) {
+                    currentFocus = (x.length - 1);
+                }
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+                
+            function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                    }
+            }
+
+            function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                except the one passed as an argument:*/
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+
+            /*execute a function when someone clicks in the document:*/
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+            });
+        }
+    </script>
+    <div id="screens">
+        <div class="screen" id="login">
+            <h2>התחברות</h2>
+            <div id="formContent">
+                <div class="inputDiv">
+                    <label for="inputLoginId">:תז/מא</label>
+                    <input type="text" class="textInput" id="inputLoginId" value="1">
+                </div>
+                <div class="inputDiv">
+                    <label for="inputLoginPassword">:סיסמה</label>
+                    <input type="password" id="inputLoginPassword" value="1">
+                </div>
+                <button id="loginButton">כניסה</button>
+            </div>           
+            <p>אין לך חשבון? <a class="gotoButton" id="toRegisterButton">להרשמה</a></p>
+        </div>
+        <div class="screen" id="register">
+            <h2>הרשמה</h2>
+            <div id="formContent">
+                <div class="inputDiv">
+                    <label for="inputRegisterId">:תז/מא</label>
+                    <input type="text" class="textInput" id="inputRegisterId">
+                </div>
+                <div class="inputDiv">
+                    <label for="inputRegisterName">:שם מלא</label>
+                    <input type="text" class="textInput" id="inputRegisterName">
+                </div>
+                <div class="inputDiv">
+                    <label for="inputRegisterPhone">:טלפון</label>
+                    <input type="text" class="textInput" id="inputRegisterPhone">
+                </div>
+                <div class="inputDiv">
+                    <label for="inputRegisterCarNumber">:מספר רכב</label>
+                    <input type="text" class="textInput" id="inputRegisterCarNumber">
+                </div>
+                <div class="inputDiv">
+                    <label for="inputRegisterLeaveTime">:זמן עזיבה משוער</label>
+                    <input type="time" id="inputRegisterLeaveTime">
+                </div>
+                <div class="inputDiv">
+                    <label for="inputRegisterPassword">:סיסמה</label>
+                    <input type="text" class="textInput" id="inputRegisterPassword">
+                </div>
+                <button id="registerButton">הרשם</button>
+            </div>
+            <p>כבר יש לך חשבון? <a class="gotoButton" id="toLoginButton">להתחברות</a></p>
+        </div>
+        <div class="screen" id="profile">
+            <div class="details">
+                <p></p>
+                <h2 id="name"></h2>
+            </div>
+            <div id="actions">
+                <!-- actions will by dynamiclly append here according to the user role -->
+            </div>
+        </div>
+        <div id="loader-circle" style="position: absolute;bottom: 5%; visibility: hidden; z-index: 3;" class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div id="dialogs">
+        <datalist id="rolesList"></datalist>
+        <div class="dialog" id="showJobsDialog">
+            <p>ניהול בעלי תפקידים</p>
+            <div class="autocomplete" style="width:300px;">
+                <input type="text" class="textInput" id="myJobsInput" placeholder="הכנס שם או מספר תעודה מזהה">
+            </div>
+            <form method="dialog" autocomplete="off">
+                <table id="jobsTable" class="table">
+                </table>
+                <button class="closeDialogButton">לסגירה</button>
+            </form>
+        </div>
+        <div class="dialog" id="showNewJobDialog">
+            <p>הוספת/עריכת בעל תפקיד</p>
+            <h4>פרטי התפקידן:</h4>
+            <div>
+                <table>
+                    <tr>
+                        <td><label for="userIDForJob">תז/מא:</label></td>
+                        <td><input type="text" class="textInput" id="userIDForJob"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userNameForJob">שם מלא:</label></td>
+                        <td><input type="text" class="textInput" id="userNameForJob" readonly><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userPhoneForJob">טלפון:</label></td>
+                        <td><input type="text" class="textInput" id="userPhoneForJob" readonly><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userRoleForJob">תפקיד:</label></td>
+                        <td><input list="rolesList" id="userRoleForJob"><br></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <button id="showNewJobSubmitButton" class="submit">שגר בקשה</button>
+                <button id="showNewJobCloseButton" class="closeDialogButton">לסגירה</button>
+            </div>
+        </div>
+        <div class="dialog" id="showRolesDialog">
+            <p>ניהול התפקידים במערכת</p>
+            <div class="autocomplete" style="width:300px;">
+                <input type="text" class="textInput" id="myRolesInput" placeholder="הכנס שם או מספר תעודה מזהה">
+            </div>
+            <form method="dialog" autocomplete="off">
+                <table id="rolesTable" class="table">
+                </table>
+                <button class="closeDialogButton">לסגירה</button>
+            </form>
+        </div>
+        <div class="dialog" id="showNewRoleDialog">
+            <p>הוספת/עריכת תפקיד</p>
+            <h4>פרטי התפקידים:</h4>
+            <div>
+                <table>
+                    <tr>
+                        <td><label for="roleIDForRole">מזהה תפקיד:</label></td>
+                        <td><input type="text" class="textInput" id="roleIDForRole" readonly><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="roleValueForRole">תיאור התפקיד:</label></td>
+                        <td><input type="text" class="textInput" id="roleValueForRole"><br></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <button id="showNewRoleSubmitButton" class="submit">שגר בקשה</button>
+                <button id="showNewRoleCloseButton" class="closeDialogButton">לסגירה</button>
+            </div>
+        </div>
+        <div class="dialog" id="showUsersDialog">
+            <p>ניהול המשתמשים</p>
+            <div class="autocomplete" style="width:300px;">
+                <input type="text" class="textInput" id="myUsersInput" placeholder="הכנס שם או מספר תעודה מזהה">
+            </div>
+            <form method="dialog" autocomplete="off">
+                <table id="usersTable" class="table">
+                </table>
+                <button class="closeDialogButton">לסגירה</button>
+            </form>
+        </div>
+        <div class="dialog" id="showNewUserDialog">
+            <p>הוספת/עריכת משתמש</p>
+            <h4>פרטי המשתמש:</h4>
+            <div>
+                <table>
+                    <tr>
+                        <td><label for="userIDForUsers">תז/מא:</label></td>
+                        <td><input type="text" class="textInput" id="userIDForUsers"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userNameForUsers">שם מלא:</label></td>
+                        <td><input type="text" class="textInput" id="userNameForUsers"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userPhoneForUsers">טלפון:</label></td>
+                        <td><input type="text" class="textInput" id="userPhoneForUsers"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userTimeToAlertForUsers">זמן מועדף להתראה:</label></td>
+                        <td><input type="text" class="textInput" id="userTimeToAlertForUsers"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userRoleForJob">תפקיד:</label></td>
+                        <td><input list="rolesList" id="userRoleForUsers"><br></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <button id="showNewUserSubmitButton" class="submit">שגר בקשה</button>
+                <button id="showNewUserCloseButton" class="closeDialogButton">לסגירה</button>
+            </div>
+        </div>
+        <div class="dialog" id="showBamDialog">
+            <p>ניהול ביטחון מידע</p>
+            <div class="autocomplete" style="width:300px;">
+                <input type="text" class="textInput" id="myBamInput" placeholder="הכנס שם או מספר תעודה מזהה">
+            </div>
+            <form method="dialog" autocomplete="off">
+                <table id="bamTable" class="table">
+                </table>
+                <button class="closeDialogButton">לסגירה</button>
+            </form>
+        </div>
+        <div class="dialog" id="showNewBamDialog">
+            <p>הוספת/עריכת סיווג ביטחוני</p>
+            <h4>פרטי הסיווג הביטחוני של המשתמש:</h4>
+            <div>
+                <table>
+                    <tr>
+                        <td><label for="userIDForBam">מזהה המשתמש:</label></td>
+                        <td><input type="text" class="textInput" id="userIDForBam" required><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userNameForBam">שם המשתמש:</label></td>
+                        <td><input type="text" class="textInput" id="userNameForBam" readonly><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userStatusForBam">סיווג ביטחוני:</label></td>
+                        <td><input type="text" class="textInput" id="userStatusForBam"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userValidDateForBam"> תאריך תפוגה סיווג ביטחוני:</label></td>
+                        <td><input type="text" class="textInput" id="userValidDateForBam"><br></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <button id="showNewBamSubmitButton" class="submit">שגר בקשה</button>
+                <button id="showNewBamCloseButton" class="closeDialogButton">לסגירה</button>
+            </div>
+        </div>
+        <div class="dialog" id="showSecurityDialog">
+            <p>ניהול אבטחה</p>
+            <div class="autocomplete" style="width:300px;">
+                <input type="text" class="textInput" id="mySecurityInput" placeholder="הכנס שם או מספר תעודה מזהה">
+            </div>
+            <form method="dialog" autocomplete="off">
+                <table id="securityTable" class="table">
+                </table>
+                <button class="closeDialogButton">לסגירה</button>
+            </form>
+        </div>
+        <div class="dialog" id="showNewSecurityDialog">
+            <p>הוספת/עריכת חסימה</p>
+            <h4>פרטי מנועי הכניסה:</h4>
+            <div>
+                <table>
+                    <tr>
+                        <td><label for="securityIDForSecurity">מזהה מנוע:</label></td>
+                        <td><input type="text" class="textInput" id="securityIDForSecurity"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="securityReasonForSecurity">סיבת המניעה:</label></td>
+                        <td><input type="text" class="textInput" id="securityReasonForSecurity"><br></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <button id="showNewSecuritySubmitButton" class="submit">שגר בקשה</button>
+                <button id="showNewSecurityCloseButton" class="closeDialogButton">לסגירה</button>
+            </div>
+        </div>
+        <div class="dialog" id="showRequestsByHostIDDialog">
+            <p>ניהול בקשות כניסה</p>
+            <div class="autocomplete" style="width:300px;">
+                <input type="text" class="textInput" id="myRequestsByHostIDInput" placeholder="הכנס שם או מספר תעודה מזהה">
+            </div>
+            <table id="requestsByHostIDTable" class="table">
+            </table>
+            <br>
+            <form method="dialog" autocomplete="off">
+                <button id="showRequestsByHostIDCloseButton" class="closeDialogButton">לסגירה</button>
+            </form>
+        </div>
+        <div class="dialog" id="showNewRequestDialog">
+            <p>הוספת/עריכת בקשת כניסה</p>
+            <h4>פרטי האדם עבורו מבקשים את האישור:</h4>
+            <div>
+                <table>
+                    <tr>
+                        <td><label for="visitorName">שם מלא:</label></td>
+                        <td><input type="text" class="textInput" id="visitorName"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="visitorID">תז/מא:</label></td>
+                        <td><input type="text" class="textInput" id="visitorID"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="visitorPhone">טלפון:</label></td>
+                        <td><input type="text" class="textInput" id="visitorPhone"><br></td>
+                    </tr>
+                </table>
+            </div>
+            <h4>פרטי המארח:</h4>
+            <div>
+                <table>
+                    <tr>
+                        <td><label for="hostID">תז/מא:</label></td>
+                        <td><input type="text" class="textInput" id="hostID"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="hostName">שם מלא:</label></td>
+                        <td><input type="text" class="textInput" id="hostName"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="hostPhone">טלפון:</label></td>
+                        <td><input type="text" class="textInput" id="hostPhone"><br></td>
+                    </tr>
+                </table><br>
+            </div>
+            <div>
+                <button id="showNewRequestSubmitButton" class="submit">שגר בקשה</button>
+                <button id="showNewRequestCloseButton" class="closeDialogButton">לסגירה</button>
+            </div>
+        </div>
+        <div class="dialog" id="showRequestsDialog">
+            <p>ניהול בקשות כניסה</p>
+            <div class="autocomplete" style="width:300px;">
+                <input type="text" class="textInput" id="myRequestsInput" placeholder="הכנס שם או מספר תעודה מזהה">
+            </div>
+            <table id="requestsTable" class="table">
+            </table>
+            <br>
+            <form method="dialog" autocomplete="off">
+                <button id="showRequestsCloseButton" class="closeDialogButton">לסגירה</button>
+            </form>
+        </div>
+        <div class="dialog" id="showBlocksDialog">
+            <h4>מי חסום על ידך:</h4>
+            <table id="meBlockTable" class="table">
+            </table>
+            <br>
+            <h4>מי חוסם אותך:</h4>
+            <table id="blockMeTable" class="table">
+            </table>
+            <table id="blocksUserTable">  
+                <tr>
+                    <td><button id="updateParkingDetailsButton">עדכן שעת יציאה</button></td>
+                    <td><input type="time" id="leaveTime"></td>
+                </tr>
+                <tr>
+                    <td><button id="leaveNowButton">צא עכשיו</button></td>
+                </tr>                  
+            </table>
+            <button id="showBlocksCloseButton" class="closeDialogButton">לסגירה</button>  
+        </div>
+        <div class="dialog" id="showNewBlockDialog">
+            <h4>פרטי חסימה:</h4>
+            <div>
+                <table>
+                    <tr>
+                        <td><label for="blockerCarNumber">מספר רכב חוסם:</label></td>
+                        <td><input type="text" class="textInput" id="blockerCarNumber"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="blockedCarNumber">מספר רכב חסום:</label></td>
+                        <td><input type="text" class="textInput" id="blockedCarNumber"><br></td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+            <div>
+                <button id="showNewBlockSubmitButton" class="submit">הוסף חסימה</button>
+                <button id="showNewBlockCloseButton" class="closeDialogButton">לסגירה</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="bundle.js"></script>
+</html>
