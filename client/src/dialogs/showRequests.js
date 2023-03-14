@@ -72,9 +72,6 @@ export const showRequestsFunction = async () => {
         thStatus.innerText = "סטטוס";
         thDots.innerText = "";
         
-        
-        
-        
         trHead.appendChild(thVisitorID);
         trHead.appendChild(thVisitorName);
         trHead.appendChild(thStatus);
@@ -92,9 +89,6 @@ export const showRequestsFunction = async () => {
                         "visitorName":requests[key]["visitorName"],
                         "visitorID":requests[key]["visitorID"],
                         "visitorPhone":requests[key]["visitorPhone"],
-                        "carNumber":requests[key]["carNumber"],
-                        "carType":requests[key]["carType"],
-                        "carColor":requests[key]["carColor"],
                         "hostID":requests[key]["hostID"],
                         "hostName":requests[key]["hostName"],
                         "hostPhone":requests[key]["hostPhone"]

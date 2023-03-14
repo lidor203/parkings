@@ -1,6 +1,5 @@
 import { Roles } from '../common/roles'
 import { actions } from '../common/actions'
-//import { getBlockedTimeToLeave } from '../common/alarm';
 import { DialogHandler } from '../dialogs/DialogHandler';
 import { UsersFunctionality } from '../users/users';
 

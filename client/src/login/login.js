@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Roles } from "../common/roles";
 import { apiURL } from "../../config";
-import Joi from "joi";
+import {Joi} from "joi";
 
 export class LoginFunctionality {
     login = async (hanldeSuccess, handleFailure) => {
@@ -32,7 +32,6 @@ export class LoginFunctionality {
         
         if (error) {
             alert('מספר הטלפון חייב להיות בתבנית +972 ולאחר מכן 9 ספרות');
-
             return;
         }
         

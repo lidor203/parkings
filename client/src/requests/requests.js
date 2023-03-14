@@ -7,6 +7,7 @@ const securityFunctionality = new SecurityFunctionality();
 export class RequestsFunctionality {
     showRequests = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
+
         const hostID = global.userID;
         await axios.post(`${apiURL}/requests/getRequests`)
             .then(res => {
@@ -20,6 +21,7 @@ export class RequestsFunctionality {
     
     showRequestsByHostID = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
+        
         const hostID = global.userID;
         await axios.post(`${apiURL}/requests/getRequestsByHostID`, { hostID })
             .then(res => {
