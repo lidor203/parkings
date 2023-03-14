@@ -100,7 +100,7 @@ button {
     border: 1px solid;
     border-radius: 2px;
     max-width: 500px;    
-    font-size: 1.6em;
+    font-size: 1.4em;
     padding: 0.2em 1em;
     margin: 10px 5px;
     text-align: center;
@@ -269,9 +269,6 @@ ul {
     width: 6px;
     background-color: rgba(49, 49, 49, 0.8);
     border-radius: 50%;
-    -webkit-transition: 0s;
-    -o-transition: 0;
-    transition: 0;
   }
   
   #container #menu-wrap .dots > div {
@@ -352,7 +349,7 @@ ul {
   #container #menu-wrap .toggler:hover + .dots > div:before {
     background-color: rgba(49, 49, 49, 0.6);
   }
-  
+
   #container #menu-wrap .toggler:checked + .dots > div {
     -webkit-transform: translateX(calc(((25px / 2) - (6px / 2)) * -0.7071067812))
       translateY(calc(((25px / 2) - (6px / 2)) * -0.7071067812));
@@ -388,13 +385,16 @@ ul {
       );
   }
   
+  #container #menu-wrap .toggler + .dots > div,
+   #container #menu-wrap .toggler + .dots > div:after,
+   #container #menu-wrap .toggler + .dots > div:before {
+    transition: all 0.5s;
+   }
+
   #container #menu-wrap .toggler:checked:hover + .dots > div,
   #container #menu-wrap .toggler:checked:hover + .dots > div:after,
   #container #menu-wrap .toggler:checked:hover + .dots > div:before {
     background-color: rgba(49, 49, 49, 0.6);
-    -webkit-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
   }
   
   #container #menu-wrap .toggler:checked ~ .menu {
