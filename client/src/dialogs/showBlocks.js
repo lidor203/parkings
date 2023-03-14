@@ -4,7 +4,7 @@ import { UsersFunctionality } from '../users/users';
 const blocksFunctionality = new BlocksFunctionality();
 const usersFunctionality = new UsersFunctionality();
 
-export const getBlockedsByMe = (blockedMap, carNumber) => {
+export const getBlockedsByMe = async (blockedMap, carNumber) => {
     let meBlockTable = document.getElementById("meBlockTable");
     
     if (blockedMap === undefined) {
@@ -42,7 +42,7 @@ export const getBlockedsByMe = (blockedMap, carNumber) => {
     }
 }
 
-export const getMyBlockers = (blockerMap, carNumber) => {
+export const getMyBlockers = async (blockerMap, carNumber) => {
     let blockMeTable = document.getElementById("blockMeTable");
     
     if (blockerMap === undefined) {
@@ -81,7 +81,7 @@ export const getMyBlockers = (blockerMap, carNumber) => {
 }
 
 export const showBlocksFunction = async () => {
-    await blocksFunctionality.showBlocks((blockerMap, blockedMap) => {
+    await blocksFunctionality.showBlocks(async (blockerMap, blockedMap) => {
         const changeLeaveTime = () => {
             const leaveTime = document.getElementById("leaveTime").value;
             const leaveTimeHours = parseInt(String(leaveTime).split(':')[0]);
@@ -120,16 +120,13 @@ export const showBlocksFunction = async () => {
         thBlockedPhone.innerText = "מספר פלאפון של החסום";
         thBlockedLeaveTime.innerText = "שעת היציאה של החסום";
         
-        
-        
-        
         trBlockedHead.appendChild(thBlockedName);
         trBlockedHead.appendChild(thBlockedCarNumber);
         trBlockedHead.appendChild(thBlockedPhone);
         trBlockedHead.appendChild(thBlockedLeaveTime);
         meBlockTable.appendChild(trBlockedHead);
 
-        getBlockedsByMe(blockerMap.get(global.userCarNumber), global.userCarNumber);
+        await getBlockedsByMe(blockerMap.get(global.userCarNumber), global.userCarNumber);
 
         let blockMeTable = document.getElementById("blockMeTable");
 
@@ -144,16 +141,13 @@ export const showBlocksFunction = async () => {
         thBlockerPhone.innerText = "מספר פלאפון של החוסם";
         thBlockerCarNumber.innerText = "מספר הרכב של החוסם";
         
-        
-        
-        
         trBlockerHead.appendChild(thBlockerID);
         trBlockerHead.appendChild(thBlockerName);
         trBlockerHead.appendChild(thBlockerPhone);
         trBlockerHead.appendChild(thBlockerCarNumber);
         blockMeTable.appendChild(trBlockerHead);
 
-        getMyBlockers(blockedMap.get(global.userCarNumber), global.userCarNumber);
+        await getMyBlockers(blockedMap.get(global.userCarNumber), global.userCarNumber);
     },
         () => { alert("התרחשה שגיאה בשליפת החוסמים/חסומים"); })
 }
