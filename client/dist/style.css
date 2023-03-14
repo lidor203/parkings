@@ -201,10 +201,6 @@ ul {
     gap: 20px;
 }
 
-#register {
-    height: 85vh;
-}
-
 #myInput {
     width: 90%;
     font-size: 16px;
