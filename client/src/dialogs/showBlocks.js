@@ -9,6 +9,7 @@ export const getBlockedsByMe = (blockedMap, carNumber) => {
     
     if (blockedMap === undefined) {
         const td = document.createElement("td");
+        td.setAttribute('colspan', '4');
         td.innerText = "אינך חוסם אף רכב";
         const tr = document.createElement("tr");
         tr.appendChild(td);
@@ -46,6 +47,7 @@ export const getMyBlockers = (blockerMap, carNumber) => {
     
     if (blockerMap === undefined) {
         const td = document.createElement("td");
+        td.setAttribute('colspan', '4');
         td.innerText = "אינך חסום על ידי אף רכב";
         const tr = document.createElement("tr");
         tr.appendChild(td);
