@@ -1,4 +1,5 @@
 import { SecurityFunctionality } from '../security/security';
+import autocomplete from '../autocomplete/autocomplete';
 
 const securityFunctionality = new SecurityFunctionality();
 

@@ -1,4 +1,5 @@
 import { RolesFunctionality } from '../roles/roles';
+import autocomplete from '../autocomplete/autocomplete';
 
 const rolesFunctionality = new RolesFunctionality();
 

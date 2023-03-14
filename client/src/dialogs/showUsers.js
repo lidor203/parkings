@@ -1,4 +1,5 @@
 import { UsersFunctionality } from '../users/users';
+import autocomplete from '../autocomplete/autocomplete';
 
 const usersFunctionality = new UsersFunctionality();
 

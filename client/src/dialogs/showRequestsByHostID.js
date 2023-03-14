@@ -1,4 +1,5 @@
 import { RequestsFunctionality } from '../requests/requests';
+import autocomplete from '../autocomplete/autocomplete';
 
 const requestsFunctionality = new RequestsFunctionality();
 

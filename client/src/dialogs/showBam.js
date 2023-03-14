@@ -1,4 +1,5 @@
 import { BamFunctionality } from '../bam/bam';
+import autocomplete from '../autocomplete/autocomplete';
 
 const bamFunctionality = new BamFunctionality();
 
