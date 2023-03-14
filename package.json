@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "client": "cd client && npm run client",
+    "server": "cd server && npm run server"
+  },
   "dependencies": {
     "axios": "^1.2.2",
     "firebase": "^9.15.0",
