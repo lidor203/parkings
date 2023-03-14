@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SecurityFunctionality } from "../security/security";
+import { apiURL } from "../../config";
 
 const securityFunctionality = new SecurityFunctionality();
 
@@ -7,7 +8,7 @@ export class RequestsFunctionality {
     showRequests = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
         const hostID = global.userID;
-        await axios.post("http://localhost:8000/requests/getRequests")
+        await axios.post(`${apiURL}/requests/getRequests`)
             .then(res => {
                 if (res.status === 200) hanldeSuccess(res.data);
             })
@@ -20,7 +21,7 @@ export class RequestsFunctionality {
     showRequestsByHostID = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
         const hostID = global.userID;
-        await axios.post("http://localhost:8000/requests/getRequestsByHostID", { hostID })
+        await axios.post(`${apiURL}/requests/getRequestsByHostID`, { hostID })
             .then(res => {
                 if (res.status === 200) hanldeSuccess(res.data);
             })
@@ -47,7 +48,7 @@ export class RequestsFunctionality {
             const hostName = document.getElementById("hostName").value;
             const hostPhone = document.getElementById("hostPhone").value;
 
-            await axios.post("http://localhost:8000/requests/newRequest", {ID, visitorName, visitorID, visitorPhone, hostID, hostName, hostPhone })
+            await axios.post(`${apiURL}/requests/newRequest`, {ID, visitorName, visitorID, visitorPhone, hostID, hostName, hostPhone })
                 .then(res => {
                     if (res.status === 200)
                     {
@@ -65,7 +66,7 @@ export class RequestsFunctionality {
     deleteRequest = async (hanldeSuccess, handleFailure, key) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
-        await axios.post("http://localhost:8000/requests/deleteRequest", {key})
+        await axios.post(`${apiURL}/requests/deleteRequest`, {key})
             .then(res => {
                 if (res.status === 200)
                 {
@@ -91,7 +92,7 @@ export class RequestsFunctionality {
         const hostPhone = document.getElementById("hostPhone").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post("http://localhost:8000/requests/editRequest", {userID, visitorName, visitorID, visitorPhone, hostID, hostName, hostPhone, key })
+        await axios.post(`${apiURL}/requests/editRequest`, {userID, visitorName, visitorID, visitorPhone, hostID, hostName, hostPhone, key })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);

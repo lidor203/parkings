@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Roles } from "../common/roles";
+import { apiURL } from "../../config";
 
 export class LoginFunctionality {
     login = async (hanldeSuccess, handleFailure) => {
@@ -7,7 +8,7 @@ export class LoginFunctionality {
         
         const ID = document.getElementById("inputLoginId").value;
         const password = document.getElementById("inputLoginPassword").value;
-        await axios.post("http://localhost:8000/first/login", { ID, password })
+        await axios.post(`${apiURL}/first/login`, { ID, password })
             .then(res => {
                 if (res.status === 200) hanldeSuccess(res.data);
             })
@@ -27,7 +28,7 @@ export class LoginFunctionality {
         const carNumber = document.getElementById("inputRegisterCarNumber").value;
         const leaveTime = document.getElementById("inputRegisterLeaveTime").value;
               
-        await axios.post("http://localhost:8000/first/register", { ID, fullName, phone, password, carNumber, leaveTime })
+        await axios.post(`${apiURL}/first/register`, { ID, fullName, phone, password, carNumber, leaveTime })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);

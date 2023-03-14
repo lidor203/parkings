@@ -1,10 +1,11 @@
 import axios from "axios";
+import { apiURL } from "../../config";
 
 export class SecurityFunctionality {
     showSecurity = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
         
-        await axios.post("http://localhost:8000/security/getSecurity")
+        await axios.post(`${apiURL}/security/getSecurity`)
             .then(res => {
                 if (res.status === 200) hanldeSuccess(res.data);
             })
@@ -18,7 +19,7 @@ export class SecurityFunctionality {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
         var securityDisclaimer = undefined;
-        await axios.post("http://localhost:8000/security/getSecurityDisclaimerByID", { ID })
+        await axios.post(`${apiURL}/security/getSecurityDisclaimerByID`, { ID })
             .then(res => {
                 if (res.status === 200) {
                     securityDisclaimer = (res.data);
@@ -37,7 +38,7 @@ export class SecurityFunctionality {
         const IDToCreate = document.getElementById("securityIDForSecurity").value;
         const reasonToCreate = document.getElementById("securityReasonForSecurity").value;
 
-        await axios.post("http://localhost:8000/security/newSecurity", { IDToCreate, reasonToCreate })
+        await axios.post(`${apiURL}/security/newSecurity`, { IDToCreate, reasonToCreate })
             .then(async res => {
                 if (res.status === 200)
                 {
@@ -58,7 +59,7 @@ export class SecurityFunctionality {
         const reasonToUpdate = document.getElementById("securityReasonForSecurity").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post("http://localhost:8000/security/editSecurity", { reasonToUpdate, key})
+        await axios.post(`${apiURL}/security/editSecurity`, { reasonToUpdate, key})
             .then(res => {
                 if (res.status === 200)
                 {
@@ -75,7 +76,7 @@ export class SecurityFunctionality {
     deleteRequest = async (visitorID) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
-        await axios.post("http://localhost:8000/requests/getRequestByVisitorID", {visitorID})
+        await axios.post(`${apiURL}/requests/getRequestByVisitorID`, {visitorID})
         .then(async res => {
             if (res.status === 200) {
                 if (JSON.stringify(res.data) !== "{}") {
@@ -83,7 +84,7 @@ export class SecurityFunctionality {
                     const key = Object.keys(visitorRequestToDelete)[0];
                 
                     alert(key);
-                    await axios.post("http://localhost:8000/requests/deleteRequestByVisitorID", { key })
+                    await axios.post(`${apiURL}/requests/deleteRequestByVisitorID`, { key })
                     .then(res => {
                         if (res.status === 200)
                         {
@@ -103,7 +104,7 @@ export class SecurityFunctionality {
 
     deleteSecurity = async (hanldeSuccess, handleFailure, key) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
-        await axios.post("http://localhost:8000/security/deleteSecurity", {key})
+        await axios.post(`${apiURL}/security/deleteSecurity`, {key})
             .then(res => {
                 if (res.status === 200)
                 {

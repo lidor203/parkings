@@ -1,10 +1,11 @@
 import axios from "axios";
+import { apiURL } from "../../config";
 
 export class RolesFunctionality {
     showRoles = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
-        await axios.post("http://localhost:8000/roles/getRoles")
+        await axios.post(`${apiURL}/roles/getRoles`)
             .then(res => {
                 if (res.status === 200) hanldeSuccess(res.data);
             })
@@ -20,7 +21,7 @@ export class RolesFunctionality {
         const valueToUpdate = document.getElementById("roleValueForRole").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post("http://localhost:8000/roles/editRole", {valueToUpdate, key})
+        await axios.post(`${apiURL}/roles/editRole`, {valueToUpdate, key})
             .then(res => {
                 if (res.status === 200)
                 {
@@ -37,7 +38,7 @@ export class RolesFunctionality {
     deleteRole = async (hanldeSuccess, handleFailure, key) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
         
-        await axios.post("http://localhost:8000/roles/deleteRole", {key})
+        await axios.post(`${apiURL}/roles/deleteRole`, {key})
             .then(res => {
                 if (res.status === 200)
                 {

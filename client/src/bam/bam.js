@@ -1,9 +1,10 @@
 import axios from "axios";
+import { apiURL } from "../../config";
 
 export class BamFunctionality {
     showBam = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
-        await axios.post("http://localhost:8000/bam/getBam")
+        await axios.post(`${apiURL}/bam/getBam`)
             .then(res => {
                 if (res.status === 200) hanldeSuccess(res.data);
             })
@@ -17,7 +18,7 @@ export class BamFunctionality {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
         var userBam = undefined;
-        await axios.post("http://localhost:8000/bam/getUserBamByID", { ID })
+        await axios.post(`${apiURL}/bam/getUserBamByID`, { ID })
             .then(res => {
                 if (res.status === 200) {
                     userBam = (res.data);
@@ -39,7 +40,7 @@ export class BamFunctionality {
         const userStatusForBam = document.getElementById("userStatusForBam").value;
         const userValidDateForBam = document.getElementById("userValidDateForBam").value;
 
-        await axios.post("http://localhost:8000/bam/newBam", {userIDForBam, userNameForBam, userStatusForBam, userValidDateForBam})
+        await axios.post(`${apiURL}/bam/newBam`, {userIDForBam, userNameForBam, userStatusForBam, userValidDateForBam})
             .then(res => {
                 if (res.status === 200)
                 {
@@ -61,7 +62,7 @@ export class BamFunctionality {
         
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post("http://localhost:8000/bam/editBam", {userStatusForBam, userValidDateForBam, key})
+        await axios.post(`${apiURL}/bam/editBam`, {userStatusForBam, userValidDateForBam, key})
             .then(res => {
                 if (res.status === 200)
                 {
@@ -77,7 +78,7 @@ export class BamFunctionality {
 
     deleteBam = async (hanldeSuccess, handleFailure, key) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
-        await axios.post("http://localhost:8000/bam/deleteBam", {key})
+        await axios.post(`${apiURL}/bam/deleteBam`, {key})
             .then(res => {
                 if (res.status === 200)
                 {

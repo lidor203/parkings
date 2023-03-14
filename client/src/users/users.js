@@ -1,10 +1,11 @@
 import axios from "axios";
+import { apiURL } from "../../config";
 
 export class UsersFunctionality {
     showUsers = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
         
-        await axios.post("http://localhost:8000/users/getUsers")
+        await axios.post(`${apiURL}/users/getUsers`)
             .then(res => {
                 if (res.status === 200) hanldeSuccess(res.data);
             })
@@ -26,7 +27,7 @@ export class UsersFunctionality {
         const userLeaveTimeCreate = "";
         const userPasswordToCreate = "1";
 
-        await axios.post("http://localhost:8000/users/newUser", { userIDToCreate, userNameToCreate, userPhoneToCreate, userTimeToAlertToCreate, userRoleToCreate, userCarNumberToCreate, userLeaveTimeCreate, userPasswordToCreate })
+        await axios.post(`${apiURL}/users/newUser`, { userIDToCreate, userNameToCreate, userPhoneToCreate, userTimeToAlertToCreate, userRoleToCreate, userCarNumberToCreate, userLeaveTimeCreate, userPasswordToCreate })
         .then(res => {
             if (res.status === 200) {
                 alert(res.data);
@@ -49,7 +50,7 @@ export class UsersFunctionality {
         const userRoleToUpdate = document.getElementById("userRoleForUsers").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post("http://localhost:8000/users/editUser", { userIDToUpdate, userNameToUpdate, userPhoneToUpdate, userTimeToAlertToUpdate, userRoleToUpdate, key })
+        await axios.post(`${apiURL}/users/editUser`, { userIDToUpdate, userNameToUpdate, userPhoneToUpdate, userTimeToAlertToUpdate, userRoleToUpdate, key })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);
@@ -64,7 +65,7 @@ export class UsersFunctionality {
 
     deleteUser = async (hanldeSuccess, handleFailure, key) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
-        await axios.post("http://localhost:8000/users/deleteUser", { key })
+        await axios.post(`${apiURL}/users/deleteUser`, { key })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);
@@ -79,7 +80,7 @@ export class UsersFunctionality {
 
     getUserByCar = async (hanldeSuccess, handleFailure, carNumber) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
-        await axios.post("http://localhost:8000/users/getUserByCar", { carNumber })
+        await axios.post(`${apiURL}/users/getUserByCar`, { carNumber })
             .then(res => {
                 if (res.status === 200) {
                     hanldeSuccess(res.data);
@@ -95,7 +96,7 @@ export class UsersFunctionality {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
         var user = undefined;
-        await axios.post("http://localhost:8000/users/getUserByID", { ID })
+        await axios.post(`${apiURL}/users/getUserByID`, { ID })
             .then(res => {
                 if (res.status === 200) {
                     user = (res.data);
@@ -112,7 +113,7 @@ export class UsersFunctionality {
     changeLeaveTime = async (userLeaveTime, key) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
-        await axios.post("http://localhost:8000/users/changeLeaveTime", { userLeaveTime, key })
+        await axios.post(`${apiURL}/users/changeLeaveTime`, { userLeaveTime, key })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);
@@ -126,7 +127,7 @@ export class UsersFunctionality {
     getRolesDescriptions = async () => {
         document.getElementById('loader-circle').style.visibility = 'visible';
        
-        await axios.post("http://localhost:8000/jobs/getRolesDescriptions")
+        await axios.post(`${apiURL}/jobs/getRolesDescriptions`)
             .then(res => {
                 if (res.status === 200)
                 {

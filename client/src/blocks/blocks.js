@@ -1,10 +1,11 @@
 import axios from "axios";
+import { apiURL } from "../../config";
 
 export class BlocksFunctionality {
     showBlocks = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
-        await axios.post("http://localhost:8000/blocks/getBlocks")
+        await axios.post(`${apiURL}/blocks/getBlocks`)
             .then(res => {
                 if (res.status === 200){
                     const blockerMap = new Map();
@@ -44,7 +45,7 @@ export class BlocksFunctionality {
         else {
             document.getElementById('loader-circle').style.visibility = 'visible';
 
-            await axios.post("http://localhost:8000/blocks/getBlocks")
+            await axios.post(`${apiURL}/blocks/getBlocks`)
             .then(async res => {
                 const blockerMap = new Map();
 
@@ -56,7 +57,7 @@ export class BlocksFunctionality {
                     blockerMap.get(res.data[key]["blockerCarNumber"]).push(res.data[key]["blockedCarNumber"]);
                 }              
                 
-                await axios.post("http://localhost:8000/blocks/newBlock", {blockerCarNumber, blockedCarNumber})
+                await axios.post(`${apiURL}/blocks/newBlock`, {blockerCarNumber, blockedCarNumber})
                 .then(async res => {
                     messege = res.data + "\n";
 
@@ -69,7 +70,7 @@ export class BlocksFunctionality {
                     }
 
                     while (blockedCarNumber !== undefined) {
-                        await axios.post("http://localhost:8000/blocks/newBlock", {blockerCarNumber, blockedCarNumber})
+                        await axios.post(`${apiURL}/blocks/newBlock`, {blockerCarNumber, blockedCarNumber})
                         .then(async res => {
                             messege = messege + res.data + "\n";
                         })

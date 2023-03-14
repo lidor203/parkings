@@ -1,7 +1,8 @@
 import axios from "axios";
+import { apiURL } from "../../config";
 
 export const getBlockedTimeToLeave = (carNumber) => {
-    axios.post("http://localhost:8000/blocks/getBlocks")
+    axios.post(`${apiURL}/blocks/getBlocks`)
     .then(res => {
         const blockerMap = new Map();
         if (res.status === 200){
@@ -18,7 +19,7 @@ export const getBlockedTimeToLeave = (carNumber) => {
             if (blockedCars !== undefined) {
                 while (carNumber !== undefined) {
                     if (carNumber !== global.userCarNumber){
-                        axios.post("http://localhost:8000/users/getUserByCar", { carNumber })
+                        axios.post(`${apiURL}/users/getUserByCar`, { carNumber })
                         .then(res => {
                             if (res.status === 200) {
                                 const user = res.data;

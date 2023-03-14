@@ -1,12 +1,13 @@
 import axios from "axios";
 import { UsersFunctionality } from "../users/users";
+import { apiURL } from "../../config";
 
 const usersFunctionality = new UsersFunctionality();
 
 export class JobsFunctionality {
     showJobs = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
-        await axios.post("http://localhost:8000/jobs/getJobs")
+        await axios.post(`${apiURL}/jobs/getJobs`)
             .then(res => {
                 if (res.status === 200) hanldeSuccess(res.data);
             })
@@ -29,7 +30,7 @@ export class JobsFunctionality {
         const key = Object.keys(user)[0];
         const userRoleForJob = document.getElementById("userRoleForJob").value;
 
-        await axios.post("http://localhost:8000/jobs/newJob", {key, userRoleForJob})
+        await axios.post(`${apiURL}/jobs/newJob`, {key, userRoleForJob})
         .then(res => {
             if (res.status === 200)
             {
@@ -50,7 +51,7 @@ export class JobsFunctionality {
         const roleToUpdate = document.getElementById("userRoleForJob").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post("http://localhost:8000/jobs/editJob", {roleToUpdate, key})
+        await axios.post(`${apiURL}/jobs/editJob`, {roleToUpdate, key})
             .then(res => {
                 if (res.status === 200)
                 {
@@ -67,7 +68,7 @@ export class JobsFunctionality {
     deleteJob = async (hanldeSuccess, handleFailure, key) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
         
-        await axios.post("http://localhost:8000/jobs/deleteJob", {key})
+        await axios.post(`${apiURL}/jobs/deleteJob`, {key})
             .then(res => {
                 if (res.status === 200)
                 {
@@ -84,7 +85,7 @@ export class JobsFunctionality {
     getRolesDescriptions = async () => {
         document.getElementById('loader-circle').style.visibility = 'visible';
        
-        await axios.post("http://localhost:8000/jobs/getRolesDescriptions")
+        await axios.post(`${apiURL}/jobs/getRolesDescriptions`)
             .then(res => {
                 if (res.status === 200)
                 {
