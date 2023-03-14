@@ -1,0 +1,5 @@
+npm
+git
+npm i
+npm install firebase
+npm install firebase-admin
