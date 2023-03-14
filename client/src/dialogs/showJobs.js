@@ -71,10 +71,10 @@ export const showJobsFunction = async () => {
         thUserName.innerText = "שם משתמש";
         thRoleID.innerText = "מזהה תפקיד";
         thDots.innerText = "";
-        thUserID.style="width:30%";
-        thUserName.style = "width:30%";
-        thRoleID.style="width:30%";
-        thDots.style = "width:5%";
+        
+        
+        
+        
         trHead.appendChild(thUserID);
         trHead.appendChild(thUserName);
         trHead.appendChild(thRoleID);

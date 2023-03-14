@@ -65,14 +65,14 @@ export class DialogHandler {
             }
 
             this.keyToUpdate = null;
-            document.getElementById(this.dialogMode + "Dialog").style.display = "none";
+            document.getElementById(this.dialogMode + "Dialog").classList.remove('open');
             document.getElementById('loader-circle').style.visibility = 'hidden';
         }
         else {
             var code = mode + "()";
             await eval(code);
 
-            document.getElementById(mode + "Dialog").style.display = "flex";            
+            document.getElementById(mode + "Dialog").classList.add('open');           
 
             for (const key in datas) {
                 document.getElementById(key).value = datas[key];

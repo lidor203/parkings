@@ -69,9 +69,9 @@ export const showRolesFunction = async () => {
         thRoleID.innerText = "מזהה תפקיד";
         thRoleName.innerText = "תיאור תפקיד";
         thDots.innerText = "";
-        thRoleID.style="width:25%";
-        thRoleName.style = "width:25%";
-        thDots.style = "width:5%";
+        
+        
+        
         trHead.appendChild(thRoleID);
         trHead.appendChild(thRoleName);
         trHead.appendChild(thDots);

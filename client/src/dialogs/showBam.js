@@ -73,11 +73,11 @@ export const showBamFunction = async () => {
         thBamStatus.innerText = "סיווג";
         thValidDate.innerHTML = "תאריך תפוגה";
         thDots.innerText = "";
-        thUserID.style="width:20%";
-        thUserName.style = "width:20%";
-        thBamStatus.style="width:20%";
-        thValidDate.style="width:20%";
-        thDots.style = "width:5%";
+        
+        
+        
+        
+        
         trHead.appendChild(thUserID);
         trHead.appendChild(thUserName);
         trHead.appendChild(thBamStatus);

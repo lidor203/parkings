@@ -117,10 +117,10 @@ export const showBlocksFunction = async () => {
         thBlockedCarNumber.innerText = "מספר הרכב של החסום";
         thBlockedPhone.innerText = "מספר פלאפון של החסום";
         thBlockedLeaveTime.innerText = "שעת היציאה של החסום";
-        thBlockedName.style = "width:25%";
-        thBlockedCarNumber.style = "width:25%";
-        thBlockedPhone.style = "width:25%";
-        thBlockedLeaveTime.style = "width:25%";
+        
+        
+        
+        
         trBlockedHead.appendChild(thBlockedName);
         trBlockedHead.appendChild(thBlockedCarNumber);
         trBlockedHead.appendChild(thBlockedPhone);
@@ -141,10 +141,10 @@ export const showBlocksFunction = async () => {
         thBlockerName.innerText = "שם החוסם";
         thBlockerPhone.innerText = "מספר פלאפון של החוסם";
         thBlockerCarNumber.innerText = "מספר הרכב של החוסם";
-        thBlockerID.style="width:25%";
-        thBlockerName.style = "width:25%";
-        thBlockerPhone.style = "width:25%";
-        thBlockerCarNumber.style = "width:25%";
+        
+        
+        
+        
         trBlockerHead.appendChild(thBlockerID);
         trBlockerHead.appendChild(thBlockerName);
         trBlockerHead.appendChild(thBlockerPhone);

@@ -48,6 +48,8 @@ export class Profile {
 
         const actionsElement = document.getElementById("actions");
         const permittedActions = this.getUserActions();
+
+        actionsElement.textContent = '';
         permittedActions.forEach(action => {
             actionsElement.appendChild(this.createAction(action));
         });

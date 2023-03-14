@@ -71,10 +71,10 @@ export const showRequestsFunction = async () => {
         thVisitorName.innerText = "שם האורח";
         thStatus.innerText = "סטטוס";
         thDots.innerText = "";
-        thVisitorID.style = "width:25%";
-        thVisitorName.style = "width:25%";
-        thStatus.style = "width:15%";
-        thDots.style = "width:5%";
+        
+        
+        
+        
         trHead.appendChild(thVisitorID);
         trHead.appendChild(thVisitorName);
         trHead.appendChild(thStatus);

@@ -69,9 +69,9 @@ export const showSecurityFunction = async () => {
         thDisclaimedID.innerText = "מזהה";
         thReason.innerText = "סיבה";
         thDots.innerText = "";
-        thDisclaimedID.style="width:45%";
-        thReason.style = "width:45%";
-        thDots.style = "width:5%";
+        
+        
+        
         trHead.appendChild(thDisclaimedID);
         trHead.appendChild(thReason);
         trHead.appendChild(thDots);
