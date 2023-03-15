@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Roles } from "../common/roles";
 import { apiURL } from "../../config";
-import { Joi } from "joi";
+import  Joi  from "joi";
 
 export class LoginFunctionality {
     login = async (hanldeSuccess, handleFailure) => {
@@ -27,10 +27,21 @@ export class LoginFunctionality {
         const carNumber = document.getElementById("inputRegisterCarNumber").value;
         const leaveTime = document.getElementById("inputRegisterLeaveTime").value;
              
+        const IDValidation = Joi.string().pattern(/^[0-9]{9}$/);
         const phoneValidation = Joi.string().pattern(/^\+972[0-9]{9}$/);
-        const error = phoneValidation.validate(phone);
+
+        let error = IDValidation.validate(ID);
         
-        if (error) {
+        if (error["error"]) {
+            console.log(error)
+            alert('תעודת הזהות חייבת להיות בתבנית של 9 ספרות');
+            return;
+        }
+
+        error = phoneValidation.validate(phone);
+
+        if (error["error"]) {
+            console.log(error)
             alert('מספר הטלפון חייב להיות בתבנית +972 ולאחר מכן 9 ספרות');
             return;
         }
