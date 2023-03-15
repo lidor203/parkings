@@ -22,7 +22,8 @@
                     <input type="password" id="inputLoginPassword" value="1">
                 </div>
                 <button id="loginButton">כניסה</button>
-            </div>           
+            </div>  
+            <br>         
             <p>אין לך חשבון? <a class="gotoButton" id="toRegisterButton">להרשמה</a></p>
         </div>
         <div class="screen" id="register">
@@ -54,6 +55,7 @@
                 </div>
                 <button id="registerButton">הרשם</button>
             </div>
+            <br>
             <p>כבר יש לך חשבון? <a class="gotoButton" id="toLoginButton">להתחברות</a></p>
         </div>
         <div class="screen" id="profile">
@@ -332,14 +334,16 @@
             </table>
             <table id="blocksUserTable">  
                 <tr>
+                    <td><button id="leaveNowButton">צא עכשיו</button></td>
                     <td><button id="updateParkingDetailsButton">עדכן שעת יציאה</button></td>
                     <td><input type="time" id="leaveTime"></td>
-                </tr>
+                </tr>   
                 <tr>
-                    <td><button id="leaveNowButton">צא עכשיו</button></td>
-                </tr>                  
-            </table>
-            <button id="showBlocksCloseButton" class="closeDialogButton">לסגירה</button>  
+                    <td></td>
+                    <td ><button id="showBlocksCloseButton" class="closeDialogButton">לסגירה</button></td>
+                    <td></td>
+                </tr>               
+            </table> 
         </div>
         <div class="dialog" id="showNewBlockDialog">
             <h4>פרטי חסימה:</h4>

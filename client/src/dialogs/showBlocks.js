@@ -18,7 +18,7 @@ export const getBlockedsByMe = async (blockedMap, carNumber) => {
     else {
         while (carNumber !== undefined) {
             if (carNumber !== global.userCarNumber){
-                usersFunctionality.getUserByCar((user) => {
+                await usersFunctionality.getUserByCar((user) => {
                     for (const key in user) {  
                         const tr = document.createElement("tr");
                         const tdBlockedName = document.createElement("td");
@@ -56,7 +56,7 @@ export const getMyBlockers = async (blockerMap, carNumber) => {
     else {
         while (carNumber !== undefined) {
             if (carNumber !== global.userCarNumber){
-                usersFunctionality.getUserByCar((user) => {
+                await usersFunctionality.getUserByCar((user) => {
                     for (const key in user) {  
                         const tr = document.createElement("tr");
                         const tdBlockerID = document.createElement("td");

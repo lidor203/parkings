@@ -74,10 +74,6 @@ export const showBamFunction = async () => {
         thValidDate.innerHTML = "תאריך תפוגה";
         thDots.innerText = "";
         
-        
-        
-        
-        
         trHead.appendChild(thUserID);
         trHead.appendChild(thUserName);
         trHead.appendChild(thBamStatus);

@@ -80,16 +80,12 @@ export class UsersFunctionality {
 
     getUserByCar = async (hanldeSuccess, handleFailure, carNumber) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
-        await axios.post(`${apiURL}/users/getUserByCar`, { carNumber })
-            .then(res => {
-                if (res.status === 200) {
-                    hanldeSuccess(res.data);
-                }
-            })
-            .catch(err => {
-                handleFailure();
-            })
-            .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden');
+        const res = await axios.post(`${apiURL}/users/getUserByCar`, { carNumber })
+        if (res.status === 200) {
+            hanldeSuccess(res.data);
+        }
+    
+        document.getElementById('loader-circle').style.visibility = 'hidden';
     }
 
     getUserByID = async (handleFailure, ID) => {

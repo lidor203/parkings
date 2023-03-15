@@ -75,12 +75,7 @@ export const showUsersFunction = async () => {
         thTimeToAlert.innerText = "זמן התראה מראש";
         thRole.innerText = "תפקיד";
         thDots.innerText = "";
-        
-        
-        
-        
-        
-        
+          
         trHead.appendChild(thID);
         trHead.appendChild(thName);
         trHead.appendChild(thPhone);

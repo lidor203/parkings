@@ -70,8 +70,6 @@ export const showRolesFunction = async () => {
         thRoleName.innerText = "תיאור תפקיד";
         thDots.innerText = "";
         
-        
-        
         trHead.appendChild(thRoleID);
         trHead.appendChild(thRoleName);
         trHead.appendChild(thDots);

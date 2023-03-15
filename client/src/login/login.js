@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Roles } from "../common/roles";
 import { apiURL } from "../../config";
-import {Joi} from "joi";
+import { Joi } from "joi";
 
 export class LoginFunctionality {
     login = async (hanldeSuccess, handleFailure) => {
@@ -28,7 +28,7 @@ export class LoginFunctionality {
         const leaveTime = document.getElementById("inputRegisterLeaveTime").value;
              
         const phoneValidation = Joi.string().pattern(/^\+972[0-9]{9}$/);
-        const { error } = phoneValidation.validate(phone);
+        const error = phoneValidation.validate(phone);
         
         if (error) {
             alert('מספר הטלפון חייב להיות בתבנית +972 ולאחר מכן 9 ספרות');

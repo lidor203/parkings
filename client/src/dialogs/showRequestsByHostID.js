@@ -72,9 +72,6 @@ export const showRequestsByHostIDFunction = async () => {
         thStatus.innerText = "סטטוס";
         thDots.innerText = "";
         
-        
-        
-        
         trHead.appendChild(thVisitorID);
         trHead.appendChild(thVisitorName);
         trHead.appendChild(thStatus);

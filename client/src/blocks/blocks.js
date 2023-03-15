@@ -5,29 +5,26 @@ export class BlocksFunctionality {
     showBlocks = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
-        await axios.post(`${apiURL}/blocks/getBlocks`)
-            .then(res => {
-                if (res.status === 200){
-                    const blockerMap = new Map();
-                    const blockedMap = new Map();
+        const res = await axios.post(`${apiURL}/blocks/getBlocks`)
+        
+        if (res.status === 200){
+            const blockerMap = new Map();
+            const blockedMap = new Map();
 
-                    for (const key in res.data) { 
-                        blockerMap.set(res.data[key]["blockerCarNumber"], []);
-                        blockedMap.set(res.data[key]["blockedCarNumber"], []);
-                    }
+            for (const key in res.data) { 
+                blockerMap.set(res.data[key]["blockerCarNumber"], []);
+                blockedMap.set(res.data[key]["blockedCarNumber"], []);
+            }
 
-                    for (const key in res.data) {              
-                        blockerMap.get(res.data[key]["blockerCarNumber"]).push(res.data[key]["blockedCarNumber"]);
-                        blockedMap.get(res.data[key]["blockedCarNumber"]).push(res.data[key]["blockerCarNumber"]);
-                    }
+            for (const key in res.data) {              
+                blockerMap.get(res.data[key]["blockerCarNumber"]).push(res.data[key]["blockedCarNumber"]);
+                blockedMap.get(res.data[key]["blockedCarNumber"]).push(res.data[key]["blockerCarNumber"]);
+            }
 
-                    hanldeSuccess(blockerMap, blockedMap);
-                }
-            })
-            .catch(err=>{
-                handleFailure();
-            })
-            .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
+            await hanldeSuccess(blockerMap, blockedMap);
+        }
+
+        document.getElementById('loader-circle').style.visibility = 'hidden';
     }
 
     newBlock = async () => {
