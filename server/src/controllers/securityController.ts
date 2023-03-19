@@ -38,5 +38,5 @@ securityRouter.post('/editSecurity', async (req: Request, res: Response)  => {
 securityRouter.post('/getSecurityDisclaimerByID', async (req: Request, res: Response)  => {
     const securityDisclaimer = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/securityDisclaimers.json?orderBy=\"ID\"&equalTo=\"${req.body.ID}\"`);
     res.status(200);
-    res.json(securityDisclaimer.data);
+    res.json(securityDisclaimer.data);    
 });

@@ -37,14 +37,14 @@ export class RequestsFunctionality {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
         const ID = global.userID;
-        const disclaimedPersonID = await securityFunctionality.getSecurityDisclaimerByID(() => {}, ID);
+        const visitorID = document.getElementById("visitorID").value;
+        const disclaimedPersonID = await securityFunctionality.getSecurityDisclaimerByID(visitorID);
 
         if (JSON.stringify(disclaimedPersonID) !== "{}") {
-            alert("האורח מנוע כניסה");
+            alert("בקשת הכניסה נשללה מכיוון שהאורח מנוע כניסה!");
         }
         else {
             const visitorName = document.getElementById("visitorName").value;
-            const visitorID = document.getElementById("visitorID").value;
             const visitorPhone = document.getElementById("visitorPhone").value;
             const hostID = document.getElementById("hostID").value;
             const hostName = document.getElementById("hostName").value;

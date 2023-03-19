@@ -25,8 +25,7 @@ export class SecurityFunctionality {
                     securityDisclaimer = (res.data);
                 }
             })
-            .catch(err => {
-            })
+            .catch(err => {})
             .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden');
 
             return(securityDisclaimer);
@@ -83,12 +82,11 @@ export class SecurityFunctionality {
                     const visitorRequestToDelete = res.data;
                     const key = Object.keys(visitorRequestToDelete)[0];
                 
-                    alert(key);
                     await axios.post(`${apiURL}/requests/deleteRequestByVisitorID`, { key })
                     .then(res => {
                         if (res.status === 200)
                         {
-                            alert(res.data);
+                            alert("למשתמש הייתה בקשת כניסה בפועל. הבקשה נמחקה בהצלחה!");
                         } 
                     })
                     .catch(err=>{
