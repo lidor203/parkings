@@ -27,7 +27,7 @@ export class BlocksFunctionality {
         document.getElementById('loader-circle').style.visibility = 'hidden';
     }
 
-    newBlock = async () => {
+    newBlock = async (hanldeSuccess, handleFailure) => {
         let blockerCarNumber = document.getElementById("blockerCarNumber").value;
         let blockedCarNumber = document.getElementById("blockedCarNumber").value;
         let messege = "";
@@ -82,7 +82,9 @@ export class BlocksFunctionality {
                     if (res.status === 200)
                     {
                         alert(messege);
-                    } 
+                    }
+                    
+                    hanldeSuccess();
                 })
                 .catch(() => { alert("משהו השתבש בשמירת החסימה. נסה שוב"); })
                 .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
