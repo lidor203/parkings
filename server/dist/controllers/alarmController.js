@@ -45,21 +45,23 @@ const updateAlarm = (blockerCarNumber, blockedCarNumber) => __awaiter(void 0, vo
     }
     timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0);
     // For Debugg ONLY. Change timeToSendMessege to whenever we need to
-    timeToSendMessege = new Date();
-    timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes(), 0, 0);
+    //timeToSendMessege = new Date()
+    //timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes(), 0, 0);
     //
+    console.log(timeToSendMessege);
     const phones = [blockerUser.data[blockerkey]["phone"]];
     const messege = (yield blockedUser.data[blockedkey]["name"]) + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
     //Set an alarm to activate the SMS function    
     alarm = yield setAlarm(() => __awaiter(void 0, void 0, void 0, function* () {
         // This function occur when timeToSendMessege arrives
-        yield wbm.start({ showBrowser: true }).then(() => __awaiter(void 0, void 0, void 0, function* () {
+        // {showBrowser:true}
+        yield wbm.start().then(() => __awaiter(void 0, void 0, void 0, function* () {
             yield wbm.send(phones, messege);
             setTimeout((() => { wbm.end(); }), 10000);
         }))
             .catch(console.log("error"))
             .finally();
-    }), timeToSendMessege);
+    }), parseInt(timeToSendMessege));
     return (messege);
 });
 exports.updateAlarm = updateAlarm;

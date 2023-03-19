@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { time } from 'console';
 
 const { setAlarm, clearAlarm, Alarm } = require('set-alarm');
 const wbm = require('wbm');
@@ -13,7 +14,7 @@ let alarm: any = null;
     const blockerkey = Object.keys(blockerUser.data)[0];
     const blockedkey = Object.keys(blockedUser.data)[0];
 
-    let timeToSendMessege = new Date();
+    let timeToSendMessege: any = new Date();
     const blockedUserLeaveTime = String(blockedUser.data[blockedkey]["leaveTime"]).split(":");
     const blockedUserLeaveHoursTime = parseInt(blockedUserLeaveTime[0]);
     const blockedUserLeaveMinutesTime = parseInt(blockedUserLeaveTime[1]);
@@ -40,9 +41,11 @@ let alarm: any = null;
     timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0);
 
     // For Debugg ONLY. Change timeToSendMessege to whenever we need to
-    timeToSendMessege = new Date();
-    timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes(), 0, 0);
+    //timeToSendMessege = new Date()
+    //timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes(), 0, 0);
     //
+
+    console.log(timeToSendMessege);
 
     const phones = [blockerUser.data[blockerkey]["phone"]];
     const messege = await blockedUser.data[blockedkey]["name"] + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
@@ -50,14 +53,15 @@ let alarm: any = null;
     //Set an alarm to activate the SMS function    
     alarm = await setAlarm(async () => {    
         // This function occur when timeToSendMessege arrives
-        await wbm.start({showBrowser:true}).then(
+        // {showBrowser:true}
+        await wbm.start().then(
             async () => {              
                                 await wbm.send(phones, messege);
                                 setTimeout((() => { wbm.end(); }), 10000);
                         })
         .catch(console.log("error"))
         .finally();
-    }, timeToSendMessege);
+    }, parseInt(timeToSendMessege));
 
     return (messege);
 }
