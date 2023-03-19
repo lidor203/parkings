@@ -65,6 +65,7 @@ export class UsersFunctionality {
 
     deleteUser = async (hanldeSuccess, handleFailure, key) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
+        
         await axios.post(`${apiURL}/users/deleteUser`, { key })
             .then(res => {
                 if (res.status === 200) {
