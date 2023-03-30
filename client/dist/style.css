@@ -460,7 +460,7 @@ ul {
 
   .requiredInputWrapper {
     position: relative;
-    --padding: 4px; 
+    padding: 2px; 
   }
 
   .requiredInputWrapper::after {

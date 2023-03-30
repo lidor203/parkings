@@ -89,20 +89,20 @@
                 <table>
                     <tr>
                         <td><label for="userIDForJob">תז/מא:</label></td>
-                        <td><input type="text" class="textInput" id="userIDForJob"><br></td>
+                        <td><input type="text" class="textInput" id="userIDForJob" required></td>
                     </tr>
                     <tr>
                         <td><label for="userNameForJob">שם מלא:</label></td>
-                        <td><input type="text" class="textInput" id="userNameForJob" readonly><br></td>
+                        <td><input type="text" class="textInput" id="userNameForJob" readonly></td>
                     </tr>
                     <tr>
                         <td><label for="userPhoneForJob">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="userPhoneForJob" readonly><br></td>
+                        <td><input type="text" class="textInput" id="userPhoneForJob" readonly></td>
                     </tr>
                     <tr>
                         <td><label for="userRoleForJob">תפקיד:</label></td>
                         <td class="rolesInput">
-                            <input list="" autocomplete="off" id="userRoleForJob">
+                            <input list="" autocomplete="off" id="userRoleForJob" required>
                             <div class="roles hidden" id="rolesDatalistForJob"></div><br>
                         </td>                        
                     </tr>
@@ -131,11 +131,11 @@
                 <table>
                     <tr>
                         <td><label for="roleIDForRole">מזהה תפקיד:</label></td>
-                        <td><input type="text" class="textInput" id="roleIDForRole" readonly><br></td>
+                        <td><input type="text" class="textInput" id="roleIDForRole" readonly></td>
                     </tr>
                     <tr>
                         <td><label for="roleValueForRole">תיאור התפקיד:</label></td>
-                        <td><input type="text" class="textInput" id="roleValueForRole"><br></td>
+                        <td><input type="text" class="textInput" id="roleValueForRole" required></td>
                     </tr>
                 </table>
             </div>
@@ -162,25 +162,25 @@
                 <table>
                     <tr>
                         <td><label for="userIDForUsers">תז/מא:</label></td>
-                        <td><input type="text" class="textInput" id="userIDForUsers"><br></td>
+                        <td><input type="text" class="textInput" id="userIDForUsers" required></td>
                     </tr>
                     <tr>
                         <td><label for="userNameForUsers">שם מלא:</label></td>
-                        <td><input type="text" class="textInput" id="userNameForUsers"><br></td>
+                        <td><input type="text" class="textInput" id="userNameForUsers" required></td>
                     </tr>
                     <tr>
                         <td><label for="userPhoneForUsers">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="userPhoneForUsers"><br></td>
+                        <td><input type="text" class="textInput" id="userPhoneForUsers" required></td>
                     </tr>
                     <tr>
                         <td><label for="userTimeToAlertForUsers">זמן מועדף להתראה:</label></td>
-                        <td><input type="text" class="textInput" id="userTimeToAlertForUsers"><br></td>
+                        <td><input type="text" class="textInput" id="userTimeToAlertForUsers" required></td>
                     </tr>
                     <tr>
                         <td><label for="userRoleForJob">תפקיד:</label></td>
                         <td class="rolesInput">
-                            <input list="" autocomplete="off" id="userRoleForUsers">
-                            <div class="roles hidden" id="rolesDatalistForUsers"></div><br>
+                            <input list="" autocomplete="off" id="userRoleForUsers" required>
+                            <div class="roles hidden" id="rolesDatalistForUsers"></div>
                         </td>
                     </tr>
                 </table>
@@ -208,19 +208,19 @@
                 <table>
                     <tr>
                         <td><label for="userIDForBam">מזהה המשתמש:</label></td>
-                        <td><input type="text" class="textInput" id="userIDForBam" required><br></td>
+                        <td><input type="text" class="textInput" id="userIDForBam" required></td>
                     </tr>
                     <tr>
                         <td><label for="userNameForBam">שם המשתמש:</label></td>
-                        <td><input type="text" class="textInput" id="userNameForBam" readonly><br></td>
+                        <td><input type="text" class="textInput" id="userNameForBam" required></td>
                     </tr>
                     <tr>
                         <td><label for="userStatusForBam">סיווג ביטחוני:</label></td>
-                        <td><input type="text" class="textInput" id="userStatusForBam"><br></td>
+                        <td><input type="text" class="textInput" id="userStatusForBam" required></td>
                     </tr>
                     <tr>
                         <td><label for="userValidDateForBam"> תאריך תפוגה סיווג ביטחוני:</label></td>
-                        <td><input type="text" class="textInput" id="userValidDateForBam"><br></td>
+                        <td><input type="text" class="textInput" id="userValidDateForBam" required></td>
                     </tr>
                 </table>
             </div>
@@ -273,37 +273,38 @@
         </div>
         <div class="dialog" id="showNewRequestDialog">
             <h2>הוספת/עריכת בקשת כניסה</h2>
-            <h4>פרטי האדם עבורו<br/>מבקשים את האישור:</h4>
+            <h4>פרטי האדם עבורו<br>מבקשים את האישור:</h4><br>
             <div>
                 <table>
                     <tr>
                         <td><label for="visitorName">שם מלא:</label></td>
-                        <td><input type="text" class="textInput" id="visitorName"><br></td>
+                        <td><input type="text" class="textInput" id="visitorName" required></td>
                     </tr>
                     <tr>
                         <td><label for="visitorID">תז/מא:</label></td>
-                        <td><input type="text" class="textInput" id="visitorID"><br></td>
+                        <td><input type="text" class="textInput" id="visitorID" required></td>
                     </tr>
                     <tr>
                         <td><label for="visitorPhone">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="visitorPhone"><br></td>
+                        <td><input type="text" class="textInput" id="visitorPhone" required></td>
                     </tr>
                 </table>
+                <br>
             </div>
-            <h4>פרטי המארח:</h4>
+            <h4>פרטי המארח:</h4><br>
             <div>
                 <table>
                     <tr>
                         <td><label for="hostID">תז/מא:</label></td>
-                        <td><input type="text" class="textInput" id="hostID"><br></td>
+                        <td><input type="text" class="textInput" id="hostID" required></td>
                     </tr>
                     <tr>
                         <td><label for="hostName">שם מלא:</label></td>
-                        <td><input type="text" class="textInput" id="hostName"><br></td>
+                        <td><input type="text" class="textInput" id="hostName" required></td>
                     </tr>
                     <tr>
                         <td><label for="hostPhone">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="hostPhone"><br></td>
+                        <td><input type="text" class="textInput" id="hostPhone" required></td>
                     </tr>
                 </table>
             </div>
