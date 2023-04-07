@@ -145,17 +145,13 @@ ul {
     padding: 12px;
 }
 
-.table th:last-child, .table td:last-child {
-  padding: 0;
-}
-
 .table td {
-    padding: 12px;
+  text-align: center;
+  padding: 12px;
 }
 
 .table tr {
     border-bottom: 1px solid #ddd;
-    padding-bottom: 20px;
 }
 
 .table tr.header {
