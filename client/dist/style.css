@@ -109,24 +109,14 @@ button {
     display: none;
     overflow-y: auto;
     padding-top: 20px;
-
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-
     direction: rtl;
     text-align: center;
     background: white;
-}
-
-.dialog>*:first-child {
-  margin-bottom: 20px;
-}
-
-.dialog>*:nth-child(2) {
-  margin: 10px 0;
 }
 
 .dialog>div:last-child {
@@ -165,6 +155,7 @@ ul {
 
 .table tr {
     border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
 }
 
 .table tr.header {
@@ -173,6 +164,10 @@ ul {
 
 .table tr:hover {
     background-color: #f1f1f1;
+}
+
+td {
+  padding: 5px;
 }
 
 #dialogs {
@@ -192,11 +187,15 @@ ul {
     height: 60vh;
 }
 
-#formContent {
+.formContent {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 14px;
+}
+
+.trContent {
+    padding-bottom: 400px;
 }
 
 #myInput {
@@ -459,8 +458,7 @@ ul {
   }
 
   .requiredInputWrapper {
-    position: relative;
-    padding: 2px; 
+    position: relative; 
   }
 
   .requiredInputWrapper::after {
@@ -469,7 +467,9 @@ ul {
     top: calc(-0.5em - var(--padding) / 2);
     left: 4px;
     font-size: 12px;
-    transform: translateY(-25%);
+    transform: translateY(-41%);
     background: white;
-    padding: 0 4px;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-bottom: 4px;
   }

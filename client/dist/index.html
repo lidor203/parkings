@@ -12,14 +12,14 @@
     <div id="screens">
         <div class="screen" id="login">
             <h2>התחברות</h2>
-            <div id="formContent">
+            <div class="formContent">
                 <div class="inputDiv">
                     <label for="inputLoginId">:תז/מא</label>
-                    <input type="text" class="textInput" id="inputLoginId" value="1">
+                    <input type="text" class="textInput" id="inputLoginId" required value="1">
                 </div>
                 <div class="inputDiv">
                     <label for="inputLoginPassword">:סיסמה</label>
-                    <input type="password" id="inputLoginPassword" value="1">
+                    <input type="password" id="inputLoginPassword" required value="1">
                 </div>
                 <button id="loginButton">כניסה</button>
             </div>  
@@ -28,7 +28,7 @@
         </div>
         <div class="screen" id="register">
             <h2>הרשמה</h2>
-            <div id="formContent">
+            <div class="formContent">
                 <div class="inputDiv">
                     <label for="inputRegisterId">:תז/מא</label>
                     <input type="text" class="textInput" id="inputRegisterId" required>
@@ -273,7 +273,7 @@
         </div>
         <div class="dialog" id="showNewRequestDialog">
             <h2>הוספת/עריכת בקשת כניסה</h2>
-            <h4>פרטי האדם עבורו<br>מבקשים את האישור:</h4><br>
+            <h4>פרטי האדם עבורו<br>מבקשים את האישור:</h4>
             <div>
                 <table>
                     <tr>
@@ -291,7 +291,7 @@
                 </table>
                 <br>
             </div>
-            <h4>פרטי המארח:</h4><br>
+            <h4>פרטי המארח:</h4>
             <div>
                 <table>
                     <tr>
