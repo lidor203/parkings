@@ -13,7 +13,7 @@ import { blocksRouter } from './controllers/blocksController';
 dotenv.config();
 
 const app: Express = express();
-app.use(express.json())
+app.use(express.json());
 app.use(cors());
 
 

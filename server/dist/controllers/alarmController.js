@@ -14,9 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateAlarm = void 0;
 const axios_1 = __importDefault(require("axios"));
-const { setAlarm, clearAlarm, Alarm } = require('set-alarm');
-const wbm = require('wbm');
-let alarm = null;
 const updateAlarm = (blockerCarNumber, blockedCarNumber) => __awaiter(void 0, void 0, void 0, function* () {
     const blockerUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockerCarNumber}\"`);
     const blockedUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockedCarNumber}\"`);
@@ -43,25 +40,13 @@ const updateAlarm = (blockerCarNumber, blockedCarNumber) => __awaiter(void 0, vo
         alarmHoursTime = 0;
         alarmMinutesTime = 0;
     }
-    timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0);
+    timeToSendMessege = new Date(timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0));
+    console.log(timeToSendMessege);
     // For Debugg ONLY. Change timeToSendMessege to whenever we need to
-    //timeToSendMessege = new Date()
-    //timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes(), 0, 0);
-    //
+    timeToSendMessege = new Date('2023-04-07T17:53Z');
     console.log(timeToSendMessege);
     const phones = [blockerUser.data[blockerkey]["phone"]];
     const messege = (yield blockedUser.data[blockedkey]["name"]) + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
-    //Set an alarm to activate the SMS function    
-    alarm = yield setAlarm(() => __awaiter(void 0, void 0, void 0, function* () {
-        // This function occur when timeToSendMessege arrives
-        // {showBrowser:true}
-        yield wbm.start().then(() => __awaiter(void 0, void 0, void 0, function* () {
-            yield wbm.send(phones, messege);
-            setTimeout((() => { wbm.end(); }), 10000);
-        }))
-            .catch(console.log("error"))
-            .finally();
-    }), parseInt(timeToSendMessege));
     return (messege);
 });
 exports.updateAlarm = updateAlarm;

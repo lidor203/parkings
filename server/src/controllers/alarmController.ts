@@ -1,13 +1,6 @@
 import axios from 'axios';
-import { time } from 'console';
 
-const { setAlarm, clearAlarm, Alarm } = require('set-alarm');
-const wbm = require('wbm');
-
-
-let alarm: any = null;
-
- export const updateAlarm = async (blockerCarNumber: any, blockedCarNumber: any) => {    
+export const updateAlarm = async (blockerCarNumber: any, blockedCarNumber: any) => {    
     const blockerUser: any = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockerCarNumber}\"`);
     const blockedUser: any = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockedCarNumber}\"`);
     
@@ -38,30 +31,15 @@ let alarm: any = null;
         alarmMinutesTime = 0;
     }
 
-    timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0);
-
-    // For Debugg ONLY. Change timeToSendMessege to whenever we need to
-    //timeToSendMessege = new Date()
-    //timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes(), 0, 0);
-    //
-
+    timeToSendMessege = new Date(timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0));
     console.log(timeToSendMessege);
-
+    
+    // For Debugg ONLY. Change timeToSendMessege to whenever we need to
+    timeToSendMessege = new Date('2023-04-07T17:53Z');
+    console.log(timeToSendMessege);
+    
     const phones = [blockerUser.data[blockerkey]["phone"]];
     const messege = await blockedUser.data[blockedkey]["name"] + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
-    
-    //Set an alarm to activate the SMS function    
-    alarm = await setAlarm(async () => {    
-        // This function occur when timeToSendMessege arrives
-        // {showBrowser:true}
-        await wbm.start().then(
-            async () => {              
-                                await wbm.send(phones, messege);
-                                setTimeout((() => { wbm.end(); }), 10000);
-                        })
-        .catch(console.log("error"))
-        .finally();
-    }, parseInt(timeToSendMessege));
 
     return (messege);
 }
