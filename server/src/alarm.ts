@@ -10,14 +10,12 @@ export const addMessegesToBlocker = (timeToSendMessege:string, phone:string, mes
         timeAlarm.set(timeToSendMessege, []);
     }
     timeAlarm.get(timeToSendMessege).push({"phone":phone, "messege":messege});
+    timeAlarm.get(timeToSendMessege).push({"phone":phone, "messege":messege});
 
     if (phoneAlarm.get(phone) === undefined) {
         phoneAlarm.set(phone, []);
     }
-    phoneAlarm.get(phone).push({"timeToSendMessege":timeToSendMessege, "messege":messege});   
-
-    console.log(phoneAlarm);
-    console.log(timeAlarm);
+    phoneAlarm.get(phone).push({"timeToSendMessege":timeToSendMessege, "messege":messege});
 }
 
 export const deleteMessegesFromBlocker = (phone:string) => {
@@ -25,25 +23,25 @@ export const deleteMessegesFromBlocker = (phone:string) => {
         phoneAlarm.get(phone).forEach((child: any) => deleteTimedMessegesFromBlocker(child["timeToSendMessege"], phone));   
         phoneAlarm.delete(phone);
     }    
-
-    console.log(phoneAlarm);
-    console.log(timeAlarm);
 }
 
 const deleteTimedMessegesFromBlocker = (timeToSendMessege:string, phone:string) => {
     if (timeAlarm.get(timeToSendMessege) !== undefined) {
-        let counter = 0;
+        let newMessegeList: any[] = [];
+        
         timeAlarm.get(timeToSendMessege).forEach((child: any) => {
-            if (child["phone"] === phone) {
-                timeAlarm.get(timeToSendMessege).splice(counter, 1)
+            if (child["phone"] !== phone) {
+                newMessegeList.push(child);
             }
+        });
 
-            counter++;
-        })
+        timeAlarm.delete(timeToSendMessege);
 
-        if (timeAlarm.get(timeToSendMessege).length === 0) {
-            timeAlarm.delete(timeToSendMessege);
+        if (newMessegeList.length !== 0) {
+            timeAlarm.set(timeToSendMessege, newMessegeList);
         }
+
+        console.log(timeAlarm);
     }    
 }
 
