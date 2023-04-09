@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { addMessegesToBlocker } from '../alarm'
+import { deleteMessegesFromBlocker } from '../alarm'
 
 export const updateAlarm = async (blockerCarNumber: any, blockedCarNumber: any) => {    
     const blockerUser: any = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockerCarNumber}\"`);
@@ -38,8 +40,11 @@ export const updateAlarm = async (blockerCarNumber: any, blockedCarNumber: any) 
     timeToSendMessege = new Date('2023-04-07T17:53Z');
     console.log(timeToSendMessege);
     
-    const phones = [blockerUser.data[blockerkey]["phone"]];
+    const phone = blockerUser.data[blockerkey]["phone"];
     const messege = await blockedUser.data[blockedkey]["name"] + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
 
+    addMessegesToBlocker(timeToSendMessege, phone, messege);
+    deleteMessegesFromBlocker(phone);
+    
     return (messege);
 }

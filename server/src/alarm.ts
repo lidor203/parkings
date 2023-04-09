@@ -1,9 +1,11 @@
+import { log } from "console";
+
 const wbm = require('wbm');
 
 let phoneAlarm = new Map();
 let timeAlarm = new Map();
 
-export const addtime = (timeToSendMessege:string, phone:string, messege:string) => {
+export const addMessegesToBlocker = (timeToSendMessege:string, phone:string, messege:string) => {
     if (timeAlarm.get(timeToSendMessege) === undefined) {
         timeAlarm.set(timeToSendMessege, []);
     }
@@ -12,18 +14,38 @@ export const addtime = (timeToSendMessege:string, phone:string, messege:string) 
     if (phoneAlarm.get(phone) === undefined) {
         phoneAlarm.set(phone, []);
     }
-    phoneAlarm.get(phone).push({"timeToSendMessege":timeToSendMessege, "messege":messege});
+    phoneAlarm.get(phone).push({"timeToSendMessege":timeToSendMessege, "messege":messege});   
+
+    console.log(phoneAlarm);
+    console.log(timeAlarm);
 }
 
-// export const deleteblocks = (phone:string) => {
-//     if (phoneAlarm.get(phone) !== undefined) {
-//         for (const key in phoneAlarm.get(phone)) { 
-//             timeAlarm.get(key["timeToSendMessege"])
-//         }
+export const deleteMessegesFromBlocker = (phone:string) => {
+    if (phoneAlarm.get(phone) !== undefined) {
+        phoneAlarm.get(phone).forEach((child: any) => deleteTimedMessegesFromBlocker(child["timeToSendMessege"], phone));   
+        phoneAlarm.delete(phone);
+    }    
 
-//         phoneAlarm.delete(phone);
-//     }    
-// }
+    console.log(phoneAlarm);
+    console.log(timeAlarm);
+}
+
+const deleteTimedMessegesFromBlocker = (timeToSendMessege:string, phone:string) => {
+    if (timeAlarm.get(timeToSendMessege) !== undefined) {
+        let counter = 0;
+        timeAlarm.get(timeToSendMessege).forEach((child: any) => {
+            if (child["phone"] === phone) {
+                timeAlarm.get(timeToSendMessege).splice(counter, 1)
+            }
+
+            counter++;
+        })
+
+        if (timeAlarm.get(timeToSendMessege).length === 0) {
+            timeAlarm.delete(timeToSendMessege);
+        }
+    }    
+}
 
 // export const throwMesseges = async () => {
 //     //Set an alarm to activate the SMS function    
