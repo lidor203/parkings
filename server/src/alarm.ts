@@ -40,8 +40,6 @@ const deleteTimedMessegesFromBlocker = (timeToSendMessege:string, phone:string) 
         if (newMessegeList.length !== 0) {
             timeAlarm.set(timeToSendMessege, newMessegeList);
         }
-
-        console.log(timeAlarm);
     }    
 }
 

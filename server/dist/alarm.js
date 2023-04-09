@@ -35,7 +35,6 @@ const deleteTimedMessegesFromBlocker = (timeToSendMessege, phone) => {
         if (newMessegeList.length !== 0) {
             timeAlarm.set(timeToSendMessege, newMessegeList);
         }
-        console.log(timeAlarm);
     }
 };
 // export const throwMesseges = async () => {
