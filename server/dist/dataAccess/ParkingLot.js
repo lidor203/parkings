@@ -26,7 +26,6 @@ class ParkingLot {
             delete this.blockList[carId];
         };
         this.getCarBlock = (carId) => {
-            console.log(this.blockList[carId]);
             return this.blockList[carId];
         };
         this.getBlockList = () => {

@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateAlarm = void 0;
 const axios_1 = __importDefault(require("axios"));
 const alarm_1 = require("../alarm");
-const alarm_2 = require("../alarm");
 const updateAlarm = (blockerCarNumber, blockedCarNumber) => __awaiter(void 0, void 0, void 0, function* () {
     const blockerUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockerCarNumber}\"`);
     const blockedUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockedCarNumber}\"`);
@@ -43,14 +42,12 @@ const updateAlarm = (blockerCarNumber, blockedCarNumber) => __awaiter(void 0, vo
         alarmMinutesTime = 0;
     }
     timeToSendMessege = new Date(timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0));
-    console.log(timeToSendMessege);
     // For Debugg ONLY. Change timeToSendMessege to whenever we need to
-    timeToSendMessege = new Date('2023-04-07T17:53Z');
-    console.log(timeToSendMessege);
+    timeToSendMessege = new Date();
+    timeToSendMessege = timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes() + 1, 0, 0);
     const phone = blockerUser.data[blockerkey]["phone"];
     const messege = (yield blockedUser.data[blockedkey]["name"]) + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
     (0, alarm_1.addMessegesToBlocker)(timeToSendMessege, phone, messege);
-    (0, alarm_2.deleteMessegesFromBlocker)(phone);
     return (messege);
 });
 exports.updateAlarm = updateAlarm;

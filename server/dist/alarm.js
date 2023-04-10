@@ -1,14 +1,23 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteMessegesFromBlocker = exports.addMessegesToBlocker = void 0;
+exports.throwMesseges = exports.deleteMessegesFromBlocker = exports.addMessegesToBlocker = void 0;
 const wbm = require('wbm');
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let phoneAlarm = new Map();
 let timeAlarm = new Map();
 const addMessegesToBlocker = (timeToSendMessege, phone, messege) => {
     if (timeAlarm.get(timeToSendMessege) === undefined) {
         timeAlarm.set(timeToSendMessege, []);
     }
-    timeAlarm.get(timeToSendMessege).push({ "phone": phone, "messege": messege });
     timeAlarm.get(timeToSendMessege).push({ "phone": phone, "messege": messege });
     if (phoneAlarm.get(phone) === undefined) {
         phoneAlarm.set(phone, []);
@@ -37,16 +46,30 @@ const deleteTimedMessegesFromBlocker = (timeToSendMessege, phone) => {
         }
     }
 };
-// export const throwMesseges = async () => {
-//     //Set an alarm to activate the SMS function    
-//     alarm = await setAlarm(async () => {    
-//         // This function occur when timeToSendMessege arrives
-//         await wbm.start({showBrowser:true}).then(
-//             async () => {              
-//                                 await wbm.send(phones, messege);
-//                                 setTimeout((() => { wbm.end(); }), 10000);
-//                         })
-//         .catch(console.log("error"))
-//         .finally();
-//     }, timeToSendMessege);
-// }
+const throwMesseges = () => __awaiter(void 0, void 0, void 0, function* () {
+    let currentTime = "";
+    let currentTimeMesseges = [];
+    let phoneNumber = [];
+    while (true) {
+        currentTime = new Date();
+        currentTime = currentTime.setUTCHours(currentTime.getHours(), currentTime.getMinutes(), 0, 0);
+        currentTimeMesseges = timeAlarm.get(currentTime);
+        if (currentTimeMesseges !== undefined) {
+            for (let i = 0; i < currentTimeMesseges.length; i++) {
+                phoneNumber = [];
+                phoneNumber.push(currentTimeMesseges[i]["phone"]);
+                //{showBrowser:true}
+                yield wbm.start().then(() => __awaiter(void 0, void 0, void 0, function* () {
+                    yield wbm.send(phoneNumber, currentTimeMesseges[i]["messege"]);
+                    yield sleep(5000);
+                    yield wbm.end();
+                }))
+                    .catch()
+                    .finally();
+            }
+            timeAlarm.delete(currentTime);
+        }
+        yield sleep(10000);
+    }
+});
+exports.throwMesseges = throwMesseges;

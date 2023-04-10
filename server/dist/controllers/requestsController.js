@@ -66,7 +66,6 @@ exports.requestsRouter.post('/getRequestByVisitorID', (req, res) => __awaiter(vo
     res.json(request.data);
 }));
 exports.requestsRouter.post('/deleteRequestByVisitorID', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body.key);
     yield axios_1.default.delete(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requests/${req.body.key}.json`);
     res.status(200);
     res.json("בקשת הכניסה נמחקה בהצלחה!");

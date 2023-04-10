@@ -1,6 +1,7 @@
 import { log } from "console";
 
 const wbm = require('wbm');
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 let phoneAlarm = new Map();
 let timeAlarm = new Map();
@@ -9,7 +10,6 @@ export const addMessegesToBlocker = (timeToSendMessege:string, phone:string, mes
     if (timeAlarm.get(timeToSendMessege) === undefined) {
         timeAlarm.set(timeToSendMessege, []);
     }
-    timeAlarm.get(timeToSendMessege).push({"phone":phone, "messege":messege});
     timeAlarm.get(timeToSendMessege).push({"phone":phone, "messege":messege});
 
     if (phoneAlarm.get(phone) === undefined) {
@@ -43,16 +43,34 @@ const deleteTimedMessegesFromBlocker = (timeToSendMessege:string, phone:string) 
     }    
 }
 
-// export const throwMesseges = async () => {
-//     //Set an alarm to activate the SMS function    
-//     alarm = await setAlarm(async () => {    
-//         // This function occur when timeToSendMessege arrives
-//         await wbm.start({showBrowser:true}).then(
-//             async () => {              
-//                                 await wbm.send(phones, messege);
-//                                 setTimeout((() => { wbm.end(); }), 10000);
-//                         })
-//         .catch(console.log("error"))
-//         .finally();
-//     }, timeToSendMessege);
-// }
+export const throwMesseges = async () => {
+    let currentTime :any = "";
+    let currentTimeMesseges: any[] = [];
+    let phoneNumber :any[] = [];
+
+    while (true) {
+        currentTime = new Date();
+        currentTime = currentTime.setUTCHours(currentTime.getHours(), currentTime.getMinutes(), 0, 0);
+        currentTimeMesseges = timeAlarm.get(currentTime);
+
+        if (currentTimeMesseges !== undefined) {
+            for (let i = 0; i < currentTimeMesseges.length; i++) {
+                phoneNumber = [];
+                phoneNumber.push(currentTimeMesseges[i]["phone"]);
+                //{showBrowser:true}
+                await wbm.start().then(
+                    async () => {              
+                                    await wbm.send(phoneNumber, currentTimeMesseges[i]["messege"]);
+                                    await sleep(5000);
+                                    await wbm.end();
+                                })
+                .catch()
+                .finally();
+            }
+
+            timeAlarm.delete(currentTime);
+        }
+        
+        await sleep(10000);
+    }
+}

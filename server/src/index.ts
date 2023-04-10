@@ -9,13 +9,13 @@ import { bamRouter } from './controllers/bamController';
 import { securityRouter } from './controllers/securityController';
 import { jobsRouter } from './controllers/jobsController';
 import { blocksRouter } from './controllers/blocksController';
+import { throwMesseges } from './alarm';
 
 dotenv.config();
 
 const app: Express = express();
 app.use(express.json());
 app.use(cors());
-
 
 const port = process.env.PORT;
 
@@ -42,3 +42,5 @@ app.get('/', (req: Request, res: Response) => {
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
+
+const alarmClock = throwMesseges();

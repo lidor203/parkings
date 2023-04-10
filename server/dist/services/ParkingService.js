@@ -20,7 +20,6 @@ class ParkingService {
             return this.parkingLot.getCars();
         };
         this.whoBlocks = (carId) => {
-            console.log(carId);
             if (!this.parkingLot.getCarBlock(carId))
                 throw new Error(`car ${carId} not exist`);
             const carBlock = this.parkingLot.getCarBlock(carId);

@@ -61,7 +61,6 @@ requestsRouter.post('/getRequestByVisitorID', async (req: Request, res: Response
 });
 
 requestsRouter.post('/deleteRequestByVisitorID', async (req: Request, res: Response)  => {
-    console.log(req.body.key);
     await axios.delete(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requests/${req.body.key}.json`);
     res.status(200);
     res.json("בקשת הכניסה נמחקה בהצלחה!");

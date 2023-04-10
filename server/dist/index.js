@@ -14,6 +14,7 @@ const bamController_1 = require("./controllers/bamController");
 const securityController_1 = require("./controllers/securityController");
 const jobsController_1 = require("./controllers/jobsController");
 const blocksController_1 = require("./controllers/blocksController");
+const alarm_1 = require("./alarm");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -38,3 +39,4 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
+const alarmClock = (0, alarm_1.throwMesseges)();

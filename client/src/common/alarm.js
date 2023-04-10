@@ -14,7 +14,6 @@ export const getBlockedTimeToLeave = (carNumber) => {
                 blockerMap.get(res.data[key]["blockerCarNumber"]).push(res.data[key]["blockedCarNumber"]);
             }
         
-            console.log(blockerMap);
             const blockedCars = blockerMap.get(carNumber);
             if (blockedCars !== undefined) {
                 while (carNumber !== undefined) {
