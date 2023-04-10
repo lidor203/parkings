@@ -12,10 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateAlarm = void 0;
+exports.removeFromAlarm = exports.addToAlarm = void 0;
 const axios_1 = __importDefault(require("axios"));
 const alarm_1 = require("../alarm");
-const updateAlarm = (blockerCarNumber, blockedCarNumber) => __awaiter(void 0, void 0, void 0, function* () {
+const alarm_2 = require("../alarm");
+const addToAlarm = (blockerCarNumber, blockedCarNumber) => __awaiter(void 0, void 0, void 0, function* () {
     const blockerUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockerCarNumber}\"`);
     const blockedUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockedCarNumber}\"`);
     const blockerkey = Object.keys(blockerUser.data)[0];
@@ -50,4 +51,8 @@ const updateAlarm = (blockerCarNumber, blockedCarNumber) => __awaiter(void 0, vo
     (0, alarm_1.addMessegesToBlocker)(timeToSendMessege, phone, messege);
     return (messege);
 });
-exports.updateAlarm = updateAlarm;
+exports.addToAlarm = addToAlarm;
+const removeFromAlarm = (blockerPhone) => __awaiter(void 0, void 0, void 0, function* () {
+    (0, alarm_2.deleteMessegesFromBlocker)(blockerPhone);
+});
+exports.removeFromAlarm = removeFromAlarm;

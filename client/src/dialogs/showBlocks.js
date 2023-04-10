@@ -82,6 +82,11 @@ export const getMyBlockers = async (blockerMap, carNumber) => {
 
 export const showBlocksFunction = async () => {
     await blocksFunctionality.showBlocks(async (blockerMap, blockedMap) => {
+        let nowTime = new Date();
+        document.getElementById("leaveTime").value = nowTime.getHours().toString().padStart(2,'0') + ":" + nowTime.getMinutes().toString().padStart(2,'0');
+        document.getElementById("updateParkingDetailsButton").onclick = changeLeaveTime;
+        document.getElementById("leftNowButton").onclick = blocksFunctionality.deleteBlock;
+
         const changeLeaveTime = () => {
             const leaveTime = document.getElementById("leaveTime").value;
             const leaveTimeHours = parseInt(String(leaveTime).split(':')[0]);
@@ -97,15 +102,6 @@ export const showBlocksFunction = async () => {
                 usersFunctionality.changeLeaveTime(leaveTime, global.userKey);
             }
         };
-
-        const changeLeaveTimeToNow = () => {
-            const currentDate = new Date();
-            const currentTime = currentDate.getHours() + ":" + currentDate.getMinutes();
-            usersFunctionality.changeLeaveTime(currentTime, global.userKey);
-        };
-        
-        document.getElementById("updateParkingDetailsButton").onclick = changeLeaveTime;
-        document.getElementById("leaveNowButton").onclick = changeLeaveTimeToNow;
 
         let meBlockTable = document.getElementById("meBlockTable");
 

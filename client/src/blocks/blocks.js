@@ -2,7 +2,7 @@ import axios from "axios";
 import { apiURL } from "../../config";
 
 export class BlocksFunctionality {
-    showBlocks = async (hanldeSuccess, handleFailure) => {
+    showBlocks = async (hanldeSuccess, _handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
         const res = await axios.post(`${apiURL}/blocks/getBlocks`)
@@ -27,7 +27,7 @@ export class BlocksFunctionality {
         document.getElementById('loader-circle').style.visibility = 'hidden';
     }
 
-    newBlock = async (hanldeSuccess, handleFailure) => {
+    newBlock = async (hanldeSuccess, _handleFailure) => {
         let blockerCarNumber = document.getElementById("blockerCarNumber").value;
         let blockedCarNumber = document.getElementById("blockedCarNumber").value;
         let messege = "";
@@ -77,9 +77,12 @@ export class BlocksFunctionality {
                         blockedCarNumber = blockedCars.pop();
                     }
 
-                    messege = messege + additionalMessege;
-
                     if (res.status === 200)
+                    {
+                        messege = messege + additionalMessege;
+                    }
+
+                    if((res.status === 200) || (res.status === 201))
                     {
                         alert(messege);
                     }
@@ -92,5 +95,26 @@ export class BlocksFunctionality {
             .catch(() => { alert("משהו השתבש בשמירת החסימה. נסה שוב"); })
             .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
         }
+    }
+    
+    deleteBlock = async (hanldeSuccess, handleFailure) => {
+        document.getElementById('loader-circle').style.visibility = 'visible';
+        
+        await axios.post(`${apiURL}/blocks/deleteBlock`, {userCarNumber, userPhone})
+            .then(res => {
+                if (res.status === 200)
+                {
+                    alert(res.data);
+                    hanldeSuccess();
+                } 
+            })
+            .catch(_err=>{
+                handleFailure();
+            })
+            .finally(() => {
+                document.getElementById('loader-circle').style.visibility = 'hidden';
+                document.getElementById('showBlocksCloseButton').click();                
+            }
+        );
     }
 }

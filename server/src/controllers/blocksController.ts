@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import axios from 'axios';
-import { updateAlarm } from '../controllers/alarmController';
+import { addToAlarm } from '../controllers/alarmController';
+import { removeFromAlarm } from '../controllers/alarmController';
 
 export const blocksRouter = express.Router();
 blocksRouter.use(express.json());
@@ -12,35 +13,42 @@ blocksRouter.post('/getBlocks', async (req: Request, res: Response) => {
 });
 
 blocksRouter.post('/newBlock', async (req: Request, res: Response) => {
+    let isBlcokExist = false;
+    let messege: any = "החסימה כבר רשומה במאגר!";
     const blockerCarNumber = req.body.blockerCarNumber;
     const blockedCarNumber = req.body.blockedCarNumber;
-    let messege: any = "";
+    const blocks = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks.json?orderBy=\"blockerCarNumber\"&equalTo=\"${blockerCarNumber}\"`);
+    
+    for (const key in blocks.data) {     
+        if (blocks.data[key]["blockedCarNumber"] === blockedCarNumber) {
+            isBlcokExist = true;
+            res.status(201);
+            break;
+        }
+    } 
 
-    await axios.post("https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks.json",
+    if (!(isBlcokExist)) {
+        await axios.post("https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks.json",
         {
             "blockerCarNumber": blockerCarNumber,
             "blockedCarNumber": blockedCarNumber
-        }).then(async () => { messege = await updateAlarm(blockerCarNumber, blockedCarNumber); })
+        }).then(async () => { messege = await addToAlarm(blockerCarNumber, blockedCarNumber); })
         .catch()
         .finally();
-    res.status(200);   
+        res.status(200); 
+    }  
+
     res.json(messege);
 });
 
-// blocksRouter.post('/deleteBlock', async (req: Request, res: Response)  => {
-//     await axios.delete(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks/${req.body.key}.json`);
-//     res.status(200);
-//     res.json("החסימה נמחקה בהצלחה!");
-// });
+blocksRouter.post('/deleteBlock', async (req: Request, res: Response)  => {  
+    const blocks = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks.json?orderBy=\"blockerCarNumber\"&equalTo=\"${req.body.userCarNumber}\"`);
+    
+    for (const key in blocks.data) {
+        await axios.delete(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks/${key}.json`);
+    }
 
-// blocksRouter.post('/editBlock', async (req: Request, res: Response)  => {
-//     await axios.patch(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks/${req.body.key}.json`,
-//     {
-//         "ID" : req.body.userIDToUpdate, 
-//         "name" : req.body.userNameToUpdate, 
-//         "phone" : req.body.userPhoneToUpdate, 
-//         "role" : req.body.userRoleToUpdate
-//     });
-//     res.status(200);
-//     res.json("החסימה עודכנה בהצלחה!");
-// });
+    removeFromAlarm(req.body.userPhone);
+    res.status(200);
+    res.json("החסימות נמחקו בהצלחה!");
+});

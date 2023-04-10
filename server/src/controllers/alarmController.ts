@@ -2,7 +2,7 @@ import axios from 'axios';
 import { addMessegesToBlocker } from '../alarm';
 import { deleteMessegesFromBlocker } from '../alarm';
 
-export const updateAlarm = async (blockerCarNumber: any, blockedCarNumber: any) => {    
+export const addToAlarm = async (blockerCarNumber: any, blockedCarNumber: any) => {    
     const blockerUser: any = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockerCarNumber}\"`);
     const blockedUser: any = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockedCarNumber}\"`);
     
@@ -36,8 +36,8 @@ export const updateAlarm = async (blockerCarNumber: any, blockedCarNumber: any) 
     timeToSendMessege = new Date(timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0));
     
     // For Debugg ONLY. Change timeToSendMessege to whenever we need to
-    timeToSendMessege = new Date();
-    timeToSendMessege = timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes()+1, 0, 0);
+    // timeToSendMessege = new Date();
+    // timeToSendMessege = timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes()+1, 0, 0);
     
     const phone = blockerUser.data[blockerkey]["phone"];
     const messege = await blockedUser.data[blockedkey]["name"] + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
@@ -45,4 +45,8 @@ export const updateAlarm = async (blockerCarNumber: any, blockedCarNumber: any) 
     addMessegesToBlocker(timeToSendMessege, phone, messege);
     
     return (messege);
+}
+
+export const removeFromAlarm = async (blockerPhone: any) => {
+    deleteMessegesFromBlocker(blockerPhone);
 }
