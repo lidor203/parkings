@@ -44,8 +44,8 @@ const addToAlarm = (blockerCarNumber, blockedCarNumber) => __awaiter(void 0, voi
     }
     timeToSendMessege = new Date(timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0));
     // For Debugg ONLY. Change timeToSendMessege to whenever we need to
-    timeToSendMessege = new Date();
-    timeToSendMessege = timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes() + 1, 0, 0);
+    // timeToSendMessege = new Date();
+    // timeToSendMessege = timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes()+1, 0, 0);
     const phone = blockerUser.data[blockerkey]["phone"];
     const messege = (yield blockedUser.data[blockedkey]["name"]) + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
     (0, alarm_1.addMessegesToBlocker)(timeToSendMessege, phone, messege);
