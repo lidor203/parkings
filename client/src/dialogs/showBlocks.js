@@ -104,14 +104,14 @@ export const showBlocksFunction = async () => {
                     if (res.status === 200)
                     {
                         const blockedUserPhone = global.userPhone;                   
-                        await axios.post(`${apiURL}/blocks/changeAlarmMessegesToNewTime`, { blockedUserPhone })
+                        await axios.post(`${apiURL}/blocks/changeAlarmMessegesToNewTime`, { blockedUserPhone, newLeaveTime })
                         .then()
                         .catch()
                         .finally(global.leaveTime = newLeaveTime);
                     }
                 })
                 .catch()
-                .finally(global.leaveTime = newLeaveTime);
+                .finally();
             }
         };
 

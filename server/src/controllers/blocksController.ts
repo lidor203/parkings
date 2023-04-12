@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import axios from 'axios';
 import { addToAlarm } from '../controllers/alarmController';
 import { removeFromAlarm } from '../controllers/alarmController';
+import { changeMessegesTime } from '../controllers/alarmController';
 
 export const blocksRouter = express.Router();
 blocksRouter.use(express.json());
@@ -55,14 +56,7 @@ blocksRouter.post('/deleteBlock', async (req: Request, res: Response)  => {
 
 
 blocksRouter.post('/changeAlarmMessegesToNewTime', async (req: Request, res: Response)  => {  
-    //blockedUserPhone
-    const blocks = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks.json?orderBy=\"blockerCarNumber\"&equalTo=\"${req.body.userCarNumber}\"`);
-    
-    for (const key in blocks.data) {
-        await axios.delete(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks/${key}.json`);
-    }
-
-    removeFromAlarm(req.body.userPhone);
+    changeMessegesTime(req.body.blockedUserPhone, req.body.newLeaveTime);
     res.status(200);
-    res.json("החסימות נמחקו בהצלחה!");
+    res.json("שינוי זמן היציאה עודכן בהצלחה!");
 });

@@ -1,57 +1,118 @@
-import { log } from "console";
+import { time } from "console";
+import { parse } from "path";
 
 const wbm = require('wbm');
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-let phoneAlarm = new Map();
 let timeAlarm = new Map();
 
-export const addMessegesToBlocker = (timeToSendMessege:string, phone:string, messege:string) => {
+const calculateNewMessege = async (messege:string, newLeaveTime:string) => {
+    let words: any[] = messege.split(' ');
+    words[words.length -1] = newLeaveTime;
+    return(words.join(' '));
+}
+
+export const calculateTimeToSendMessege = async (leaveTime:string, blockerUsertimeToAlertMinutesTime:number) => {
+    let timeToSendMessege: any = new Date();
+    const blockedUserLeaveTime = leaveTime.split(":");
+    const blockedUserLeaveHoursTime = parseInt(blockedUserLeaveTime[0]);
+    const blockedUserLeaveMinutesTime = parseInt(blockedUserLeaveTime[1]);
+
+    let alarmHoursTime = null;
+    let alarmMinutesTime = null;
+
+    if (blockedUserLeaveMinutesTime >= blockerUsertimeToAlertMinutesTime) {
+        alarmHoursTime = blockedUserLeaveHoursTime;
+        alarmMinutesTime = blockedUserLeaveMinutesTime - blockerUsertimeToAlertMinutesTime
+    }
+    else {
+        alarmMinutesTime = 60 - (blockerUsertimeToAlertMinutesTime - blockedUserLeaveMinutesTime);
+        alarmHoursTime = blockedUserLeaveHoursTime - 1;
+    }
+
+    // for cases when the hour gets to be -1
+    // for example: if the blocked time to leave is 00:15 and the blocker time to alert is 30 minutes
+    if (alarmHoursTime < 0) {
+        alarmHoursTime = 0;
+        alarmMinutesTime = 0;
+    }
+
+    timeToSendMessege = new Date(timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0));
+    
+    // For Debugg ONLY. Change timeToSendMessege to whenever we need to
+    // timeToSendMessege = new Date();
+    // timeToSendMessege = timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes()+1, 0, 0);
+
+    return(timeToSendMessege);
+}
+
+export const addMessegesToBlocker = async (timeToSendMessege:string, phone:string, messege:string, timeToAlert:string) => {
     if (timeAlarm.get(timeToSendMessege) === undefined) {
         timeAlarm.set(timeToSendMessege, []);
     }
-    timeAlarm.get(timeToSendMessege).push({"phone":phone, "messege":messege});
 
-    if (phoneAlarm.get(phone) === undefined) {
-        phoneAlarm.set(phone, []);
-    }
-    phoneAlarm.get(phone).push({"timeToSendMessege":timeToSendMessege, "messege":messege});
+    timeAlarm.get(timeToSendMessege).push({"phone":phone, "messege":messege, "timeToAlert":timeToAlert});
 }
 
 export const deleteMessegesFromBlocker = (phone:string) => {
-    if (phoneAlarm.get(phone) !== undefined) {
-        phoneAlarm.get(phone).forEach((child: any) => deleteTimedMessegesFromBlocker(child["timeToSendMessege"], phone));   
-        phoneAlarm.delete(phone);
-    }    
-}
+    let newMessegeList: any[] = [];
 
-const deleteTimedMessegesFromBlocker = (timeToSendMessege:string, phone:string) => {
-    if (timeAlarm.get(timeToSendMessege) !== undefined) {
-        let newMessegeList: any[] = [];
-        
-        timeAlarm.get(timeToSendMessege).forEach((child: any) => {
+    timeAlarm.forEach(async (key) => {
+        timeAlarm.get(key).forEach((child:any) => {
             if (child["phone"] !== phone) {
                 newMessegeList.push(child);
             }
-        });
+        })
 
-        timeAlarm.delete(timeToSendMessege);
+        timeAlarm.delete(key);
+        timeAlarm.set(key, []);
+        timeAlarm.get(key).push(newMessegeList);
+        newMessegeList = [];
+    })  
+}
 
-        if (newMessegeList.length !== 0) {
-            timeAlarm.set(timeToSendMessege, newMessegeList);
+export const changeAlarmMessegesTime = async (blockedUserPhone: string, newLeaveTime: string) => {
+    let newMessegeList: any[] = [];
+    let oldMessegeList: any[] = [];
+
+    timeAlarm.forEach(async (key) => {
+        timeAlarm.get(key).forEach((child:any) => {
+            if (child["messege"].includes(blockedUserPhone)) {
+                newMessegeList.push(child);
+            }
+            else {
+                oldMessegeList.push(child);
+            }
+        })
+
+        timeAlarm.delete(key);
+
+        if (oldMessegeList.length !== 0) {
+            timeAlarm.set(key, []);
+            timeAlarm.get(key).push(oldMessegeList);
         }
-    }    
+
+        oldMessegeList = [];
+
+        for (let i = 0; i < newMessegeList.length; i++) {
+            addMessegesToBlocker(await calculateTimeToSendMessege(newLeaveTime, newMessegeList[i]["timeToAlert"]), newMessegeList[i]["phone"], await calculateNewMessege(newMessegeList[i]["messege"], newLeaveTime), newMessegeList[i]["timeToAlert"]);            
+        }
+
+        newMessegeList = [];
+    })      
 }
 
 export const throwMesseges = async () => {
-    let currentTime :any = "";
+    let currentTime: any = "";
+    let previousTime: any = "";
     let currentTimeMesseges: any[] = [];
     let phoneNumber :any[] = [];
 
     while (true) {
-        currentTime = new Date();
-        currentTime = currentTime.setUTCHours(currentTime.getHours(), currentTime.getMinutes(), 0, 0);
-        currentTimeMesseges = timeAlarm.get(currentTime);
+        currentTime = new Date().setUTCHours(currentTime.getHours(), currentTime.getMinutes(), 0, 0);
+        previousTime = currentTime - 60000; //We also calculate it for the chance of missing a minute between the Alarm register and the Alarm notification      
+
+        currentTimeMesseges = timeAlarm.get(currentTime).concat(timeAlarm.get(previousTime));
 
         if (currentTimeMesseges !== undefined) {
             for (let i = 0; i < currentTimeMesseges.length; i++) {
@@ -68,6 +129,7 @@ export const throwMesseges = async () => {
                 .finally();
             }
 
+            timeAlarm.delete(previousTime);
             timeAlarm.delete(currentTime);
         }
         
