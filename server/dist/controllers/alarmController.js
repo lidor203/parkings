@@ -12,43 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeFromAlarm = exports.addToAlarm = void 0;
+exports.changeMessegesTime = exports.removeFromAlarm = exports.addToAlarm = void 0;
 const axios_1 = __importDefault(require("axios"));
 const alarm_1 = require("../alarm");
 const alarm_2 = require("../alarm");
+const alarm_3 = require("../alarm");
+const alarm_4 = require("../alarm");
 const addToAlarm = (blockerCarNumber, blockedCarNumber) => __awaiter(void 0, void 0, void 0, function* () {
     const blockerUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockerCarNumber}\"`);
     const blockedUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockedCarNumber}\"`);
     const blockerkey = Object.keys(blockerUser.data)[0];
     const blockedkey = Object.keys(blockedUser.data)[0];
-    let timeToSendMessege = new Date();
-    const blockedUserLeaveTime = String(blockedUser.data[blockedkey]["leaveTime"]).split(":");
-    const blockedUserLeaveHoursTime = parseInt(blockedUserLeaveTime[0]);
-    const blockedUserLeaveMinutesTime = parseInt(blockedUserLeaveTime[1]);
-    const blockerUsertimeToAlertMinutesTime = parseInt(blockerUser.data[blockerkey]["timeToAlert"]);
-    let alarmHoursTime = null;
-    let alarmMinutesTime = null;
-    if (blockedUserLeaveMinutesTime >= blockerUsertimeToAlertMinutesTime) {
-        alarmHoursTime = blockedUserLeaveHoursTime;
-        alarmMinutesTime = blockedUserLeaveMinutesTime - blockerUsertimeToAlertMinutesTime;
-    }
-    else {
-        alarmMinutesTime = 60 - (blockerUsertimeToAlertMinutesTime - blockedUserLeaveMinutesTime);
-        alarmHoursTime = blockedUserLeaveHoursTime - 1;
-    }
-    // for cases when the hour gets to be -1
-    // for example: if the blocked time to leave is 00:15 and the blocker time to alert is 30 minutes
-    if (alarmHoursTime < 0) {
-        alarmHoursTime = 0;
-        alarmMinutesTime = 0;
-    }
-    timeToSendMessege = new Date(timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0));
-    // For Debugg ONLY. Change timeToSendMessege to whenever we need to
-    // timeToSendMessege = new Date();
-    // timeToSendMessege = timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes()+1, 0, 0);
+    const timeToSendMessege = yield (0, alarm_4.calculateTimeToSendMessege)(blockedUser.data[blockedkey]["leaveTime"], parseInt(blockerUser.data[blockerkey]["timeToAlert"]));
     const phone = blockerUser.data[blockerkey]["phone"];
-    const messege = (yield blockedUser.data[blockedkey]["name"]) + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
-    (0, alarm_1.addMessegesToBlocker)(timeToSendMessege, phone, messege);
+    const messege = blockedUser.data[blockedkey]["name"] + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
+    const timeToAlert = blockerUser.data[blockerkey]["timeToAlert"];
+    (0, alarm_1.addMessegesToBlocker)(timeToSendMessege, phone, messege, timeToAlert);
     return (messege);
 });
 exports.addToAlarm = addToAlarm;
@@ -56,3 +35,7 @@ const removeFromAlarm = (blockerPhone) => __awaiter(void 0, void 0, void 0, func
     (0, alarm_2.deleteMessegesFromBlocker)(blockerPhone);
 });
 exports.removeFromAlarm = removeFromAlarm;
+const changeMessegesTime = (blockedUserPhone, newLeaveTime) => __awaiter(void 0, void 0, void 0, function* () {
+    return ((0, alarm_3.changeAlarmMessegesTime)(blockedUserPhone, newLeaveTime));
+});
+exports.changeMessegesTime = changeMessegesTime;

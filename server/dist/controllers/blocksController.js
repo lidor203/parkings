@@ -17,6 +17,7 @@ const express_1 = __importDefault(require("express"));
 const axios_1 = __importDefault(require("axios"));
 const alarmController_1 = require("../controllers/alarmController");
 const alarmController_2 = require("../controllers/alarmController");
+const alarmController_3 = require("../controllers/alarmController");
 exports.blocksRouter = express_1.default.Router();
 exports.blocksRouter.use(express_1.default.json());
 exports.blocksRouter.post('/getBlocks', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -58,12 +59,7 @@ exports.blocksRouter.post('/deleteBlock', (req, res) => __awaiter(void 0, void 0
     res.json("החסימות נמחקו בהצלחה!");
 }));
 exports.blocksRouter.post('/changeAlarmMessegesToNewTime', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //blockedUserPhone
-    const blocks = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks.json?orderBy=\"blockerCarNumber\"&equalTo=\"${req.body.userCarNumber}\"`);
-    for (const key in blocks.data) {
-        yield axios_1.default.delete(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks/${key}.json`);
-    }
-    (0, alarmController_2.removeFromAlarm)(req.body.userPhone);
+    (0, alarmController_3.changeMessegesTime)(req.body.blockedUserPhone, req.body.newLeaveTime);
     res.status(200);
-    res.json("החסימות נמחקו בהצלחה!");
+    res.json("שינוי זמן היציאה עודכן בהצלחה!");
 }));

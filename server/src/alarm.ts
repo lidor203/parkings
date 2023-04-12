@@ -109,10 +109,16 @@ export const throwMesseges = async () => {
     let phoneNumber :any[] = [];
 
     while (true) {
-        currentTime = new Date().setUTCHours(currentTime.getHours(), currentTime.getMinutes(), 0, 0);
+        currentTime = new Date(); // wh have to make it a Date Befor change it to UTC so we can use it's getHours and getMinutes functions
+        currentTime = currentTime.setUTCHours(currentTime.getHours(), currentTime.getMinutes(), 0, 0);
         previousTime = currentTime - 60000; //We also calculate it for the chance of missing a minute between the Alarm register and the Alarm notification      
 
-        currentTimeMesseges = timeAlarm.get(currentTime).concat(timeAlarm.get(previousTime));
+        if (timeAlarm.get(previousTime) !== undefined) {
+            currentTimeMesseges = timeAlarm.get(previousTime).concat(timeAlarm.get(currentTime));
+        }
+        else {
+            currentTimeMesseges = timeAlarm.get(currentTime);
+        } 
 
         if (currentTimeMesseges !== undefined) {
             for (let i = 0; i < currentTimeMesseges.length; i++) {
