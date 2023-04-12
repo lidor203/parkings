@@ -25,6 +25,10 @@ export const getBlockedsByMe = async (blockedMap, carNumber) => {
                         const tdBlockedCarNumber = document.createElement("td");
                         const tdBlockedPhone = document.createElement("td");
                         const tdBlockedLeaveTime = document.createElement("td");
+                        tdBlockedName.setAttribute("width", "25%");
+                        tdBlockedCarNumber.setAttribute("width", "25%");
+                        tdBlockedPhone.setAttribute("width", "25%");
+                        tdBlockedLeaveTime.setAttribute("width", "25%");
                         tdBlockedName.innerText = user[key]["name"];
                         tdBlockedCarNumber.innerText = user[key]["carNumber"];
                         tdBlockedPhone.innerText = user[key]["phone"];
@@ -63,6 +67,10 @@ export const getMyBlockers = async (blockerMap, carNumber) => {
                         const tdBlockerName = document.createElement("td");
                         const tdBlockerPhone = document.createElement("td");
                         const tdBlockerCarNumber = document.createElement("td");
+                        tdBlockerID.setAttribute("width", "25%");
+                        tdBlockerName.setAttribute("width", "25%");
+                        tdBlockerPhone.setAttribute("width", "25%");
+                        tdBlockerCarNumber.setAttribute("width", "25%");
                         tdBlockerID.innerText = user[key]["ID"];
                         tdBlockerName.innerText = user[key]["name"];
                         tdBlockerPhone.innerText = user[key]["phone"];
@@ -127,7 +135,10 @@ export const showBlocksFunction = async () => {
         thBlockedCarNumber.innerText = "מספר הרכב של החסום";
         thBlockedPhone.innerText = "מספר פלאפון של החסום";
         thBlockedLeaveTime.innerText = "שעת היציאה של החסום";
-        
+        thBlockedName.setAttribute("width", "25%");
+        thBlockedCarNumber.setAttribute("width", "25%");
+        thBlockedPhone.setAttribute("width", "25%");
+        thBlockedLeaveTime.setAttribute("width", "25%");
         trBlockedHead.appendChild(thBlockedName);
         trBlockedHead.appendChild(thBlockedCarNumber);
         trBlockedHead.appendChild(thBlockedPhone);
@@ -148,7 +159,10 @@ export const showBlocksFunction = async () => {
         thBlockerName.innerText = "שם החוסם";
         thBlockerPhone.innerText = "מספר פלאפון של החוסם";
         thBlockerCarNumber.innerText = "מספר הרכב של החוסם";
-        
+        thBlockerID.setAttribute("width", "25%");
+        thBlockerName.setAttribute("width", "25%");
+        thBlockerPhone.setAttribute("width", "25%");
+        thBlockerCarNumber.setAttribute("width", "25%");
         trBlockerHead.appendChild(thBlockerID);
         trBlockerHead.appendChild(thBlockerName);
         trBlockerHead.appendChild(thBlockerPhone);

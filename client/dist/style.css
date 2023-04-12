@@ -375,8 +375,8 @@ td {
   }
   
   #container #menu-wrap .toggler + .dots > div,
-   #container #menu-wrap .toggler + .dots > div:after,
-   #container #menu-wrap .toggler + .dots > div:before {
+  #container #menu-wrap .toggler + .dots > div:after,
+  #container #menu-wrap .toggler + .dots > div:before {
     transition: all 0.5s;
    }
 
