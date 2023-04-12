@@ -38,8 +38,9 @@ export class Profile {
             global.userCarNumber = user[key]["carNumber"];
             global.userPhone = user[key]["phone"];
             global.userRole = user[key]["role"];
+            global.userLeaveTime = user[key]["leaveTime"];
+            global.userTimeToAlert = user[key]["timeToAlert"];
             global.userKey = key;
-            //setInterval(function(){getBlockedTimeToLeave(global.userCarNumber);},60000);
         }
 
         document.getElementById("name").innerText = "שם: " + global.userName;

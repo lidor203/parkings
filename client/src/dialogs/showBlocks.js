@@ -87,19 +87,31 @@ export const showBlocksFunction = async () => {
         document.getElementById("updateParkingDetailsButton").onclick = changeLeaveTime;
         document.getElementById("leftNowButton").onclick = blocksFunctionality.deleteBlock;
 
-        const changeLeaveTime = () => {
-            const leaveTime = document.getElementById("leaveTime").value;
-            const leaveTimeHours = parseInt(String(leaveTime).split(':')[0]);
-            const leaveTimeMinutes = parseInt(String(leaveTime).split(':')[1]);
-            if (leaveTime === "") {
+        const changeLeaveTime = async () => {
+            const newLeaveTime = document.getElementById("leaveTime").value;
+            const newLeaveTimeHours = parseInt(String(newLeaveTime).split(':')[0]);
+            const newLeaveTimeMinutes = parseInt(String(newLeaveTime).split(':')[1]);
+            if (newLeaveTime === "") {
                 alert("אי אפשר לעדכן זמן עזיבה ריק או לא שלם");
             }
-            else if ((leaveTimeHours < new Date().getHours()) || 
-                     ((leaveTimeHours === new Date().getHours()) && (leaveTimeMinutes < new Date().getMinutes()))) {
+            else if ((newLeaveTimeHours < new Date().getHours()) || 
+                     ((newLeaveTimeHours === new Date().getHours()) && (newLeaveTimeMinutes < new Date().getMinutes()))) {
                 alert("אי אפשר לעדכן זמן עזיבה בעבר");
             }
             else {
-                usersFunctionality.changeLeaveTime(leaveTime, global.userKey);
+                await usersFunctionality.changeLeaveTime(newLeaveTime, global.userKey)
+                .then(async () => {
+                    if (res.status === 200)
+                    {
+                        const blockedUserPhone = global.userPhone;                   
+                        await axios.post(`${apiURL}/blocks/changeAlarmMessegesToNewTime`, { blockedUserPhone })
+                        .then()
+                        .catch()
+                        .finally(global.leaveTime = newLeaveTime);
+                    }
+                })
+                .catch()
+                .finally(global.leaveTime = newLeaveTime);
             }
         };
 

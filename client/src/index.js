@@ -11,6 +11,8 @@ global.userCarNumber = null;
 global.userPhone = null;
 global.userRole = null;
 global.userKey = null;
+global.userLeaveTime = null;
+global.userTimeToAlert = null;
 global.dialogHandler = null;
 
 let currScreen = ScreenMode.LOGIN;

@@ -57,3 +57,13 @@ exports.blocksRouter.post('/deleteBlock', (req, res) => __awaiter(void 0, void 0
     res.status(200);
     res.json("החסימות נמחקו בהצלחה!");
 }));
+exports.blocksRouter.post('/changeAlarmMessegesToNewTime', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //blockedUserPhone
+    const blocks = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks.json?orderBy=\"blockerCarNumber\"&equalTo=\"${req.body.userCarNumber}\"`);
+    for (const key in blocks.data) {
+        yield axios_1.default.delete(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks/${key}.json`);
+    }
+    (0, alarmController_2.removeFromAlarm)(req.body.userPhone);
+    res.status(200);
+    res.json("החסימות נמחקו בהצלחה!");
+}));
