@@ -21,22 +21,11 @@ exports.firstRouter.post('/login', (req, res) => __awaiter(void 0, void 0, void 
     const user = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"ID\"&equalTo=\"${req.body.ID}\"`);
     if (JSON.stringify(user.data) === "{}") {
         res.status(404);
-        res.json("שם המשתמש או הסיסמא אינם נכונים!");
+        res.json("אין משתמש רשום עם תעודת זהות זאת!");
     }
     else {
-        const userPassword = req.body.password;
-        let password;
-        for (const key in user.data) {
-            password = user.data[key].password;
-        }
-        if (userPassword !== password) {
-            res.status(401);
-            res.json("שם המשתמש או הסיסמא אינם נכונים!");
-        }
-        else {
-            res.status(200);
-            res.json(user.data);
-        }
+        res.status(200);
+        res.json(user.data);
     }
 }));
 exports.firstRouter.post('/register', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -50,7 +39,6 @@ exports.firstRouter.post('/register', (req, res) => __awaiter(void 0, void 0, vo
         yield axios_1.default.post("https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json", {
             "ID": req.body.ID,
             "name": req.body.fullName,
-            "password": req.body.password,
             "phone": req.body.phone,
             "carNumber": req.body.carNumber,
             "leaveTime": req.body.leaveTime,

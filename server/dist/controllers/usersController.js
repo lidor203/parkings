@@ -35,8 +35,7 @@ exports.usersRouter.post('/newUser', (req, res) => __awaiter(void 0, void 0, voi
         "timeToAlert": req.body.userTimeToAlertToCreate,
         "role": req.body.userRoleToCreate,
         "carNumber": req.body.userCarNumberToCreate,
-        "leaveTime": req.body.userLeaveTimeToCreate,
-        "password": req.body.userPasswordToCreate
+        "leaveTime": req.body.userLeaveTimeToCreate
     });
     res.status(200);
     res.json("המשתמש נוצר בהצלחה!");
