@@ -25,9 +25,8 @@ export class UsersFunctionality {
         const userRoleToCreate = document.getElementById("userRoleForUsers").value;
         const userCarNumberToCreate = "";
         const userLeaveTimeCreate = "";
-        const userPasswordToCreate = "1";
 
-        await axios.post(`${apiURL}/users/newUser`, { userIDToCreate, userNameToCreate, userPhoneToCreate, userTimeToAlertToCreate, userRoleToCreate, userCarNumberToCreate, userLeaveTimeCreate, userPasswordToCreate })
+        await axios.post(`${apiURL}/users/newUser`, { userIDToCreate, userNameToCreate, userPhoneToCreate, userTimeToAlertToCreate, userRoleToCreate, userCarNumberToCreate, userLeaveTimeCreate })
         .then(res => {
             if (res.status === 200) {
                 alert(res.data);
