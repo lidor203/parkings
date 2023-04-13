@@ -8,8 +8,7 @@ export class LoginFunctionality {
         document.getElementById('loader-circle').style.visibility = 'visible';
         
         const ID = document.getElementById("inputLoginId").value;
-        const password = document.getElementById("inputLoginPassword").value;
-        await axios.post(`${apiURL}/first/login`, { ID, password })
+        await axios.post(`${apiURL}/first/login`, { ID })
             .then(res => {
                 if (res.status === 200) hanldeSuccess(res.data);
             })
@@ -23,7 +22,6 @@ export class LoginFunctionality {
         const ID = document.getElementById("inputRegisterId").value;
         const fullName = document.getElementById("inputRegisterName").value;
         const phone = document.getElementById("inputRegisterPhone").value;
-        const password = document.getElementById("inputRegisterPassword").value;
         const carNumber = document.getElementById("inputRegisterCarNumber").value;
         const leaveTime = document.getElementById("inputRegisterLeaveTime").value;
              
@@ -47,11 +45,11 @@ export class LoginFunctionality {
         }
         
         document.getElementById('loader-circle').style.visibility = 'visible';
-        await axios.post(`${apiURL}/first/register`, { ID, fullName, phone, password, carNumber, leaveTime })
+        await axios.post(`${apiURL}/first/register`, { ID, fullName, phone, carNumber, leaveTime })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);
-                    const user = JSON.parse(`{"key":{"ID":\"${ID}\", "name":\"${fullName}\", "phone":\"${phone}\", "password":\"${password}\", "carNumber":\"${carNumber}\", "leaveTime":\"${leaveTime}\", "role":\"${Roles.Visitor}\"}}`);
+                    const user = JSON.parse(`{"key":{"ID":\"${ID}\", "name":\"${fullName}\", "phone":\"${phone}\", "carNumber":\"${carNumber}\", "leaveTime":\"${leaveTime}\", "role":\"${Roles.Visitor}\"}}`);
                     hanldeSuccess(user);
                 }
             })

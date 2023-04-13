@@ -25,8 +25,7 @@ usersRouter.post('/newUser', async (req: Request, res: Response)  => {
         "timeToAlert" : req.body.userTimeToAlertToCreate,
         "role" : req.body.userRoleToCreate,
         "carNumber" : req.body.userCarNumberToCreate,
-        "leaveTime" : req.body.userLeaveTimeToCreate,
-        "password" : req.body.userPasswordToCreate
+        "leaveTime" : req.body.userLeaveTimeToCreate
     });
     res.status(200);
     res.json("המשתמש נוצר בהצלחה!");
