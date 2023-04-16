@@ -14,14 +14,14 @@ export const showJobsFunction = async () => {
                 if (chosenInput === "") {
                     for (let i = 0; i < trArray.length; i++) {
                         const tr = trArray[i];
-                        tr.style = "visibility:inherit";
+                        tr.style = "display: table-row";
                     }
                 }
                 else {
                     var styleText = "";
                     for (let i = 0; i < trArray.length; i++) {
                         const tr = trArray[i];
-                        styleText = "visibility:collapse";
+                        styleText = "display: none";
                         if (tr.className !== "header"){
                             tdArray = tr.cells;
                             for (let j = 0; j < tdArray.length; j++) {
@@ -30,23 +30,9 @@ export const showJobsFunction = async () => {
                                 {
                                     if (td.innerHTML.toLowerCase().includes(chosenInput.toLowerCase()))
                                     {
-                                        styleText = "visibility:inherit";
+                                        styleText = "display: table-row";
                                         break;
                                     }
-                                    // if (e.key === "Enter") {
-                                    //     if (td.innerHTML === chosenInput)
-                                    //     {
-                                    //         tr.style = "visibility:inherit";
-                                    //         j = tdArray.length;
-                                    //     }
-                                    // }
-                                    // if (e.key === "Backspace") {
-                                    //     if (td.innerHTML.includes(chosenInput))
-                                    //     {
-                                    //         tr.style = "visibility:inherit";
-                                    //         j = tdArray.length;
-                                    //     }
-                                    // }
                                 }
                             }
 

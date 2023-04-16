@@ -65,7 +65,7 @@ button {
 .inputDiv{
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 7px;
 }
 
 .inputDiv label{
@@ -139,6 +139,7 @@ ul {
 .table {
     border-collapse: collapse;
     border: 1px solid #ddd;
+    margin-top: 10px;
 }
 
 .table th {
