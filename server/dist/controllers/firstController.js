@@ -42,6 +42,7 @@ exports.firstRouter.post('/register', (req, res) => __awaiter(void 0, void 0, vo
             "phone": req.body.phone,
             "carNumber": req.body.carNumber,
             "leaveTime": req.body.leaveTime,
+            "timeToAlert": req.body.timeToAlert,
             "role": "אורח"
         });
         res.status(200);

@@ -35,15 +35,19 @@
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterPhone">:טלפון</label>
-                    <input type="text" class="textInput" id="inputRegisterPhone" required>
+                    <input type="text" class="textInput" id="inputRegisterPhone" dir="ltr" style="text-align:right" required>
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterCarNumber">:מספר רכב</label>
-                    <input type="text" class="textInput" id="inputRegisterCarNumber" required>
+                    <input type="text" class="textInput" id="inputRegisterCarNumber" required value="ללא">
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterLeaveTime">:זמן עזיבה משוער</label>
                     <input type="time" id="inputRegisterLeaveTime" required>
+                </div>
+                <div class="inputDiv">
+                    <label for="inputRegisterTimeToAlert">:כמה זמן מראש להתריע</label>
+                    <input type="text" id="inputRegisterTimeToAlert" required>
                 </div>
                 <button id="registerButton">הרשם</button>
             </div>
@@ -71,7 +75,7 @@
             <form method="dialog" autocomplete="off">
                 <table id="jobsTable" class="table">
                 </table>
-                <button class="closeDialogButton">לסגירה</button>
+                <button class="closeDialogButton">סגירה</button>
             </form>
         </div>
         <div class="dialog" id="showNewJobDialog">
@@ -89,7 +93,7 @@
                     </tr>
                     <tr>
                         <td><label for="userPhoneForJob">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="userPhoneForJob" readonly></td>
+                        <td><input type="text" class="textInput" id="userPhoneForJob" dir="ltr" style="text-align:right" readonly></td>
                     </tr>
                     <tr>
                         <td><label for="userRoleForJob">תפקיד:</label></td>
@@ -102,7 +106,7 @@
             </div>
             <div>
                 <button id="showNewJobSubmitButton" class="submit">שגר בקשה</button>
-                <button id="showNewJobCloseButton" class="closeDialogButton">לסגירה</button>
+                <button id="showNewJobCloseButton" class="closeDialogButton">סגירה</button>
             </div>
         </div>
         <div class="dialog" id="showRolesDialog">
@@ -113,7 +117,7 @@
             <form method="dialog" autocomplete="off">
                 <table id="rolesTable" class="table">
                 </table>
-                <button class="closeDialogButton">לסגירה</button>
+                <button class="closeDialogButton">סגירה</button>
             </form>
         </div>
         <div class="dialog" id="showNewRoleDialog">
@@ -133,7 +137,7 @@
             </div>
             <div>
                 <button id="showNewRoleSubmitButton" class="submit">שגר בקשה</button>
-                <button id="showNewRoleCloseButton" class="closeDialogButton">לסגירה</button>
+                <button id="showNewRoleCloseButton" class="closeDialogButton">סגירה</button>
             </div>
         </div>
         <div class="dialog" id="showUsersDialog">
@@ -144,7 +148,15 @@
             <form method="dialog" autocomplete="off">
                 <table id="usersTable" class="table">
                 </table>
-                <button class="closeDialogButton">לסגירה</button>
+                <button class="closeDialogButton">סגירה</button>
+            </form>
+        </div>
+        <div class="dialog" id="showMyUserDialog">
+            <h2>ניהול המשתמש שלי</h2>
+            <form method="dialog" autocomplete="off">
+                <table id="myUserTable" class="table">
+                </table>
+                <button class="closeDialogButton">סגירה</button>
             </form>
         </div>
         <div class="dialog" id="showNewUserDialog">
@@ -162,14 +174,22 @@
                     </tr>
                     <tr>
                         <td><label for="userPhoneForUsers">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="userPhoneForUsers" required></td>
+                        <td><input type="text" class="textInput" id="userPhoneForUsers" dir="ltr" style="text-align:right" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userCarNumberForUsers">מספר רכב:</label></td>
+                        <td><input type="text" class="textInput" id="userCarNumberForUsers" required value="ללא"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userTimeToAlertForMyUser">זמן יציאה:</label></td>
+                        <td><input type="time" style="text-align: right; width: 100%" id="userLeaveTimeForUsers" required></td>
                     </tr>
                     <tr>
                         <td><label for="userTimeToAlertForUsers">זמן מועדף להתראה:</label></td>
                         <td><input type="text" class="textInput" id="userTimeToAlertForUsers" required></td>
                     </tr>
                     <tr>
-                        <td><label for="userRoleForJob">תפקיד:</label></td>
+                        <td><label for="userRoleForUsers">תפקיד:</label></td>
                         <td class="rolesInput">
                             <input list="" autocomplete="off" id="userRoleForUsers" required>
                             <div class="roles hidden" id="rolesDatalistForUsers"></div>
@@ -178,8 +198,48 @@
                 </table>
             </div>
             <div>
+                <button id="showNewUserCloseButton" class="closeDialogButton">סגירה</button>
                 <button id="showNewUserSubmitButton" class="submit">שגר בקשה</button>
-                <button id="showNewUserCloseButton" class="closeDialogButton">לסגירה</button>
+            </div>
+        </div>
+        <div class="dialog" id="showNewMyUserDialog">
+            <h2>עריכת המשתמש שלי</h2>
+            <h4>פרטי המשתמש שלי:</h4>
+            <div>
+                <table>
+                    <tr>
+                        <td><label for="userIDForMyUser">תז/מא:</label></td>
+                        <td><input type="text" class="textInput" id="userIDForMyUser" required readonly></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userNameForMyUser">שם מלא:</label></td>
+                        <td><input type="text" class="textInput" id="userNameForMyUser" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userPhoneForMyUser">טלפון:</label></td>
+                        <td><input type="text" class="textInput" id="userPhoneForMyUser" dir="ltr" style="text-align:right" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userCarNumberForMyUser">מספר רכב:</label></td>
+                        <td><input type="text" class="textInput" id="userCarNumberForMyUser" required value="ללא"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userTimeToAlertForMyUser">זמן יציאה:</label></td>
+                        <td><input type="time" style="text-align: right; width: 100%" id="userLeaveTimeForMyUser" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userTimeToAlertForMyUser">זמן מועדף להתראה:</label></td>
+                        <td><input type="text" class="textInput" id="userTimeToAlertForMyUser" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userRoleForMyUser">תפקיד:</label></td>
+                        <td><input type="text" class="textInput" id="userRoleForMyUser" required readonly></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <button id="showNewMyUserCloseButton" class="closeDialogButton">סגירה</button>
+                <button id="showNewMyUserSubmitButton" class="submit">שגר בקשה</button>
             </div>
         </div>
         <div class="dialog" id="showBamDialog">
@@ -190,7 +250,7 @@
             <form method="dialog" autocomplete="off">
                 <table id="bamTable" class="table">
                 </table>
-                <button class="closeDialogButton">לסגירה</button>
+                <button class="closeDialogButton">סגירה</button>
             </form>
         </div>
         <div class="dialog" id="showNewBamDialog">
@@ -217,8 +277,8 @@
                 </table>
             </div>
             <div>
+                <button id="showNewBamCloseButton" class="closeDialogButton">סגירה</button>
                 <button id="showNewBamSubmitButton" class="submit">שגר בקשה</button>
-                <button id="showNewBamCloseButton" class="closeDialogButton">לסגירה</button>
             </div>
         </div>
         <div class="dialog" id="showSecurityDialog">
@@ -229,7 +289,7 @@
             <form method="dialog" autocomplete="off">
                 <table id="securityTable" class="table">
                 </table>
-                <button class="closeDialogButton">לסגירה</button>
+                <button class="closeDialogButton">סגירה</button>
             </form>
         </div>
         <div class="dialog" id="showNewSecurityDialog">
@@ -249,7 +309,7 @@
             </div>
             <div>
                 <button id="showNewSecuritySubmitButton" class="submit">שגר בקשה</button>
-                <button id="showNewSecurityCloseButton" class="closeDialogButton">לסגירה</button>
+                <button id="showNewSecurityCloseButton" class="closeDialogButton">סגירה</button>
             </div>
         </div>
         <div class="dialog" id="showRequestsByHostIDDialog">
@@ -260,7 +320,7 @@
             <table id="requestsByHostIDTable" class="table">
             </table>
             <form method="dialog" autocomplete="off">
-                <button id="showRequestsByHostIDCloseButton" class="closeDialogButton">לסגירה</button>
+                <button id="showRequestsByHostIDCloseButton" class="closeDialogButton">סגירה</button>
             </form>
         </div>
         <div class="dialog" id="showNewRequestDialog">
@@ -269,16 +329,16 @@
             <div>
                 <table>
                     <tr>
-                        <td><label for="visitorName">שם מלא:</label></td>
-                        <td><input type="text" class="textInput" id="visitorName" required></td>
-                    </tr>
-                    <tr>
                         <td><label for="visitorID">תז/מא:</label></td>
                         <td><input type="text" class="textInput" id="visitorID" required></td>
                     </tr>
                     <tr>
+                        <td><label for="visitorName">שם מלא:</label></td>
+                        <td><input type="text" class="textInput" id="visitorName" required></td>
+                    </tr>
+                    <tr>
                         <td><label for="visitorPhone">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="visitorPhone" required></td>
+                        <td><input type="text" class="textInput" id="visitorPhone" dir="ltr" style="text-align:right" required></td>
                     </tr>
                 </table>
                 <br>
@@ -296,13 +356,13 @@
                     </tr>
                     <tr>
                         <td><label for="hostPhone">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="hostPhone" required></td>
+                        <td><input type="text" class="textInput" id="hostPhone" dir="ltr" style="text-align:right" required></td>
                     </tr>
                 </table>
             </div>
             <div>
                 <button id="showNewRequestSubmitButton" class="submit">שגר בקשה</button>
-                <button id="showNewRequestCloseButton" class="closeDialogButton">לסגירה</button>
+                <button id="showNewRequestCloseButton" class="closeDialogButton">סגירה</button>
             </div>
         </div>
         <div class="dialog" id="showRequestsDialog">
@@ -314,7 +374,7 @@
             </table>
             <br>
             <form method="dialog" autocomplete="off">
-                <button id="showRequestsCloseButton" class="closeDialogButton">לסגירה</button>
+                <button id="showRequestsCloseButton" class="closeDialogButton">סגירה</button>
             </form>
         </div>
         <div class="dialog" id="showBlocksDialog">
@@ -333,7 +393,7 @@
                 </tr>   
                 <tr>
                     <td></td>
-                    <td ><button id="showBlocksCloseButton" class="closeDialogButton">לסגירה</button></td>
+                    <td ><button id="showBlocksCloseButton" class="closeDialogButton">סגירה</button></td>
                     <td></td>
                 </tr>               
             </table> 
@@ -343,18 +403,18 @@
             <div>
                 <table>
                     <tr>
-                        <td><label for="blockerCarNumber">מספר רכב חוסם:</label></td>
+                        <td><label for="blockerCarNumber">מספר הרכב החוסם:</label></td>
                         <td><input type="text" class="textInput" id="blockerCarNumber" required></td>
                     </tr>
                     <tr>
-                        <td><label for="blockedCarNumber">מספר רכב חסום:</label></td>
+                        <td><label for="blockedCarNumber">מספר הרכב החסום:</label></td>
                         <td><input type="text" class="textInput" id="blockedCarNumber" required></td>
                     </tr>
                 </table>
             </div>
-            <div>
+            <div>                
+                <button id="showNewBlockCloseButton" class="closeDialogButton">סגירה</button>
                 <button id="showNewBlockSubmitButton" class="submit">הוסף חסימה</button>
-                <button id="showNewBlockCloseButton" class="closeDialogButton">לסגירה</button>
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 import { showUsersFunction } from './showUsers';
+import { showMyUserFunction } from './showUsers';
 import { showRequestsFunction } from './showRequests';
 import { showRequestsByHostIDFunction } from './showRequestsByHostID';
 import { showRolesFunction } from './showRoles';
@@ -12,6 +13,7 @@ import { showNewBamFunction } from '../bam/addBam';
 import { showNewRoleFunction } from '../roles/addRole';
 import { showNewSecurityFunction } from '../security/addSecurity';
 import { showNewUserFunction } from '../users/addUser';
+import { showNewMyUserFunction } from '../users/addUser';
 import { showNewBlockFunction } from '../blocks/addBlock';
 
 let checkBoxButton = null;
@@ -32,6 +34,7 @@ const buttonPressed = e => {
 addEventListener('click', buttonPressed);
 
 const showUsers = showUsersFunction;
+const showMyUser = showMyUserFunction;
 const showRequests = showRequestsFunction;
 const showRequestsByHostID = showRequestsByHostIDFunction;
 const showRoles = showRolesFunction;
@@ -45,6 +48,7 @@ const showNewBam = showNewBamFunction;
 const showNewRole = showNewRoleFunction;
 const showNewSecurity = showNewSecurityFunction;
 const showNewUser = showNewUserFunction;
+const showNewMyUser = showNewMyUserFunction;
 const showNewBlock = showNewBlockFunction;
 
 export class DialogHandler {
@@ -72,13 +76,13 @@ export class DialogHandler {
             var code = mode + "()";
             await eval(code);
 
-            document.getElementById(mode + "Dialog").classList.add('open');           
-
+            document.getElementById(mode + "Dialog").classList.add('open');  
+            
             for (const key in datas) {
                 document.getElementById(key).value = datas[key];
             }
 
-            if (key){
+            if (key) {
                 this.keyToUpdate = key;
             }
         }

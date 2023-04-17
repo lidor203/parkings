@@ -24,6 +24,7 @@ export class LoginFunctionality {
         const phone = document.getElementById("inputRegisterPhone").value;
         const carNumber = document.getElementById("inputRegisterCarNumber").value;
         const leaveTime = document.getElementById("inputRegisterLeaveTime").value;
+        const timeToAlert = document.getElementById("inputRegisterTimeToAlert").value;
              
         const IDValidation = Joi.string().pattern(/^[0-9]{9}$/);
         const phoneValidation = Joi.string().pattern(/^\+972[0-9]{9}$/);
@@ -45,11 +46,11 @@ export class LoginFunctionality {
         }
         
         document.getElementById('loader-circle').style.visibility = 'visible';
-        await axios.post(`${apiURL}/first/register`, { ID, fullName, phone, carNumber, leaveTime })
+        await axios.post(`${apiURL}/first/register`, { ID, fullName, phone, carNumber, leaveTime, timeToAlert })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);
-                    const user = JSON.parse(`{"key":{"ID":\"${ID}\", "name":\"${fullName}\", "phone":\"${phone}\", "carNumber":\"${carNumber}\", "leaveTime":\"${leaveTime}\", "role":\"${Roles.Visitor}\"}}`);
+                    const user = JSON.parse(`{"key":{"ID":\"${ID}\", "name":\"${fullName}\", "phone":\"${phone}\", "carNumber":\"${carNumber}\", "leaveTime":\"${leaveTime}\", "role":\"${Roles.Visitor}\", "timeToAlert":\"${timeToAlert}\"}}`);
                     hanldeSuccess(user);
                 }
             })

@@ -28,3 +28,28 @@ export const showNewUserFunction = () => {
         }
     };
 }
+
+export const showNewMyUserFunction = () => {
+    document.getElementById("showNewMyUserSubmitButton").onclick = () => {
+        if (document.getElementById("userIDForMyUser").value === "" ||
+            document.getElementById("userNameForMyUser").value === "" ||
+            document.getElementById("userPhoneForMyUser").value === "" ||
+            document.getElementById("userRoleForMyUser").value === "") {
+            alert("כל שדות החובה חייבים להיות מלאים על מנת לבצע את הבקשה");
+        }
+        else {
+            if (dialogHandler.keyToUpdate)
+            {
+                usersFunctionality.editMyUser((request) => {    
+                    document.getElementById("showNewMyUserCloseButton").click();
+                },
+                () => { alert("התרחשה שגיאה בעדכון המשתמש"); });
+            }
+            else
+            {
+                alert("התרחשה שגיאה בשמירת הבקשה");  
+                document.getElementById("showNewMyUserCloseButton").click();
+            }
+        }
+    };
+}

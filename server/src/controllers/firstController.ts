@@ -31,6 +31,7 @@ firstRouter.post('/register', async (req: Request, res: Response) => {
             "phone" : req.body.phone,
             "carNumber" : req.body.carNumber,
             "leaveTime" : req.body.leaveTime,
+            "timeToAlert" : req.body.timeToAlert,
             "role" : "אורח"
         })
         res.status(200);

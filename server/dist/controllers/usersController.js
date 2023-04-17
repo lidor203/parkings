@@ -45,8 +45,10 @@ exports.usersRouter.post('/editUser', (req, res) => __awaiter(void 0, void 0, vo
         "ID": req.body.userIDToUpdate,
         "name": req.body.userNameToUpdate,
         "phone": req.body.userPhoneToUpdate,
+        "leaveTime": req.body.userLeaveTimeToUpdate,
         "timeToAlert": req.body.userTimeToAlertToUpdate,
-        "role": req.body.userRoleToUpdate
+        "role": req.body.userRoleToUpdate,
+        "carNumber": req.body.userCarNumberToUpdate
     });
     res.status(200);
     res.json("הפרטים עודכנו בהצלחה!");

@@ -15,6 +15,20 @@ export class UsersFunctionality {
             .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden');
     }
 
+    showMyUser = async (hanldeSuccess, handleFailure) => {
+        document.getElementById('loader-circle').style.visibility = 'visible';
+
+        const ID = global.userID;
+        await axios.post(`${apiURL}/users/getUserByID`, { ID })
+            .then(res => {
+                if (res.status === 200) hanldeSuccess(res.data);
+            })
+            .catch(err => {
+                handleFailure();
+            })
+            .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden');
+    }
+
     newUser = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
@@ -23,10 +37,10 @@ export class UsersFunctionality {
         const userPhoneToCreate = document.getElementById("userPhoneForUsers").value;
         const userTimeToAlertToCreate = document.getElementById("userTimeToAlertForUsers").value;
         const userRoleToCreate = document.getElementById("userRoleForUsers").value;
-        const userCarNumberToCreate = "";
-        const userLeaveTimeCreate = "";
+        const userCarNumberToCreate = document.getElementById("userCarNumberForUsers").value;
+        const userLeaveTimeToCreate = "";
 
-        await axios.post(`${apiURL}/users/newUser`, { userIDToCreate, userNameToCreate, userPhoneToCreate, userTimeToAlertToCreate, userRoleToCreate, userCarNumberToCreate, userLeaveTimeCreate })
+        await axios.post(`${apiURL}/users/newUser`, { userIDToCreate, userNameToCreate, userPhoneToCreate, userTimeToAlertToCreate, userRoleToCreate, userCarNumberToCreate, userLeaveTimeToCreate })
         .then(res => {
             if (res.status === 200) {
                 alert(res.data);
@@ -45,11 +59,38 @@ export class UsersFunctionality {
         const userIDToUpdate = document.getElementById("userIDForUsers").value;
         const userNameToUpdate = document.getElementById("userNameForUsers").value;
         const userPhoneToUpdate = document.getElementById("userPhoneForUsers").value;
+        const userLeaveTimeToUpdate = document.getElementById("userLeaveTimeForUsers").value;
         const userTimeToAlertToUpdate = document.getElementById("userTimeToAlertForUsers").value;
         const userRoleToUpdate = document.getElementById("userRoleForUsers").value;
+        const userCarNumberToUpdate = document.getElementById("userCarNumberForUsers").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post(`${apiURL}/users/editUser`, { userIDToUpdate, userNameToUpdate, userPhoneToUpdate, userTimeToAlertToUpdate, userRoleToUpdate, key })
+        await axios.post(`${apiURL}/users/editUser`, { userIDToUpdate, userNameToUpdate, userPhoneToUpdate,userLeaveTimeToUpdate, userTimeToAlertToUpdate, userRoleToUpdate, userCarNumberToUpdate, key })
+            .then(res => {
+                if (res.status === 200) {
+                    alert(res.data);
+                    hanldeSuccess();
+                }
+            })
+            .catch(err => {
+                handleFailure();
+            })
+            .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden');
+    }
+
+    editMyUser = async (hanldeSuccess, handleFailure) => {
+        document.getElementById('loader-circle').style.visibility = 'visible';
+
+        const userIDToUpdate = document.getElementById("userIDForMyUser").value;
+        const userNameToUpdate = document.getElementById("userNameForMyUser").value;
+        const userPhoneToUpdate = document.getElementById("userPhoneForMyUser").value;
+        const userLeaveTimeToUpdate = document.getElementById("userLeaveTimeForMyUser").value;
+        const userTimeToAlertToUpdate = document.getElementById("userTimeToAlertForMyUser").value;
+        const userRoleToUpdate = document.getElementById("userRoleForMyUser").value;
+        const userCarNumberToUpdate = document.getElementById("userCarNumberForMyUser").value;
+        const key = dialogHandler.keyToUpdate;
+
+        await axios.post(`${apiURL}/users/editUser`, { userIDToUpdate, userNameToUpdate, userPhoneToUpdate, userLeaveTimeToUpdate, userTimeToAlertToUpdate, userRoleToUpdate, userCarNumberToUpdate, key })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);

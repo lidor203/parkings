@@ -49,7 +49,7 @@ const login = () => {
         profile = new Profile(user);
         gotoScreen(ScreenMode.PROFILE);
     }, 
-        () => { alert("שם המשתמש או הסיסמא אינם נכונים"); })
+        () => { alert("לא קיים משתמש בעל תז/מא זה"); })
 }
 
 const register = () => {

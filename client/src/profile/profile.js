@@ -16,10 +16,10 @@ export class Profile {
             return actions.filter(action =>
                 action.role == Roles.Visitor ||
                 action.role == Roles.Simple ||
-                action.role == global.userRole || 
-                action.role == Roles.Approver || 
-                action.role == Roles.Security || 
-                action.role == Roles.Bam
+                action.role == global.userRole //|| 
+                //action.role == Roles.Approver || 
+                //action.role == Roles.Security || 
+                //action.role == Roles.Bam
         );}
     }
 
@@ -43,7 +43,7 @@ export class Profile {
             global.userKey = key;
         }
 
-        document.getElementById("name").innerText = "שם: " + global.userName;
+        document.getElementById("name").innerText = "שם: " + global.userName + "\n תפקיד: " + global.userRole;
 
         const actionsElement = document.getElementById("actions");
         const permittedActions = this.getUserActions();
