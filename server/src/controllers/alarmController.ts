@@ -17,7 +17,7 @@ export const addToAlarm = async (blockerCarNumber: any, blockedCarNumber: any) =
         const phone = blockerUser.data[blockerkey]["phone"];
         const messege = blockedUser.data[blockedkey]["name"] + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
         const timeToAlert = blockerUser.data[blockerkey]["timeToAlert"];
-
+      
         addMessegesToBlocker(timeToSendMessege, phone, messege, timeToAlert);
 
         return (messege);

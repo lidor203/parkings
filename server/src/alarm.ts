@@ -37,12 +37,14 @@ export const calculateTimeToSendMessege = async (leaveTime:string, blockerUserti
         alarmMinutesTime = 0;
     }
 
-    timeToSendMessege = new Date(timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0));
+    timeToSendMessege = new Date();
+    timeToSendMessege = timeToSendMessege.setUTCHours(alarmHoursTime, alarmMinutesTime, 0, 0);
     
     // For Debugg ONLY. Change timeToSendMessege to whenever we need to
     // timeToSendMessege = new Date();
     // timeToSendMessege = timeToSendMessege.setUTCHours(timeToSendMessege.getHours(), timeToSendMessege.getMinutes()+1, 0, 0);
-
+    // console.log(timeToSendMessege);
+    
     return(timeToSendMessege);
 }
 
@@ -52,6 +54,8 @@ export const addMessegesToBlocker = async (timeToSendMessege:string, phone:strin
     }
 
     timeAlarm.get(timeToSendMessege).push({"phone":phone, "messege":messege, "timeToAlert":timeToAlert});
+    // console.log(timeAlarm.get(timeToSendMessege));
+    // console.log(timeToSendMessege)
 }
 
 export const deleteMessegesFromBlocker = (phone:string) => {
@@ -109,23 +113,34 @@ export const throwMesseges = async () => {
     let phoneNumber :any[] = [];
 
     while (true) {
-        currentTime = new Date(); // wh have to make it a Date Befor change it to UTC so we can use it's getHours and getMinutes functions
+        //console.log("1");
+        
+        currentTime = new Date(); // we have to make it a Date Befor change it to UTC so we can use it's getHours and getMinutes functions
         currentTime = currentTime.setUTCHours(currentTime.getHours(), currentTime.getMinutes(), 0, 0);
         previousTime = currentTime - 60000; //We also calculate it for the chance of missing a minute between the Alarm register and the Alarm notification      
 
+        //console.log(currentTime);
+        //console.log(previousTime);
+        
         if (timeAlarm.get(previousTime) !== undefined) {
             currentTimeMesseges = timeAlarm.get(previousTime).concat(timeAlarm.get(currentTime));
+            //console.log("2");
+            //console.log(currentTimeMesseges);
+            
         }
         else {
             currentTimeMesseges = timeAlarm.get(currentTime);
+            //console.log("3");
+            //console.log(currentTimeMesseges);
         } 
 
         if (currentTimeMesseges !== undefined) {
+            // console.log("4");
             for (let i = 0; i < currentTimeMesseges.length; i++) {
                 phoneNumber = [];
                 phoneNumber.push(currentTimeMesseges[i]["phone"]);
-                //{showBrowser:true}
-                await wbm.start().then(
+                // console.log(currentTimeMesseges[i]["phone"]);
+                await wbm.start({showBrowser:true}).then(
                     async () => {              
                                     await wbm.send(phoneNumber, currentTimeMesseges[i]["messege"]);
                                     await sleep(5000);
