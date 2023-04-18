@@ -29,28 +29,26 @@ exports.requestsRouter.post('/deleteRequest', (req, res) => __awaiter(void 0, vo
 }));
 exports.requestsRouter.post('/newRequest', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield axios_1.default.post("https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requests.json", {
-        "ID": req.body.ID,
+        "requesterID": req.body.ID,
         "visitorName": req.body.visitorName,
         "visitorID": req.body.visitorID,
         "visitorPhone": req.body.visitorPhone,
         "hostID": req.body.hostID,
         "hostName": req.body.hostName,
-        "hostPhone": req.body.hostPhone,
-        "requester": req.body.userID
+        "hostPhone": req.body.hostPhone
     });
     res.status(200);
     res.json("בקשת הכניסה נוצרה בהצלחה!");
 }));
 exports.requestsRouter.post('/editRequest', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield axios_1.default.patch(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requests/${req.body.key}.json`, {
-        "ID": req.body.ID,
+        "requesterID": req.body.ID,
         "visitorName": req.body.visitorName,
         "visitorID": req.body.visitorID,
         "visitorPhone": req.body.visitorPhone,
         "hostID": req.body.hostID,
         "hostName": req.body.hostName,
-        "hostPhone": req.body.hostPhone,
-        "requester": req.body.userID
+        "hostPhone": req.body.hostPhone
     });
     res.status(200);
     res.json("בקשת הכניסה עודכנה בהצלחה!");

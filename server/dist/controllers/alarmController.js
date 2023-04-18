@@ -19,16 +19,21 @@ const alarm_2 = require("../alarm");
 const alarm_3 = require("../alarm");
 const alarm_4 = require("../alarm");
 const addToAlarm = (blockerCarNumber, blockedCarNumber) => __awaiter(void 0, void 0, void 0, function* () {
-    const blockerUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockerCarNumber}\"`);
-    const blockedUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockedCarNumber}\"`);
-    const blockerkey = Object.keys(blockerUser.data)[0];
-    const blockedkey = Object.keys(blockedUser.data)[0];
-    const timeToSendMessege = yield (0, alarm_4.calculateTimeToSendMessege)(blockedUser.data[blockedkey]["leaveTime"], parseInt(blockerUser.data[blockerkey]["timeToAlert"]));
-    const phone = blockerUser.data[blockerkey]["phone"];
-    const messege = blockedUser.data[blockedkey]["name"] + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
-    const timeToAlert = blockerUser.data[blockerkey]["timeToAlert"];
-    (0, alarm_1.addMessegesToBlocker)(timeToSendMessege, phone, messege, timeToAlert);
-    return (messege);
+    try {
+        const blockerUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockerCarNumber}\"`);
+        const blockedUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockedCarNumber}\"`);
+        const blockerkey = Object.keys(blockerUser.data)[0];
+        const blockedkey = Object.keys(blockedUser.data)[0];
+        const timeToSendMessege = yield (0, alarm_4.calculateTimeToSendMessege)(blockedUser.data[blockedkey]["leaveTime"], parseInt(blockerUser.data[blockerkey]["timeToAlert"]));
+        const phone = blockerUser.data[blockerkey]["phone"];
+        const messege = blockedUser.data[blockedkey]["name"] + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
+        const timeToAlert = blockerUser.data[blockerkey]["timeToAlert"];
+        (0, alarm_1.addMessegesToBlocker)(timeToSendMessege, phone, messege, timeToAlert);
+        return (messege);
+    }
+    catch (_a) {
+        return ("משהו השתבש בתזמון ההתראה!");
+    }
 });
 exports.addToAlarm = addToAlarm;
 const removeFromAlarm = (blockerPhone) => __awaiter(void 0, void 0, void 0, function* () {

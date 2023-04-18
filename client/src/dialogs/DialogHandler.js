@@ -78,7 +78,10 @@ export class DialogHandler {
 
             document.getElementById(mode + "Dialog").classList.add('open');  
             
+            //console.log(datas);
             for (const key in datas) {
+                //console.log(document.getElementById(key));
+                //console.log((datas[key]));
                 document.getElementById(key).value = datas[key];
             }
 

@@ -38,7 +38,7 @@ export class UsersFunctionality {
         const userTimeToAlertToCreate = document.getElementById("userTimeToAlertForUsers").value;
         const userRoleToCreate = document.getElementById("userRoleForUsers").value;
         const userCarNumberToCreate = document.getElementById("userCarNumberForUsers").value;
-        const userLeaveTimeToCreate = "";
+        const userLeaveTimeToCreate = document.getElementById("userLeaveTimeForUsers").value;
 
         await axios.post(`${apiURL}/users/newUser`, { userIDToCreate, userNameToCreate, userPhoneToCreate, userTimeToAlertToCreate, userRoleToCreate, userCarNumberToCreate, userLeaveTimeToCreate })
         .then(res => {

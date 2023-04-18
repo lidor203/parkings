@@ -51,16 +51,13 @@ export const showRequestsByHostIDFunction = async () => {
         trHead.className="header";
         const thVisitorID = document.createElement("th");
         const thVisitorName = document.createElement("th");
-        const thStatus = document.createElement("th");
         const thDots = document.createElement("th");
         thVisitorID.innerText = "מספר תעודה";
         thVisitorName.innerText = "שם האורח";
-        thStatus.innerText = "סטטוס";
         thDots.innerText = "";
         
         trHead.appendChild(thVisitorID);
         trHead.appendChild(thVisitorName);
-        trHead.appendChild(thStatus);
         trHead.appendChild(thDots);
         requestsTable.appendChild(trHead);
 
@@ -75,9 +72,6 @@ export const showRequestsByHostIDFunction = async () => {
                         "visitorName":requests[key]["visitorName"],
                         "visitorID":requests[key]["visitorID"],
                         "visitorPhone":requests[key]["visitorPhone"],
-                        "carNumber":requests[key]["carNumber"],
-                        "carType":requests[key]["carType"],
-                        "carColor":requests[key]["carColor"],
                         "hostID":requests[key]["hostID"],
                         "hostName":requests[key]["hostName"],
                         "hostPhone":requests[key]["hostPhone"]
@@ -93,11 +87,9 @@ export const showRequestsByHostIDFunction = async () => {
             tdVisitorID.setAttribute("tagName", "relevant");
             const tdVisitorName = document.createElement("td");
             tdVisitorName.setAttribute("tagName", "relevant");
-            const tdStatus = document.createElement("td");
             const tdDots = document.createElement("td");
             tdVisitorID.innerText = requests[key]["visitorID"];
             tdVisitorName.innerText = requests[key]["visitorName"];
-            tdStatus.innerText = "approve for now";
 
             const editHref = document.createElement("a");
             editHref.className = "link";
@@ -139,7 +131,6 @@ export const showRequestsByHostIDFunction = async () => {
 
             tr.appendChild(tdVisitorID);
             tr.appendChild(tdVisitorName);
-            tr.appendChild(tdStatus);
             tr.appendChild(tdDots);
             requestsTable.appendChild(tr);
             requestsArray.push(requests[key]["visitorID"]);

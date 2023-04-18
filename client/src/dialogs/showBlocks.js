@@ -63,22 +63,22 @@ export const getMyBlockers = async (blockerMap, carNumber) => {
                 await usersFunctionality.getUserByCar((user) => {
                     for (const key in user) {  
                         const tr = document.createElement("tr");
-                        const tdBlockerID = document.createElement("td");
                         const tdBlockerName = document.createElement("td");
-                        const tdBlockerPhone = document.createElement("td");
                         const tdBlockerCarNumber = document.createElement("td");
-                        tdBlockerID.setAttribute("width", "25%");
+                        const tdBlockerPhone = document.createElement("td");
+                        const tdBlockerLeaveTime = document.createElement("td");
                         tdBlockerName.setAttribute("width", "25%");
-                        tdBlockerPhone.setAttribute("width", "25%");
                         tdBlockerCarNumber.setAttribute("width", "25%");
-                        tdBlockerID.innerText = user[key]["ID"];
+                        tdBlockerPhone.setAttribute("width", "25%");
+                        tdBlockerLeaveTime.setAttribute("width", "25%");
                         tdBlockerName.innerText = user[key]["name"];
-                        tdBlockerPhone.innerText = user[key]["phone"];
                         tdBlockerCarNumber.innerText = user[key]["carNumber"];
-                        tr.appendChild(tdBlockerID);
+                        tdBlockerPhone.innerText = user[key]["phone"];
+                        tdBlockerLeaveTime.innerText = user[key]["leaveTime"];
                         tr.appendChild(tdBlockerName);
-                        tr.appendChild(tdBlockerPhone);
                         tr.appendChild(tdBlockerCarNumber);
+                        tr.appendChild(tdBlockerPhone);
+                        tr.appendChild(tdBlockerLeaveTime);
                         blockMeTable.appendChild(tr);
                     }
                 }, () => {}, carNumber);
@@ -92,7 +92,6 @@ export const showBlocksFunction = async () => {
     await blocksFunctionality.showBlocks(async (blockerMap, blockedMap) => {
         let nowTime = new Date();
         document.getElementById("leaveTime").value = nowTime.getHours().toString().padStart(2,'0') + ":" + nowTime.getMinutes().toString().padStart(2,'0');
-        document.getElementById("updateParkingDetailsButton").onclick = changeLeaveTime;
         document.getElementById("leftNowButton").onclick = blocksFunctionality.deleteBlock;
 
         const changeLeaveTime = async () => {
@@ -123,6 +122,7 @@ export const showBlocksFunction = async () => {
             }
         };
 
+        document.getElementById("updateParkingDetailsButton").onclick = changeLeaveTime;
         let meBlockTable = document.getElementById("meBlockTable");
 
         const trBlockedHead = document.createElement("tr");
@@ -151,22 +151,22 @@ export const showBlocksFunction = async () => {
 
         const trBlockerHead = document.createElement("tr");
         trBlockerHead.className="header";
-        const thBlockerID = document.createElement("th");
         const thBlockerName = document.createElement("th");
-        const thBlockerPhone = document.createElement("th");
         const thBlockerCarNumber = document.createElement("th");
-        thBlockerID.innerText = "מספר תעודה של החוסם";
+        const thBlockerPhone = document.createElement("th");
+        const thBlockerLeaveTime = document.createElement("th");
         thBlockerName.innerText = "שם החוסם";
-        thBlockerPhone.innerText = "מספר פלאפון של החוסם";
         thBlockerCarNumber.innerText = "מספר הרכב של החוסם";
-        thBlockerID.setAttribute("width", "25%");
+        thBlockerPhone.innerText = "מספר פלאפון של החוסם";
+        thBlockerLeaveTime.innerText = "שעת היציאה של החוסם";
         thBlockerName.setAttribute("width", "25%");
-        thBlockerPhone.setAttribute("width", "25%");
         thBlockerCarNumber.setAttribute("width", "25%");
-        trBlockerHead.appendChild(thBlockerID);
+        thBlockerPhone.setAttribute("width", "25%");
+        thBlockerLeaveTime.setAttribute("width", "25%");
         trBlockerHead.appendChild(thBlockerName);
-        trBlockerHead.appendChild(thBlockerPhone);
         trBlockerHead.appendChild(thBlockerCarNumber);
+        trBlockerHead.appendChild(thBlockerPhone);
+        trBlockerHead.appendChild(thBlockerLeaveTime);
         blockMeTable.appendChild(trBlockerHead);
 
         await getMyBlockers(blockedMap.get(global.userCarNumber), global.userCarNumber);

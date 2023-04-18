@@ -46,7 +46,7 @@
                     <input type="time" id="inputRegisterLeaveTime" required>
                 </div>
                 <div class="inputDiv">
-                    <label for="inputRegisterTimeToAlert">:כמה זמן מראש להתריע</label>
+                    <label for="inputRegisterTimeToAlert">:כמה זמן מראש להתריע (בדקות)</label>
                     <input type="text" id="inputRegisterTimeToAlert" required>
                 </div>
                 <button id="registerButton">הרשם</button>
@@ -181,11 +181,11 @@
                         <td><input type="text" class="textInput" id="userCarNumberForUsers" required value="ללא"></td>
                     </tr>
                     <tr>
-                        <td><label for="userTimeToAlertForMyUser">זמן יציאה:</label></td>
+                        <td><label for="userTimeToAlertForMyUser">זמן עזיבה משוער:</label></td>
                         <td><input type="time" style="text-align: right; width: 100%" id="userLeaveTimeForUsers" required></td>
                     </tr>
                     <tr>
-                        <td><label for="userTimeToAlertForUsers">זמן מועדף להתראה:</label></td>
+                        <td><label for="userTimeToAlertForUsers">כמה זמן מראש להתריע (בדקות):</label></td>
                         <td><input type="text" class="textInput" id="userTimeToAlertForUsers" required></td>
                     </tr>
                     <tr>
@@ -224,11 +224,11 @@
                         <td><input type="text" class="textInput" id="userCarNumberForMyUser" required value="ללא"></td>
                     </tr>
                     <tr>
-                        <td><label for="userTimeToAlertForMyUser">זמן יציאה:</label></td>
+                        <td><label for="userTimeToAlertForMyUser">זמן עזיבה משוער:</label></td>
                         <td><input type="time" style="text-align: right; width: 100%" id="userLeaveTimeForMyUser" required></td>
                     </tr>
                     <tr>
-                        <td><label for="userTimeToAlertForMyUser">זמן מועדף להתראה:</label></td>
+                        <td><label for="userTimeToAlertForMyUser">כמה זמן מראש להתריע (בדקות):</label></td>
                         <td><input type="text" class="textInput" id="userTimeToAlertForMyUser" required></td>
                     </tr>
                     <tr>
@@ -293,7 +293,7 @@
             </form>
         </div>
         <div class="dialog" id="showNewSecurityDialog">
-            <h2>הוספת/עריכת חסימה</h2>
+            <h2>הוספת/עריכת הערת אבטחה</h2>
             <h4>פרטי מנועי הכניסה:</h4>
             <div>
                 <table>
@@ -308,12 +308,12 @@
                 </table>
             </div>
             <div>
-                <button id="showNewSecuritySubmitButton" class="submit">שגר בקשה</button>
                 <button id="showNewSecurityCloseButton" class="closeDialogButton">סגירה</button>
+                <button id="showNewSecuritySubmitButton" class="submit">שגר בקשה</button>
             </div>
         </div>
         <div class="dialog" id="showRequestsByHostIDDialog">
-            <h2>ניהול בקשות כניסה</h2>
+            <h2>ניהול בקשות כניסה מאושרות</h2>
             <div class="autocomplete" style="width:300px;">
                 <input type="text" class="textInput" id="myRequestsByHostIDInput" placeholder="הכנס שם או מספר תעודה מזהה">
             </div>
@@ -361,8 +361,8 @@
                 </table>
             </div>
             <div>
-                <button id="showNewRequestSubmitButton" class="submit">שגר בקשה</button>
                 <button id="showNewRequestCloseButton" class="closeDialogButton">סגירה</button>
+                <button id="showNewRequestSubmitButton" class="submit">שגר בקשה</button>
             </div>
         </div>
         <div class="dialog" id="showRequestsDialog">

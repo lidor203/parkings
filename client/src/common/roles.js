@@ -2,6 +2,6 @@ export const Roles = {
     Simple: "רגיל",
     Approver: "מאשר",
     Security: "אבטחה",
-    Bam: "בם",
+    //Bam: "בם",
     Visitor: "אורח"
 };

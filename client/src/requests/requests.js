@@ -44,24 +44,39 @@ export class RequestsFunctionality {
             alert("בקשת הכניסה נשללה מכיוון שהאורח מנוע כניסה!");
         }
         else {
-            const visitorName = document.getElementById("visitorName").value;
-            const visitorPhone = document.getElementById("visitorPhone").value;
-            const hostID = document.getElementById("hostID").value;
-            const hostName = document.getElementById("hostName").value;
-            const hostPhone = document.getElementById("hostPhone").value;
+            await axios.post(`${apiURL}/requests/getRequestByVisitorID`, {visitorID})
+            .then(async res => {
+                if (JSON.stringify(res.data) !== "{}")
+                {
+                    alert("כבר קיימת בקשת כניסה עבור המשתמש!");
+                    hanldeSuccess();
+                } 
+                else {
+                    const visitorName = document.getElementById("visitorName").value;
+                    const visitorPhone = document.getElementById("visitorPhone").value;
+                    const hostID = document.getElementById("hostID").value;
+                    const hostName = document.getElementById("hostName").value;
+                    const hostPhone = document.getElementById("hostPhone").value;
+        
+                    await axios.post(`${apiURL}/requests/newRequest`, {ID, visitorID, visitorName, visitorPhone, hostID, hostName, hostPhone })
+                        .then(res => {
+                            if (res.status === 200)
+                            {
+                                alert(res.data);
+                                hanldeSuccess();
+                            } 
+                        })
+                        .catch(err=>{
+                            handleFailure();
+                        })
+                        .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
 
-            await axios.post(`${apiURL}/requests/newRequest`, {ID, visitorName, visitorID, visitorPhone, hostID, hostName, hostPhone })
-                .then(res => {
-                    if (res.status === 200)
-                    {
-                        alert(res.data);
-                        hanldeSuccess();
-                    } 
-                })
-                .catch(err=>{
-                    handleFailure();
-                })
-                .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
+                }
+            })
+            .catch(err=>{
+                handleFailure();
+            })
+            .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
         }        
     }
 
