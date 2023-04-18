@@ -103,7 +103,6 @@ const throwMesseges = () => __awaiter(void 0, void 0, void 0, function* () {
     let currentTimeMesseges = [];
     let phoneNumber = [];
     while (true) {
-        //console.log("1");
         currentTime = new Date(); // we have to make it a Date Befor change it to UTC so we can use it's getHours and getMinutes functions
         currentTime = currentTime.setUTCHours(currentTime.getHours(), currentTime.getMinutes(), 0, 0);
         previousTime = currentTime - 60000; //We also calculate it for the chance of missing a minute between the Alarm register and the Alarm notification      
@@ -111,20 +110,14 @@ const throwMesseges = () => __awaiter(void 0, void 0, void 0, function* () {
         //console.log(previousTime);
         if (timeAlarm.get(previousTime) !== undefined) {
             currentTimeMesseges = timeAlarm.get(previousTime).concat(timeAlarm.get(currentTime));
-            //console.log("2");
-            //console.log(currentTimeMesseges);
         }
         else {
             currentTimeMesseges = timeAlarm.get(currentTime);
-            //console.log("3");
-            //console.log(currentTimeMesseges);
         }
         if (currentTimeMesseges !== undefined) {
-            // console.log("4");
             for (let i = 0; i < currentTimeMesseges.length; i++) {
                 phoneNumber = [];
                 phoneNumber.push(currentTimeMesseges[i]["phone"]);
-                // console.log(currentTimeMesseges[i]["phone"]);
                 yield wbm.start({ showBrowser: true }).then(() => __awaiter(void 0, void 0, void 0, function* () {
                     yield wbm.send(phoneNumber, currentTimeMesseges[i]["messege"]);
                     yield sleep(5000);

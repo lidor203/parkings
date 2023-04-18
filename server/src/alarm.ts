@@ -112,9 +112,7 @@ export const throwMesseges = async () => {
     let currentTimeMesseges: any[] = [];
     let phoneNumber :any[] = [];
 
-    while (true) {
-        //console.log("1");
-        
+    while (true) {        
         currentTime = new Date(); // we have to make it a Date Befor change it to UTC so we can use it's getHours and getMinutes functions
         currentTime = currentTime.setUTCHours(currentTime.getHours(), currentTime.getMinutes(), 0, 0);
         previousTime = currentTime - 60000; //We also calculate it for the chance of missing a minute between the Alarm register and the Alarm notification      
@@ -124,22 +122,16 @@ export const throwMesseges = async () => {
         
         if (timeAlarm.get(previousTime) !== undefined) {
             currentTimeMesseges = timeAlarm.get(previousTime).concat(timeAlarm.get(currentTime));
-            //console.log("2");
-            //console.log(currentTimeMesseges);
             
         }
         else {
             currentTimeMesseges = timeAlarm.get(currentTime);
-            //console.log("3");
-            //console.log(currentTimeMesseges);
         } 
 
         if (currentTimeMesseges !== undefined) {
-            // console.log("4");
             for (let i = 0; i < currentTimeMesseges.length; i++) {
                 phoneNumber = [];
                 phoneNumber.push(currentTimeMesseges[i]["phone"]);
-                // console.log(currentTimeMesseges[i]["phone"]);
                 await wbm.start({showBrowser:true}).then(
                     async () => {              
                                     await wbm.send(phoneNumber, currentTimeMesseges[i]["messege"]);
