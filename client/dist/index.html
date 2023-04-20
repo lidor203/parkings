@@ -15,7 +15,7 @@
             <div class="formContent">
                 <div class="inputDiv">
                     <label for="inputLoginId">:תז/מא</label>
-                    <input type="text" class="textInput" id="inputLoginId" required value="1">
+                    <input type="text" autocomplete="off" class="textInput" id="inputLoginId" required value="1">
                 </div>
                 <button id="loginButton">כניסה</button>
             </div>  
@@ -27,19 +27,19 @@
             <div class="formContent">
                 <div class="inputDiv">
                     <label for="inputRegisterId">:תז/מא</label>
-                    <input type="text" class="textInput" id="inputRegisterId" required>
+                    <input type="text" autocomplete="off" class="textInput" id="inputRegisterId" required>
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterName">:שם מלא</label>
-                    <input type="text" class="textInput" id="inputRegisterName" required>
+                    <input type="text" autocomplete="off" class="textInput" id="inputRegisterName" required>
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterPhone">:טלפון</label>
-                    <input type="text" class="textInput" id="inputRegisterPhone" dir="ltr" style="text-align:right" required>
+                    <input type="text" autocomplete="off" class="textInput" id="inputRegisterPhone" dir="ltr" style="text-align:right" required>
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterCarNumber">:מספר רכב</label>
-                    <input type="text" class="textInput" id="inputRegisterCarNumber" required value="ללא">
+                    <input type="text" autocomplete="off" class="textInput" id="inputRegisterCarNumber" required value="ללא">
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterLeaveTime">:זמן עזיבה משוער</label>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="inputDiv">
                     <label for="inputRegisterTimeToAlert">:התראה מראש (בדקות)</label>
-                    <input type="text" id="inputRegisterTimeToAlert" required>
+                    <input type="text" autocomplete="off" id="inputRegisterTimeToAlert" required>
                 </div>
                 <button id="registerButton">הרשם</button>
             </div>
@@ -70,7 +70,7 @@
         <div class="dialog" id="showJobsDialog">
             <h2>ניהול בעלי תפקידים</h2>
             <div class="autocomplete" style="width:300px;">
-                <input type="text" class="textInput" id="myJobsInput" placeholder="הכנס שם או מספר תעודה מזהה">
+                <input type="text" autocomplete="off" class="textInput" id="myJobsInput" placeholder="הכנס שם או מספר תעודה מזהה">
             </div>
             <form method="dialog" autocomplete="off">
                 <table id="jobsTable" class="table">
@@ -85,15 +85,15 @@
                 <table>
                     <tr>
                         <td><label for="userIDForJob">תז/מא:</label></td>
-                        <td><input type="text" class="textInput" id="userIDForJob" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userIDForJob" required></td>
                     </tr>
                     <tr>
                         <td><label for="userNameForJob">שם מלא:</label></td>
-                        <td><input type="text" class="textInput" id="userNameForJob" readonly></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userNameForJob" readonly></td>
                     </tr>
                     <tr>
                         <td><label for="userPhoneForJob">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="userPhoneForJob" dir="ltr" style="text-align:right" readonly></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userPhoneForJob" dir="ltr" style="text-align:right" readonly></td>
                     </tr>
                     <tr>
                         <td><label for="userRoleForJob">תפקיד:</label></td>
@@ -112,7 +112,7 @@
         <div class="dialog" id="showRolesDialog">
             <p>ניהול התפקידים במערכת</p>
             <div class="autocomplete" style="width:300px;">
-                <input type="text" class="textInput" id="myRolesInput" placeholder="הכנס שם או מספר תעודה מזהה">
+                <input type="text" autocomplete="off" class="textInput" id="myRolesInput" placeholder="הכנס שם או מספר תעודה מזהה">
             </div>
             <form method="dialog" autocomplete="off">
                 <table id="rolesTable" class="table">
@@ -127,11 +127,11 @@
                 <table>
                     <tr>
                         <td><label for="roleIDForRole">מזהה תפקיד:</label></td>
-                        <td><input type="text" class="textInput" id="roleIDForRole" readonly></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="roleIDForRole" readonly></td>
                     </tr>
                     <tr>
                         <td><label for="roleValueForRole">תיאור התפקיד:</label></td>
-                        <td><input type="text" class="textInput" id="roleValueForRole" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="roleValueForRole" required></td>
                     </tr>
                 </table>
             </div>
@@ -143,7 +143,7 @@
         <div class="dialog" id="showUsersDialog">
             <h2>ניהול המשתמשים</h2>
             <div class="autocomplete" style="width:300px;">
-                <input type="text" class="textInput" id="myUsersInput" placeholder="הכנס שם או מספר תעודה מזהה">
+                <input type="text" autocomplete="off" class="textInput" id="myUsersInput" placeholder="הכנס שם או מספר תעודה מזהה">
             </div>
             <form method="dialog" autocomplete="off">
                 <table id="usersTable" class="table">
@@ -166,19 +166,19 @@
                 <table>
                     <tr>
                         <td><label for="userIDForUsers">תז/מא:</label></td>
-                        <td><input type="text" class="textInput" id="userIDForUsers" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userIDForUsers" required></td>
                     </tr>
                     <tr>
                         <td><label for="userNameForUsers">שם מלא:</label></td>
-                        <td><input type="text" class="textInput" id="userNameForUsers" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userNameForUsers" required></td>
                     </tr>
                     <tr>
                         <td><label for="userPhoneForUsers">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="userPhoneForUsers" dir="ltr" style="text-align:right" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userPhoneForUsers" dir="ltr" style="text-align:right" required></td>
                     </tr>
                     <tr>
                         <td><label for="userCarNumberForUsers">מספר רכב:</label></td>
-                        <td><input type="text" class="textInput" id="userCarNumberForUsers" required value="ללא"></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userCarNumberForUsers" required value="ללא"></td>
                     </tr>
                     <tr>
                         <td><label for="userTimeToAlertForMyUser">זמן עזיבה משוער:</label></td>
@@ -186,7 +186,7 @@
                     </tr>
                     <tr>
                         <td><label for="userTimeToAlertForUsers">כמה זמן מראש להתריע (בדקות):</label></td>
-                        <td><input type="text" class="textInput" id="userTimeToAlertForUsers" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userTimeToAlertForUsers" required></td>
                     </tr>
                     <tr>
                         <td><label for="userRoleForUsers">תפקיד:</label></td>
@@ -209,19 +209,19 @@
                 <table>
                     <tr>
                         <td><label for="userIDForMyUser">תז/מא:</label></td>
-                        <td><input type="text" class="textInput" id="userIDForMyUser" required readonly></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userIDForMyUser" required readonly></td>
                     </tr>
                     <tr>
                         <td><label for="userNameForMyUser">שם מלא:</label></td>
-                        <td><input type="text" class="textInput" id="userNameForMyUser" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userNameForMyUser" required></td>
                     </tr>
                     <tr>
                         <td><label for="userPhoneForMyUser">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="userPhoneForMyUser" dir="ltr" style="text-align:right" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userPhoneForMyUser" dir="ltr" style="text-align:right" required></td>
                     </tr>
                     <tr>
                         <td><label for="userCarNumberForMyUser">מספר רכב:</label></td>
-                        <td><input type="text" class="textInput" id="userCarNumberForMyUser" required value="ללא"></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userCarNumberForMyUser" required value="ללא"></td>
                     </tr>
                     <tr>
                         <td><label for="userTimeToAlertForMyUser">זמן עזיבה משוער:</label></td>
@@ -229,11 +229,11 @@
                     </tr>
                     <tr>
                         <td><label for="userTimeToAlertForMyUser">כמה זמן מראש להתריע (בדקות):</label></td>
-                        <td><input type="text" class="textInput" id="userTimeToAlertForMyUser" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userTimeToAlertForMyUser" required></td>
                     </tr>
                     <tr>
                         <td><label for="userRoleForMyUser">תפקיד:</label></td>
-                        <td><input type="text" class="textInput" id="userRoleForMyUser" required readonly></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userRoleForMyUser" required readonly></td>
                     </tr>
                 </table>
             </div>
@@ -245,7 +245,7 @@
         <div class="dialog" id="showBamDialog">
             <h2>ניהול ביטחון מידע</h2>
             <div class="autocomplete" style="width:300px;">
-                <input type="text" class="textInput" id="myBamInput" placeholder="הכנס שם או מספר תעודה מזהה">
+                <input type="text" autocomplete="off" class="textInput" id="myBamInput" placeholder="הכנס שם או מספר תעודה מזהה">
             </div>
             <form method="dialog" autocomplete="off">
                 <table id="bamTable" class="table">
@@ -260,19 +260,19 @@
                 <table>
                     <tr>
                         <td><label for="userIDForBam">מזהה המשתמש:</label></td>
-                        <td><input type="text" class="textInput" id="userIDForBam" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userIDForBam" required></td>
                     </tr>
                     <tr>
                         <td><label for="userNameForBam">שם המשתמש:</label></td>
-                        <td><input type="text" class="textInput" id="userNameForBam" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userNameForBam" required></td>
                     </tr>
                     <tr>
                         <td><label for="userStatusForBam">סיווג ביטחוני:</label></td>
-                        <td><input type="text" class="textInput" id="userStatusForBam" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userStatusForBam" required></td>
                     </tr>
                     <tr>
                         <td><label for="userValidDateForBam"> תאריך תפוגה סיווג ביטחוני:</label></td>
-                        <td><input type="text" class="textInput" id="userValidDateForBam" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="userValidDateForBam" required></td>
                     </tr>
                 </table>
             </div>
@@ -284,7 +284,7 @@
         <div class="dialog" id="showSecurityDialog">
             <h2>ניהול אבטחה</h2>
             <div class="autocomplete" style="width:300px;">
-                <input type="text" class="textInput" id="mySecurityInput" placeholder="הכנס שם או מספר תעודה מזהה">
+                <input type="text" autocomplete="off" class="textInput" id="mySecurityInput" placeholder="הכנס שם או מספר תעודה מזהה">
             </div>
             <form method="dialog" autocomplete="off">
                 <table id="securityTable" class="table">
@@ -299,11 +299,11 @@
                 <table>
                     <tr>
                         <td><label for="securityIDForSecurity">מזהה מנוע:</label></td>
-                        <td><input type="text" class="textInput" id="securityIDForSecurity" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="securityIDForSecurity" required></td>
                     </tr>
                     <tr>
                         <td><label for="securityReasonForSecurity">סיבת המניעה:</label></td>
-                        <td><input type="text" class="textInput" id="securityReasonForSecurity" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="securityReasonForSecurity" required></td>
                     </tr>
                 </table>
             </div>
@@ -315,7 +315,7 @@
         <div class="dialog" id="showRequestsByHostIDDialog">
             <h2>ניהול בקשות כניסה מאושרות</h2>
             <div class="autocomplete" style="width:300px;">
-                <input type="text" class="textInput" id="myRequestsByHostIDInput" placeholder="הכנס שם או מספר תעודה מזהה">
+                <input type="text" autocomplete="off" class="textInput" id="myRequestsByHostIDInput" placeholder="הכנס שם או מספר תעודה מזהה">
             </div>
             <table id="requestsByHostIDTable" class="table">
             </table>
@@ -330,15 +330,15 @@
                 <table>
                     <tr>
                         <td><label for="visitorID">תז/מא:</label></td>
-                        <td><input type="text" class="textInput" id="visitorID" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="visitorID" required></td>
                     </tr>
                     <tr>
                         <td><label for="visitorName">שם מלא:</label></td>
-                        <td><input type="text" class="textInput" id="visitorName" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="visitorName" required></td>
                     </tr>
                     <tr>
                         <td><label for="visitorPhone">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="visitorPhone" dir="ltr" style="text-align:right" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="visitorPhone" dir="ltr" style="text-align:right" required></td>
                     </tr>
                 </table>
                 <br>
@@ -348,15 +348,15 @@
                 <table>
                     <tr>
                         <td><label for="hostID">תז/מא:</label></td>
-                        <td><input type="text" class="textInput" id="hostID" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="hostID" required></td>
                     </tr>
                     <tr>
                         <td><label for="hostName">שם מלא:</label></td>
-                        <td><input type="text" class="textInput" id="hostName" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="hostName" required></td>
                     </tr>
                     <tr>
                         <td><label for="hostPhone">טלפון:</label></td>
-                        <td><input type="text" class="textInput" id="hostPhone" dir="ltr" style="text-align:right" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="hostPhone" dir="ltr" style="text-align:right" required></td>
                     </tr>
                 </table>
             </div>
@@ -368,7 +368,7 @@
         <div class="dialog" id="showRequestsDialog">
             <h2>ניהול בקשות כניסה</h2>
             <div class="autocomplete" style="width:300px;">
-                <input type="text" class="textInput" id="myRequestsInput" placeholder="הכנס שם או מספר תעודה מזהה">
+                <input type="text" autocomplete="off" class="textInput" id="myRequestsInput" placeholder="הכנס שם או מספר תעודה מזהה">
             </div>
             <table id="requestsTable" class="table">
             </table>
@@ -404,11 +404,11 @@
                 <table>
                     <tr>
                         <td><label for="blockerCarNumber">מספר הרכב החוסם:</label></td>
-                        <td><input type="text" class="textInput" id="blockerCarNumber" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="blockerCarNumber" required></td>
                     </tr>
                     <tr>
                         <td><label for="blockedCarNumber">מספר הרכב החסום:</label></td>
-                        <td><input type="text" class="textInput" id="blockedCarNumber" required></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="blockedCarNumber" required></td>
                     </tr>
                 </table>
             </div>

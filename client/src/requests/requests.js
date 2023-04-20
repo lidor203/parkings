@@ -8,7 +8,6 @@ export class RequestsFunctionality {
     showRequests = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
-        const hostID = global.userID;
         await axios.post(`${apiURL}/requests/getRequests`)
             .then(res => {
                 if (res.status === 200) hanldeSuccess(res.data);
@@ -36,7 +35,8 @@ export class RequestsFunctionality {
     newRequest = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
-        const ID = global.userID;
+        const requesterID = global.userID;
+        const requesterName = global.userName;
         const visitorID = document.getElementById("visitorID").value;
         const disclaimedPersonID = await securityFunctionality.getSecurityDisclaimerByID(visitorID);
 
@@ -58,7 +58,7 @@ export class RequestsFunctionality {
                     const hostName = document.getElementById("hostName").value;
                     const hostPhone = document.getElementById("hostPhone").value;
         
-                    await axios.post(`${apiURL}/requests/newRequest`, {ID, visitorID, visitorName, visitorPhone, hostID, hostName, hostPhone })
+                    await axios.post(`${apiURL}/requests/newRequest`, {requesterID, requesterName, visitorID, visitorName, visitorPhone, hostID, hostName, hostPhone })
                         .then(res => {
                             if (res.status === 200)
                             {
@@ -100,7 +100,8 @@ export class RequestsFunctionality {
     editRequest = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
-        const ID = global.userID;
+        const requesterID = global.userID;
+        const requesterName = global.userName;
         const visitorName = document.getElementById("visitorName").value;
         const visitorID = document.getElementById("visitorID").value;
         const visitorPhone = document.getElementById("visitorPhone").value;
@@ -109,7 +110,7 @@ export class RequestsFunctionality {
         const hostPhone = document.getElementById("hostPhone").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post(`${apiURL}/requests/editRequest`, {userID, visitorName, visitorID, visitorPhone, hostID, hostName, hostPhone, key })
+        await axios.post(`${apiURL}/requests/editRequest`, {requesterID, requesterName, visitorID, visitorName, visitorPhone, hostID, hostName, hostPhone, key })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);

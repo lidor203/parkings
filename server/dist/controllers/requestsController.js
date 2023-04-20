@@ -29,7 +29,8 @@ exports.requestsRouter.post('/deleteRequest', (req, res) => __awaiter(void 0, vo
 }));
 exports.requestsRouter.post('/newRequest', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield axios_1.default.post("https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requests.json", {
-        "requesterID": req.body.ID,
+        "requesterID": req.body.requesterID,
+        "requesterName": req.body.requesterName,
         "visitorName": req.body.visitorName,
         "visitorID": req.body.visitorID,
         "visitorPhone": req.body.visitorPhone,
@@ -42,7 +43,8 @@ exports.requestsRouter.post('/newRequest', (req, res) => __awaiter(void 0, void 
 }));
 exports.requestsRouter.post('/editRequest', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield axios_1.default.patch(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requests/${req.body.key}.json`, {
-        "requesterID": req.body.ID,
+        "requesterID": req.body.requesterID,
+        "requesterName": req.body.requesterName,
         "visitorName": req.body.visitorName,
         "visitorID": req.body.visitorID,
         "visitorPhone": req.body.visitorPhone,

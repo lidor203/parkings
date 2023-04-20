@@ -51,13 +51,25 @@ export const showRequestsFunction = async () => {
         trHead.className="header";
         const thVisitorID = document.createElement("th");
         const thVisitorName = document.createElement("th");
+        const thHostID = document.createElement("th");
+        const thHostName = document.createElement("th");
+        const thRequesterID = document.createElement("th");
+        const thRequesterName = document.createElement("th");
         const thDots = document.createElement("th");
-        thVisitorID.innerText = "מספר תעודה";
+        thVisitorID.innerText = "מספר תעודת האורח";
         thVisitorName.innerText = "שם האורח";
+        thHostID.innerText = "מספר תעודת המארח";
+        thHostName.innerText = "שם המארח";
+        thRequesterID.innerText = "מספר תעודת המאשר";
+        thRequesterName.innerText = "שם המאשר";
         thDots.innerText = "";
         
         trHead.appendChild(thVisitorID);
         trHead.appendChild(thVisitorName);
+        trHead.appendChild(thHostID);
+        trHead.appendChild(thHostName);
+        trHead.appendChild(thRequesterID);
+        trHead.appendChild(thRequesterName);
         trHead.appendChild(thDots);
         requestsTable.appendChild(trHead);
 
@@ -87,9 +99,17 @@ export const showRequestsFunction = async () => {
             tdVisitorID.setAttribute("tagName", "relevant");
             const tdVisitorName = document.createElement("td");
             tdVisitorName.setAttribute("tagName", "relevant");
+            const tdHostID = document.createElement("td");
+            const tdHostName = document.createElement("td");
+            const tdRequesterID = document.createElement("td");
+            const tdRequesterName = document.createElement("td");
             const tdDots = document.createElement("td");
             tdVisitorID.innerText = requests[key]["visitorID"];
             tdVisitorName.innerText = requests[key]["visitorName"];
+            tdHostID.innerText = requests[key]["hostID"];
+            tdHostName.innerText = requests[key]["hostName"];
+            tdRequesterID.innerText = requests[key]["requesterID"];
+            tdRequesterName.innerText = requests[key]["requesterName"];
 
             const editHref = document.createElement("a");
             editHref.className = "link";
@@ -131,6 +151,10 @@ export const showRequestsFunction = async () => {
 
             tr.appendChild(tdVisitorID);
             tr.appendChild(tdVisitorName);
+            tr.appendChild(tdHostID);
+            tr.appendChild(tdHostName);
+            tr.appendChild(tdRequesterID);
+            tr.appendChild(tdRequesterName);       
             tr.appendChild(tdDots);
             requestsTable.appendChild(tr);
             requestsArray.push(requests[key]["visitorID"]);
