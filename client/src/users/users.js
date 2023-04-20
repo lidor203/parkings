@@ -53,7 +53,7 @@ export class UsersFunctionality {
         .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden');
     }
 
-    editUser = async (hanldeSuccess, handleFailure) => {
+    editUser = async (hanldeSuccess, handleFailure, currentLeaveTime) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
         const userIDToUpdate = document.getElementById("userIDForUsers").value;
@@ -65,7 +65,7 @@ export class UsersFunctionality {
         const userCarNumberToUpdate = document.getElementById("userCarNumberForUsers").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post(`${apiURL}/users/editUser`, { userIDToUpdate, userNameToUpdate, userPhoneToUpdate,userLeaveTimeToUpdate, userTimeToAlertToUpdate, userRoleToUpdate, userCarNumberToUpdate, key })
+        await axios.post(`${apiURL}/users/editUser`, { userIDToUpdate, userNameToUpdate, userPhoneToUpdate, currentLeaveTime ,userLeaveTimeToUpdate, userTimeToAlertToUpdate, userRoleToUpdate, userCarNumberToUpdate, key })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);
@@ -78,7 +78,7 @@ export class UsersFunctionality {
             .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden');
     }
 
-    editMyUser = async (hanldeSuccess, handleFailure) => {
+    editMyUser = async (hanldeSuccess, handleFailure, currentLeaveTime) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
         const userIDToUpdate = document.getElementById("userIDForMyUser").value;
@@ -90,7 +90,7 @@ export class UsersFunctionality {
         const userCarNumberToUpdate = document.getElementById("userCarNumberForMyUser").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post(`${apiURL}/users/editUser`, { userIDToUpdate, userNameToUpdate, userPhoneToUpdate, userLeaveTimeToUpdate, userTimeToAlertToUpdate, userRoleToUpdate, userCarNumberToUpdate, key })
+        await axios.post(`${apiURL}/users/editUser`, { userIDToUpdate, userNameToUpdate, userPhoneToUpdate, currentLeaveTime, userLeaveTimeToUpdate, userTimeToAlertToUpdate, userRoleToUpdate, userCarNumberToUpdate, key })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);
@@ -147,18 +147,33 @@ export class UsersFunctionality {
             return(user);
     }
 
-    changeLeaveTime = async (userLeaveTime, key) => {
+    changeLeaveTime = async (userLeaveTime, blockedUserPhone, key) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
-        await axios.post(`${apiURL}/users/changeLeaveTime`, { userLeaveTime, key })
-            .then(res => {
-                if (res.status === 200) {
-                    alert(res.data);
+        let result = true;
+
+        await axios.post(`${apiURL}/users/changeLeaveTime`, { blockedUserPhone, userLeaveTime, key })
+            .then(async res => {
+                alert(res.data);
+
+                if (res.status === 200) {                
+                    await axios.post(`${apiURL}/blocks/changeAlarmMessegesToNewTime`, { blockedUserPhone, userLeaveTime })
+                    .then()
+                    .catch()
+                    .finally();
+                }
+                else {
+                    result = false;
                 }
             })
-            .catch(err => {
+            .catch(() => {
+                result = false;
             })
-            .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden');
+            .finally(() => { 
+                document.getElementById('loader-circle').style.visibility = 'hidden';
+            });
+
+            return (result);
     }
 
     getRolesDescriptions = async () => {

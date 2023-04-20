@@ -73,8 +73,12 @@ export const showSecurityFunction = async () => {
                         "securityReasonForSecurity" : security[key]["reason"]
                     };
 
+                    const params = {
+                        
+                    };
+    
                     dialogHandler.setDialog(null);
-                    dialogHandler.setDialog("showNewSecurity", datas, key);
+                    dialogHandler.setDialog("showNewUser", datas, key, params);
                 };
 
             const tr = document.createElement("tr");

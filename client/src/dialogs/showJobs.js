@@ -78,8 +78,12 @@ export const showJobsFunction = async () => {
                         "userRoleForJob":jobs[key]["role"]
                     };
 
+                    const params = {
+                        
+                    };
+    
                     dialogHandler.setDialog(null);
-                    dialogHandler.setDialog("showNewJob", datas, key);
+                    dialogHandler.setDialog("showNewUser", datas, key, params);
                 };
 
             const tr = document.createElement("tr");

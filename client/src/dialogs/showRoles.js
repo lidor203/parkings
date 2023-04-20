@@ -73,8 +73,12 @@ export const showRolesFunction = async () => {
                         "roleValueForRole":roles[key]["value"]
                     };
 
+                    const params = {
+                        
+                    };
+    
                     dialogHandler.setDialog(null);
-                    dialogHandler.setDialog("showNewRole", datas, key);
+                    dialogHandler.setDialog("showNewUser", datas, key, params);
                 };
 
             const tr = document.createElement("tr");

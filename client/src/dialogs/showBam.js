@@ -81,8 +81,12 @@ export const showBamFunction = async () => {
                         "userValidDateForBam":bam[key]["validDate"]
                     };
 
+                    const params = {
+                        
+                    };
+    
                     dialogHandler.setDialog(null);
-                    dialogHandler.setDialog("showNewBam", datas, key);
+                    dialogHandler.setDialog("showNewUser", datas, key, params);
                 };
 
             const tr = document.createElement("tr");

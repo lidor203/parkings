@@ -2,7 +2,7 @@ import { UsersFunctionality } from './users';
 
 const usersFunctionality = new UsersFunctionality();
 
-export const showNewUserFunction = () => {
+export const showNewUserFunction = (params) => {
     document.getElementById("showNewUserSubmitButton").onclick = () => {
         if (document.getElementById("userIDForUsers").value === "" ||
             document.getElementById("userNameForUsers").value === "" ||
@@ -13,14 +13,15 @@ export const showNewUserFunction = () => {
         else {
             if (dialogHandler.keyToUpdate)
             {
-                usersFunctionality.editUser((request) => {    
+                const currentLeaveTime = params["userLeaveTimeForUsers"];
+                usersFunctionality.editUser((currentLeaveTime) => {    
                     document.getElementById("showNewUserCloseButton").click();
                 },
                 () => { alert("התרחשה שגיאה בעדכון המשתמש"); });
             }
             else
             {
-                usersFunctionality.newUser((request) => {    
+                usersFunctionality.newUser(() => {    
                     document.getElementById("showNewUserCloseButton").click();
                 },
                 () => { alert("התרחשה שגיאה בשמירת הבקשה"); });

@@ -34,5 +34,5 @@ export const removeFromAlarm = async (blockerPhone: any) => {
 }
 
 export const changeMessegesTime = async (blockedUserPhone: any, newLeaveTime: any) =>  {
-    return (changeAlarmMessegesTime(blockedUserPhone, newLeaveTime));
+    changeAlarmMessegesTime(blockedUserPhone, newLeaveTime);
 }

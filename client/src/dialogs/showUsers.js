@@ -93,8 +93,12 @@ export const showUsersFunction = async () => {
                     "userRoleForUsers":users[key]["role"]
                 };
 
+                const params = {
+                    "userLeaveTimeForUsers":users[key]["leaveTime"]
+                };
+
                 dialogHandler.setDialog(null);
-                dialogHandler.setDialog("showNewUser", datas, key);
+                dialogHandler.setDialog("showNewUser", datas, key, params);
             };
 
             const tr = document.createElement("tr");
@@ -225,9 +229,13 @@ export const showMyUserFunction = async () => {
                     "userRoleForMyUser":users[key]["role"]
                 };
 
-                    dialogHandler.setDialog(null);
-                    dialogHandler.setDialog("showNewMyUser", datas, key);
+                const params = {
+                    "userLeaveTimeForUsers":users[key]["leaveTime"]
                 };
+
+                dialogHandler.setDialog(null);
+                dialogHandler.setDialog("showNewUser", datas, key, params);
+            };
 
             const tr = document.createElement("tr");
             tr.id = "tr" + users[key]["ID"];

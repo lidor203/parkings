@@ -89,8 +89,12 @@ export const showRequestsByHostIDFunction = async () => {
                         "hostPhone":requests[key]["hostPhone"]
                     };
 
+                    const params = {
+                        
+                    };
+    
                     dialogHandler.setDialog(null);
-                    dialogHandler.setDialog("showNewRequest", datas, key);
+                    dialogHandler.setDialog("showNewUser", datas, key, params);
                 };
 
                 const tr = document.createElement("tr");

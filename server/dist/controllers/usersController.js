@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.usersRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const axios_1 = __importDefault(require("axios"));
+const alarmController_1 = require("./alarmController");
 exports.usersRouter = express_1.default.Router();
 exports.usersRouter.use(express_1.default.json());
 exports.usersRouter.post('/getUsers', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -49,7 +50,13 @@ exports.usersRouter.post('/editUser', (req, res) => __awaiter(void 0, void 0, vo
         "timeToAlert": req.body.userTimeToAlertToUpdate,
         "role": req.body.userRoleToUpdate,
         "carNumber": req.body.userCarNumberToUpdate
-    });
+    }).then(() => {
+        if (req.body.currentLeaveTime !== req.body.userLeaveTimeToUpdate) {
+            (0, alarmController_1.changeMessegesTime)(req.body.phone, req.body.userLeaveTimeToUpdate);
+        }
+    })
+        .catch()
+        .finally();
     res.status(200);
     res.json("הפרטים עודכנו בהצלחה!");
 }));
@@ -66,7 +73,11 @@ exports.usersRouter.post('/getUserByID', (req, res) => __awaiter(void 0, void 0,
 exports.usersRouter.post('/changeLeaveTime', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield axios_1.default.patch(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users/${req.body.key}.json`, {
         "leaveTime": req.body.userLeaveTime
-    });
+    }).then(() => {
+        (0, alarmController_1.changeMessegesTime)(req.body.blockedUserPhone, req.body.userLeaveTime);
+    })
+        .catch()
+        .finally();
     res.status(200);
     res.json("שעת היציאה מהבסיס עודכנה בהצלחה!");
 }));

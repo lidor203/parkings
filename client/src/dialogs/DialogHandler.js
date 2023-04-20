@@ -56,7 +56,7 @@ export class DialogHandler {
     requestDialog = null;
     keyToUpdate = null;
 
-    setDialog = async (mode, datas, key) => {
+    setDialog = async (mode, datas, key, params) => {
         if (mode == null) {
             const tables = document.getElementsByClassName("table");
             for (let i = 0; i < tables.length; i++) {
@@ -73,7 +73,20 @@ export class DialogHandler {
             document.getElementById('loader-circle').style.visibility = 'hidden';
         }
         else {
-            var code = mode + "()";
+            var code = mode + "(";
+            
+            //console.log(params);
+            for (const key in params) {
+                code = code + "\"" + params[key] + "\",";
+                //console.log(params[key]);
+                //console.log(code);
+            }
+
+            if (code.slice(-1) === ",") {
+                code = code.substring(0, code.length -1);
+            }
+
+            code = code + ")";
             await eval(code);
 
             document.getElementById(mode + "Dialog").classList.add('open');  
@@ -81,7 +94,7 @@ export class DialogHandler {
             //console.log(datas);
             for (const key in datas) {
                 //console.log(document.getElementById(key));
-                //console.log((datas[key]));
+                //console.log(datas[key]);
                 document.getElementById(key).value = datas[key];
             }
 

@@ -41,6 +41,6 @@ const removeFromAlarm = (blockerPhone) => __awaiter(void 0, void 0, void 0, func
 });
 exports.removeFromAlarm = removeFromAlarm;
 const changeMessegesTime = (blockedUserPhone, newLeaveTime) => __awaiter(void 0, void 0, void 0, function* () {
-    return ((0, alarm_3.changeAlarmMessegesTime)(blockedUserPhone, newLeaveTime));
+    (0, alarm_3.changeAlarmMessegesTime)(blockedUserPhone, newLeaveTime);
 });
 exports.changeMessegesTime = changeMessegesTime;

@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import axios from 'axios';
+import { changeMessegesTime } from './alarmController'
 
 export const usersRouter = express.Router();
 usersRouter.use(express.json());
@@ -41,7 +42,13 @@ usersRouter.post('/editUser', async (req: Request, res: Response)  => {
         "timeToAlert" : req.body.userTimeToAlertToUpdate,
         "role" : req.body.userRoleToUpdate,
         "carNumber" : req.body.userCarNumberToUpdate
-    });
+    }).then(() => {
+        if (req.body.currentLeaveTime !== req.body.userLeaveTimeToUpdate){
+            changeMessegesTime(req.body.phone, req.body.userLeaveTimeToUpdate);
+        }
+    })
+    .catch()
+    .finally();
     res.status(200);
     res.json("הפרטים עודכנו בהצלחה!");
 });
@@ -62,7 +69,11 @@ usersRouter.post('/changeLeaveTime', async (req: Request, res: Response)  => {
     await axios.patch(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users/${req.body.key}.json`,
     {
         "leaveTime" : req.body.userLeaveTime
-    });
+    }).then(() => {
+        changeMessegesTime(req.body.blockedUserPhone, req.body.userLeaveTime);
+    })
+    .catch()
+    .finally();
     res.status(200);
     res.json("שעת היציאה מהבסיס עודכנה בהצלחה!");
 });

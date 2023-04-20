@@ -95,6 +95,7 @@ export const showBlocksFunction = async () => {
         document.getElementById("leftNowButton").onclick = blocksFunctionality.deleteBlock;
 
         const changeLeaveTime = async () => {
+            const blockedUserPhone = global.userPhone;
             const newLeaveTime = document.getElementById("leaveTime").value;
             const newLeaveTimeHours = parseInt(String(newLeaveTime).split(':')[0]);
             const newLeaveTimeMinutes = parseInt(String(newLeaveTime).split(':')[1]);
@@ -106,19 +107,10 @@ export const showBlocksFunction = async () => {
                 alert("אי אפשר לעדכן זמן עזיבה בעבר");
             }
             else {
-                await usersFunctionality.changeLeaveTime(newLeaveTime, global.userKey)
-                .then(async () => {
-                    if (res.status === 200)
-                    {
-                        const blockedUserPhone = global.userPhone;                   
-                        await axios.post(`${apiURL}/blocks/changeAlarmMessegesToNewTime`, { blockedUserPhone, newLeaveTime })
-                        .then()
-                        .catch()
-                        .finally(global.leaveTime = newLeaveTime);
-                    }
-                })
-                .catch()
-                .finally();
+                if (await usersFunctionality.changeLeaveTime(newLeaveTime, blockedUserPhone, global.userKey)){
+                        global.userLeaveTime = newLeaveTime;
+                        alert(global.userLeaveTime);
+                }
             }
         };
 
