@@ -1,4 +1,4 @@
-import { time } from "console";
+import { time, timeEnd } from "console";
 import { parse } from "path";
 
 const wbm = require('wbm');
@@ -104,6 +104,53 @@ export const changeAlarmMessegesTime = async (blockedUserPhone: string, newLeave
 
         newMessegeList = [];
     })      
+}
+
+export const changePhoneToAlertAlarm = async (oldBlockerUserPhone: string, newBlockerUserPhone: string) => {
+    timeAlarm.forEach(async (key) => {
+        timeAlarm.get(key).forEach((child:any) => {
+            if (child["phone"] === oldBlockerUserPhone) {
+                child["phone"] = newBlockerUserPhone;
+            }
+        })
+
+    })      
+}
+
+export const changeTimeToAlertAlarm = async (phone: string, oldBlockerUserTimeToAlert: string, newBlockerUserTimeToAlert: string) => {
+    const timeToAlertChange = parseInt(newBlockerUserTimeToAlert) - parseInt(oldBlockerUserTimeToAlert);
+    timeAlarm.forEach(async (key) => {
+        timeAlarm.get(key).forEach(function(child:any, index:any, object:any) {
+            if (child["phone"] === phone) {
+                const newKey = timeAlarm.get(parseInt(key) + (timeToAlertChange * 60000));
+
+                //meaning - I want to get an alert later than i wanted before
+                if (timeToAlertChange > 0){                   
+                    if (timeAlarm.get(newKey) === undefined) {
+                        timeAlarm.set(newKey, []);
+                    }
+
+                    timeAlarm.get(newKey).push({"phone":child["phone"], "messege":child["messege"], "timeToAlert":child["timeToAlert"]});
+                }
+                //meaning - I want to get an alert earlier than i wanted before
+                //needs to check if the time has already passed (and than just make it to alert now)
+                else {
+                    let nowInUTCTime = Date.now();
+
+                    //the time to alert has already passed
+                    if (nowInUTCTime < newKey){
+                        const firstKeyElement = timeAlarm.entries().next().value[0];
+                        timeAlarm.get(firstKeyElement).push({"phone":child["phone"], "messege":child["messege"], "timeToAlert":child["timeToAlert"]});
+                    }
+                    else{
+                        timeAlarm.get(newKey).push({"phone":child["phone"], "messege":child["messege"], "timeToAlert":child["timeToAlert"]});
+                    }
+                } 
+                
+                object.splice(index, 1);
+            }
+        })
+    })  
 }
 
 export const throwMesseges = async () => {

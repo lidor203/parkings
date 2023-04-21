@@ -2,6 +2,8 @@ import axios from 'axios';
 import { addMessegesToBlocker } from '../alarm';
 import { deleteMessegesFromBlocker } from '../alarm';
 import { changeAlarmMessegesTime } from '../alarm';
+import { changePhoneToAlertAlarm } from '../alarm';
+import { changeTimeToAlertAlarm } from '../alarm';
 import { calculateTimeToSendMessege } from '../alarm';
 
 export const addToAlarm = async (blockerCarNumber: any, blockedCarNumber: any) => { 
@@ -35,4 +37,12 @@ export const removeFromAlarm = async (blockerPhone: any) => {
 
 export const changeMessegesTime = async (blockedUserPhone: any, newLeaveTime: any) =>  {
     changeAlarmMessegesTime(blockedUserPhone, newLeaveTime);
+}
+
+export const changePhoneToAlert = async (oldBlockerUserPhone: any, newBlockerUserPhone: any) =>  {
+    changePhoneToAlertAlarm(oldBlockerUserPhone, newBlockerUserPhone);
+}
+
+export const changeTimeToAlert = async (phone: any, oldBlockerUserTimeToAlert: any, newBlockerUserTimeToAlert: any) =>  {
+    changeTimeToAlertAlarm(phone, oldBlockerUserTimeToAlert, newBlockerUserTimeToAlert);
 }

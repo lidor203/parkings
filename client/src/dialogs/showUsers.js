@@ -94,7 +94,10 @@ export const showUsersFunction = async () => {
                 };
 
                 const params = {
+                    "userPhoneForUsers":users[key]["phone"],
+                    "userTimeToAlertForUsers":users[key]["timeToAlert"],
                     "userLeaveTimeForUsers":users[key]["leaveTime"]
+
                 };
 
                 dialogHandler.setDialog(null);
@@ -230,6 +233,8 @@ export const showMyUserFunction = async () => {
                 };
 
                 const params = {
+                    "userPhoneForUsers":users[key]["phone"],
+                    "userTimeToAlertForUsers":users[key]["timeToAlert"],
                     "userLeaveTimeForUsers":users[key]["leaveTime"]
                 };
 

@@ -13,8 +13,7 @@ export const showNewUserFunction = (params) => {
         else {
             if (dialogHandler.keyToUpdate)
             {
-                const currentLeaveTime = params["userLeaveTimeForUsers"];
-                usersFunctionality.editUser((currentLeaveTime) => {    
+                usersFunctionality.editUser(() => {    
                     document.getElementById("showNewUserCloseButton").click();
                 },
                 () => { alert("התרחשה שגיאה בעדכון המשתמש"); });
@@ -41,7 +40,7 @@ export const showNewMyUserFunction = () => {
         else {
             if (dialogHandler.keyToUpdate)
             {
-                usersFunctionality.editMyUser((request) => {    
+                usersFunctionality.editMyUser(() => {    
                     document.getElementById("showNewMyUserCloseButton").click();
                 },
                 () => { alert("התרחשה שגיאה בעדכון המשתמש"); });

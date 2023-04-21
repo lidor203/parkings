@@ -53,7 +53,7 @@ export class UsersFunctionality {
         .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden');
     }
 
-    editUser = async (hanldeSuccess, handleFailure, currentLeaveTime) => {
+    editUser = async (hanldeSuccess, handleFailure, currentPhone, currentTimeToAlert, currentLeaveTime) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
         const userIDToUpdate = document.getElementById("userIDForUsers").value;
@@ -65,7 +65,7 @@ export class UsersFunctionality {
         const userCarNumberToUpdate = document.getElementById("userCarNumberForUsers").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post(`${apiURL}/users/editUser`, { userIDToUpdate, userNameToUpdate, userPhoneToUpdate, currentLeaveTime ,userLeaveTimeToUpdate, userTimeToAlertToUpdate, userRoleToUpdate, userCarNumberToUpdate, key })
+        await axios.post(`${apiURL}/users/editUser`, { userIDToUpdate, userNameToUpdate, currentPhone, userPhoneToUpdate, currentLeaveTime ,userLeaveTimeToUpdate, currentTimeToAlert ,userTimeToAlertToUpdate, userRoleToUpdate, userCarNumberToUpdate, key })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);
@@ -78,7 +78,7 @@ export class UsersFunctionality {
             .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden');
     }
 
-    editMyUser = async (hanldeSuccess, handleFailure, currentLeaveTime) => {
+    editMyUser = async (hanldeSuccess, handleFailure, currentPhone, currentTimeToAlert, currentLeaveTime) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
         const userIDToUpdate = document.getElementById("userIDForMyUser").value;
@@ -90,7 +90,7 @@ export class UsersFunctionality {
         const userCarNumberToUpdate = document.getElementById("userCarNumberForMyUser").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post(`${apiURL}/users/editUser`, { userIDToUpdate, userNameToUpdate, userPhoneToUpdate, currentLeaveTime, userLeaveTimeToUpdate, userTimeToAlertToUpdate, userRoleToUpdate, userCarNumberToUpdate, key })
+        await axios.post(`${apiURL}/users/editUser`, { userIDToUpdate, userNameToUpdate, currentPhone, userPhoneToUpdate, currentLeaveTime, userLeaveTimeToUpdate, currentTimeToAlert, userTimeToAlertToUpdate, userRoleToUpdate, userCarNumberToUpdate, key })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);

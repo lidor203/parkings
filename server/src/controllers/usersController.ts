@@ -1,6 +1,9 @@
 import express, { Request, Response } from 'express';
 import axios from 'axios';
-import { changeMessegesTime } from './alarmController'
+import { changeMessegesTime } from './alarmController';
+import { changePhoneToAlert } from './alarmController';
+import { changeTimeToAlert } from './alarmController'
+
 
 export const usersRouter = express.Router();
 usersRouter.use(express.json());
@@ -45,6 +48,14 @@ usersRouter.post('/editUser', async (req: Request, res: Response)  => {
     }).then(() => {
         if (req.body.currentLeaveTime !== req.body.userLeaveTimeToUpdate){
             changeMessegesTime(req.body.phone, req.body.userLeaveTimeToUpdate);
+        }
+
+        if (req.body.currentPhone !== req.body.userPhoneToUpdate){
+            changePhoneToAlert(req.body.currentPhone, req.body.userPhoneToUpdate);
+        }
+
+        if (req.body.currentTimeToAlert !== req.body.userTimeToAlertToUpdate){
+            changeTimeToAlert(req.body.phone, req.body.currentTimeToAlert, req.body.userTimeToAlertToUpdate);
         }
     })
     .catch()
