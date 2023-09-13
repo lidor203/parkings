@@ -15,7 +15,7 @@
             <div class="formContent">
                 <div class="inputDiv">
                     <label for="inputLoginId">:תז/מא</label>
-                    <input type="text" autocomplete="off" class="textInput" id="inputLoginId" required value="1">
+                    <input type="text" autocomplete="off" class="textInput" id="inputLoginId" required value="305740185">
                 </div>
                 <button id="loginButton">כניסה</button>
             </div>  
@@ -78,37 +78,6 @@
                 <button class="closeDialogButton">סגירה</button>
             </form>
         </div>
-        <div class="dialog" id="showNewJobDialog">
-            <p>הוספת/עריכת בעל תפקיד</p>
-            <h4>פרטי התפקידן:</h4>
-            <div>
-                <table>
-                    <tr>
-                        <td><label for="userIDForJob">תז/מא:</label></td>
-                        <td><input type="text" autocomplete="off" class="textInput" id="userIDForJob" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="userNameForJob">שם מלא:</label></td>
-                        <td><input type="text" autocomplete="off" class="textInput" id="userNameForJob" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><label for="userPhoneForJob">טלפון:</label></td>
-                        <td><input type="text" autocomplete="off" class="textInput" id="userPhoneForJob" dir="ltr" style="text-align:right" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><label for="userRoleForJob">תפקיד:</label></td>
-                        <td class="rolesInput">
-                            <input list="" autocomplete="off" id="userRoleForJob" required>
-                            <div class="roles hidden" id="rolesDatalistForJob"></div><br>
-                        </td>                        
-                    </tr>
-                </table>
-            </div>
-            <div>
-                <button id="showNewJobSubmitButton" class="submit">שגר בקשה</button>
-                <button id="showNewJobCloseButton" class="closeDialogButton">סגירה</button>
-            </div>
-        </div>
         <div class="dialog" id="showRolesDialog">
             <p>ניהול התפקידים במערכת</p>
             <div class="autocomplete" style="width:300px;">
@@ -133,11 +102,12 @@
                         <td><label for="roleValueForRole">תיאור התפקיד:</label></td>
                         <td><input type="text" autocomplete="off" class="textInput" id="roleValueForRole" required></td>
                     </tr>
+                    <tr><td><br></td></tr>
+                    <tr>
+                        <td><button id="showNewRoleSubmitButton" class="submit">שלח בקשה</button></td>
+                        <td><button id="showNewRoleCloseButton" class="closeDialogButton">סגירה</button></td>
+                    </tr>
                 </table>
-            </div>
-            <div>
-                <button id="showNewRoleSubmitButton" class="submit">שגר בקשה</button>
-                <button id="showNewRoleCloseButton" class="closeDialogButton">סגירה</button>
             </div>
         </div>
         <div class="dialog" id="showUsersDialog">
@@ -147,14 +117,6 @@
             </div>
             <form method="dialog" autocomplete="off">
                 <table id="usersTable" class="table">
-                </table>
-                <button class="closeDialogButton">סגירה</button>
-            </form>
-        </div>
-        <div class="dialog" id="showMyUserDialog">
-            <h2>ניהול המשתמש שלי</h2>
-            <form method="dialog" autocomplete="off">
-                <table id="myUserTable" class="table">
                 </table>
                 <button class="closeDialogButton">סגירה</button>
             </form>
@@ -195,12 +157,21 @@
                             <div class="roles hidden" id="rolesDatalistForUsers"></div>
                         </td>
                     </tr>
+                    <tr><td><br></td></tr>
+                    <tr>
+                        <td><button id="showNewUserCloseButton" class="closeDialogButton">סגירה</button></td>
+                        <td><button id="showNewUserSubmitButton" class="submit">שלח בקשה</button></td>
+                    </tr>
                 </table>
             </div>
-            <div>
-                <button id="showNewUserCloseButton" class="closeDialogButton">סגירה</button>
-                <button id="showNewUserSubmitButton" class="submit">שגר בקשה</button>
-            </div>
+        </div>
+        <div class="dialog" id="showMyUserDialog">
+            <h2>ניהול המשתמש שלי</h2>
+            <form method="dialog" autocomplete="off">
+                <table id="myUserTable" class="table">
+                </table>
+                <button class="closeDialogButton">סגירה</button>
+            </form>
         </div>
         <div class="dialog" id="showNewMyUserDialog">
             <h2>עריכת המשתמש שלי</h2>
@@ -235,11 +206,12 @@
                         <td><label for="userRoleForMyUser">תפקיד:</label></td>
                         <td><input type="text" autocomplete="off" class="textInput" id="userRoleForMyUser" required readonly></td>
                     </tr>
+                    <tr><td><br></td></tr>
+                    <tr>
+                        <td><button id="showNewMyUserCloseButton" class="closeDialogButton">סגירה</button></td>
+                        <td><button id="showNewMyUserSubmitButton" class="submit">שלח בקשה</button></td>
+                    </tr>
                 </table>
-            </div>
-            <div>
-                <button id="showNewMyUserCloseButton" class="closeDialogButton">סגירה</button>
-                <button id="showNewMyUserSubmitButton" class="submit">שגר בקשה</button>
             </div>
         </div>
         <div class="dialog" id="showBamDialog">
@@ -274,11 +246,12 @@
                         <td><label for="userValidDateForBam"> תאריך תפוגה סיווג ביטחוני:</label></td>
                         <td><input type="text" autocomplete="off" class="textInput" id="userValidDateForBam" required></td>
                     </tr>
+                    <tr><td><br></td></tr>
+                    <tr>
+                        <td><button id="showNewBamCloseButton" class="closeDialogButton">סגירה</button></td>
+                        <td><button id="showNewBamSubmitButton" class="submit">שלח בקשה</button></td>
+                    </tr>
                 </table>
-            </div>
-            <div>
-                <button id="showNewBamCloseButton" class="closeDialogButton">סגירה</button>
-                <button id="showNewBamSubmitButton" class="submit">שגר בקשה</button>
             </div>
         </div>
         <div class="dialog" id="showSecurityDialog">
@@ -305,64 +278,12 @@
                         <td><label for="securityReasonForSecurity">סיבת המניעה:</label></td>
                         <td><input type="text" autocomplete="off" class="textInput" id="securityReasonForSecurity" required></td>
                     </tr>
-                </table>
-            </div>
-            <div>
-                <button id="showNewSecurityCloseButton" class="closeDialogButton">סגירה</button>
-                <button id="showNewSecuritySubmitButton" class="submit">שגר בקשה</button>
-            </div>
-        </div>
-        <div class="dialog" id="showRequestsByHostIDDialog">
-            <h2>ניהול בקשות כניסה מאושרות</h2>
-            <div class="autocomplete" style="width:300px;">
-                <input type="text" autocomplete="off" class="textInput" id="myRequestsByHostIDInput" placeholder="הכנס שם או מספר תעודה מזהה">
-            </div>
-            <table id="requestsByHostIDTable" class="table">
-            </table>
-            <form method="dialog" autocomplete="off">
-                <button id="showRequestsByHostIDCloseButton" class="closeDialogButton">סגירה</button>
-            </form>
-        </div>
-        <div class="dialog" id="showNewRequestDialog">
-            <h2>הוספת/עריכת בקשת כניסה</h2>
-            <h4>פרטי האדם עבורו<br>מבקשים את האישור:</h4>
-            <div>
-                <table>
+                    <tr><td><br></td></tr>
                     <tr>
-                        <td><label for="visitorID">תז/מא:</label></td>
-                        <td><input type="text" autocomplete="off" class="textInput" id="visitorID" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="visitorName">שם מלא:</label></td>
-                        <td><input type="text" autocomplete="off" class="textInput" id="visitorName" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="visitorPhone">טלפון:</label></td>
-                        <td><input type="text" autocomplete="off" class="textInput" id="visitorPhone" dir="ltr" style="text-align:right" required></td>
+                        <td><button id="showNewSecurityCloseButton" class="closeDialogButton">סגירה</button></td>
+                        <td><button id="showNewSecuritySubmitButton" class="submit">שלח בקשה</button></td>
                     </tr>
                 </table>
-                <br>
-            </div>
-            <h4>פרטי המארח:</h4>
-            <div>
-                <table>
-                    <tr>
-                        <td><label for="hostID">תז/מא:</label></td>
-                        <td><input type="text" autocomplete="off" class="textInput" id="hostID" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="hostName">שם מלא:</label></td>
-                        <td><input type="text" autocomplete="off" class="textInput" id="hostName" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="hostPhone">טלפון:</label></td>
-                        <td><input type="text" autocomplete="off" class="textInput" id="hostPhone" dir="ltr" style="text-align:right" required></td>
-                    </tr>
-                </table>
-            </div>
-            <div>
-                <button id="showNewRequestCloseButton" class="closeDialogButton">סגירה</button>
-                <button id="showNewRequestSubmitButton" class="submit">שגר בקשה</button>
             </div>
         </div>
         <div class="dialog" id="showRequestsDialog">
@@ -376,6 +297,119 @@
             <form method="dialog" autocomplete="off">
                 <button id="showRequestsCloseButton" class="closeDialogButton">סגירה</button>
             </form>
+        </div>
+        <div class="dialog" id="showNewRequestDialog">
+            <h2>הוספת/עריכת בקשת כניסה</h2>
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <h4>
+                                פרטי האורח:
+                            </h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="visitorID">תז/מא:</label></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="visitorID" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="visitorName">שם מלא:</label></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="visitorName" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="visitorPhone">טלפון:</label></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="visitorPhone" dir="ltr" style="text-align:right" required></td>
+                    </tr>
+                    <tr><td><br></td></tr>
+                    <tr>
+                        <td>
+                            <h4>
+                                פרטי המארח:                                
+                            </h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="hostID">תז/מא:</label></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="hostID" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="hostName">שם מלא:</label></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="hostName" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="hostPhone">טלפון:</label></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="hostPhone" dir="ltr" style="text-align:right" required></td>
+                    </tr>
+                    <tr><td><br></td></tr>
+                    <tr>
+                        <td><button id="showNewRequestCloseButton" class="closeDialogButton">סגירה</button></td>
+                        <td><button id="showNewRequestSubmitButton" class="submit">שלח בקשה</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="dialog" id="showRequestsByHostIDDialog">
+            <h2>ניהול בקשות כניסה מאושרות</h2>
+            <div class="autocomplete" style="width:300px;">
+                <input type="text" autocomplete="off" class="textInput" id="myRequestsByHostIDInput" placeholder="הכנס שם או מספר תעודה מזהה">
+            </div>
+            <table id="requestsByHostIDTable" class="table">
+            </table>
+            <form method="dialog" autocomplete="off">
+                <button id="showRequestsByHostIDCloseButton" class="closeDialogButton">סגירה</button>
+            </form>
+        </div>
+        <div class="dialog" id="showNewRequestByHostIDDialog">
+            <h2>הוספת/עריכת בקשת כניסה</h2>
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <h4>
+                                פרטי האורח:
+                            </h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="visitorIDByHostID">תז/מא:</label></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="visitorIDByHostID" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="visitorNameByHostID">שם מלא:</label></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="visitorNameByHostID" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="visitorPhoneByHostID">טלפון:</label></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="visitorPhoneByHostID" dir="ltr" style="text-align:right" required></td>
+                    </tr>
+                    <tr><td><br></td></tr>
+                    <tr>
+                        <td>
+                            <h4>
+                                פרטי המארח:                                
+                            </h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="hostIDByHostID">תז/מא:</label></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="hostIDByHostID" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="hostNameByHostID">שם מלא:</label></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="hostNameByHostID" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="hostPhoneByHostID">טלפון:</label></td>
+                        <td><input type="text" autocomplete="off" class="textInput" id="hostPhoneByHostID" dir="ltr" style="text-align:right" required></td>
+                    </tr>
+                    <tr><td><br></td></tr>
+                    <tr>
+                        <td><button id="showNewRequestByHostIDCloseButton" class="closeDialogButton">סגירה</button></td>
+                        <td><button id="showNewRequestByHostIDSubmitButton" class="submit">שלח בקשה</button></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div class="dialog" id="showBlocksDialog">
             <h4>מי חסום על ידך:</h4>
@@ -410,11 +444,12 @@
                         <td><label for="blockedCarNumber">מספר הרכב החסום:</label></td>
                         <td><input type="text" autocomplete="off" class="textInput" id="blockedCarNumber" required></td>
                     </tr>
+                    <tr><td><br></td></tr>
+                    <tr>
+                        <td><button id="showNewBlockCloseButton" class="closeDialogButton">סגירה</button></td>
+                        <td><button id="showNewBlockSubmitButton" class="submit">הוסף חסימה</button></td>
+                    </tr>
                 </table>
-            </div>
-            <div>                
-                <button id="showNewBlockCloseButton" class="closeDialogButton">סגירה</button>
-                <button id="showNewBlockSubmitButton" class="submit">הוסף חסימה</button>
             </div>
         </div>
     </div>

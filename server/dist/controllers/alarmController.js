@@ -12,19 +12,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.changeMessegesTime = exports.removeFromAlarm = exports.addToAlarm = void 0;
+exports.changeTimeToAlert = exports.changePhoneToAlert = exports.changeMessegesTime = exports.removeFromAlarm = exports.addToAlarm = void 0;
 const axios_1 = __importDefault(require("axios"));
 const alarm_1 = require("../alarm");
 const alarm_2 = require("../alarm");
 const alarm_3 = require("../alarm");
 const alarm_4 = require("../alarm");
+const alarm_5 = require("../alarm");
+const alarm_6 = require("../alarm");
 const addToAlarm = (blockerCarNumber, blockedCarNumber) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const blockerUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockerCarNumber}\"`);
         const blockedUser = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy=\"carNumber\"&equalTo=\"${blockedCarNumber}\"`);
         const blockerkey = Object.keys(blockerUser.data)[0];
         const blockedkey = Object.keys(blockedUser.data)[0];
-        const timeToSendMessege = yield (0, alarm_4.calculateTimeToSendMessege)(blockedUser.data[blockedkey]["leaveTime"], parseInt(blockerUser.data[blockerkey]["timeToAlert"]));
+        const timeToSendMessege = yield (0, alarm_6.calculateTimeToSendMessege)(blockedUser.data[blockedkey]["leaveTime"], parseInt(blockerUser.data[blockerkey]["timeToAlert"]));
         const phone = blockerUser.data[blockerkey]["phone"];
         const messege = blockedUser.data[blockedkey]["name"] + ' (טלפון: ' + blockedUser.data[blockedkey]["phone"] + ') רוצה לצאת מהבסיס בשעה ' + blockedUser.data[blockedkey]["leaveTime"];
         const timeToAlert = blockerUser.data[blockerkey]["timeToAlert"];
@@ -44,3 +46,11 @@ const changeMessegesTime = (blockedUserPhone, newLeaveTime) => __awaiter(void 0,
     (0, alarm_3.changeAlarmMessegesTime)(blockedUserPhone, newLeaveTime);
 });
 exports.changeMessegesTime = changeMessegesTime;
+const changePhoneToAlert = (oldBlockerUserPhone, newBlockerUserPhone) => __awaiter(void 0, void 0, void 0, function* () {
+    (0, alarm_4.changePhoneToAlertAlarm)(oldBlockerUserPhone, newBlockerUserPhone);
+});
+exports.changePhoneToAlert = changePhoneToAlert;
+const changeTimeToAlert = (phone, oldBlockerUserTimeToAlert, newBlockerUserTimeToAlert) => __awaiter(void 0, void 0, void 0, function* () {
+    (0, alarm_5.changeTimeToAlertAlarm)(phone, oldBlockerUserTimeToAlert, newBlockerUserTimeToAlert);
+});
+exports.changeTimeToAlert = changeTimeToAlert;

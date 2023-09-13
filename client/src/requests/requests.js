@@ -122,4 +122,30 @@ export class RequestsFunctionality {
             })
             .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
     }
+
+    editRequestByHostID = async (hanldeSuccess, handleFailure) => {
+        document.getElementById('loader-circle').style.visibility = 'visible';
+
+        const requesterID = global.userID;
+        const requesterName = global.userName;
+        const visitorName = document.getElementById("visitorNameByHostID").value;
+        const visitorID = document.getElementById("visitorIDByHostID").value;
+        const visitorPhone = document.getElementById("visitorPhoneByHostID").value;
+        const hostID = document.getElementById("hostIDByHostID").value;
+        const hostName = document.getElementById("hostNameByHostID").value;
+        const hostPhone = document.getElementById("hostPhoneByHostID").value;
+        const key = dialogHandler.keyToUpdate;
+
+        await axios.post(`${apiURL}/requests/editRequest`, {requesterID, requesterName, visitorID, visitorName, visitorPhone, hostID, hostName, hostPhone, key })
+            .then(res => {
+                if (res.status === 200) {
+                    alert(res.data);
+                    hanldeSuccess();
+                }
+            })
+            .catch(err=>{
+                handleFailure();
+            })
+            .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
+    }
 }

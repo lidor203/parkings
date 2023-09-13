@@ -16,6 +16,8 @@ exports.usersRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const axios_1 = __importDefault(require("axios"));
 const alarmController_1 = require("./alarmController");
+const alarmController_2 = require("./alarmController");
+const alarmController_3 = require("./alarmController");
 exports.usersRouter = express_1.default.Router();
 exports.usersRouter.use(express_1.default.json());
 exports.usersRouter.post('/getUsers', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -53,6 +55,12 @@ exports.usersRouter.post('/editUser', (req, res) => __awaiter(void 0, void 0, vo
     }).then(() => {
         if (req.body.currentLeaveTime !== req.body.userLeaveTimeToUpdate) {
             (0, alarmController_1.changeMessegesTime)(req.body.phone, req.body.userLeaveTimeToUpdate);
+        }
+        if (req.body.currentPhone !== req.body.userPhoneToUpdate) {
+            (0, alarmController_2.changePhoneToAlert)(req.body.currentPhone, req.body.userPhoneToUpdate);
+        }
+        if (req.body.currentTimeToAlert !== req.body.userTimeToAlertToUpdate) {
+            (0, alarmController_3.changeTimeToAlert)(req.body.phone, req.body.currentTimeToAlert, req.body.userTimeToAlertToUpdate);
         }
     })
         .catch()

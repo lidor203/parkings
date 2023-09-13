@@ -78,7 +78,7 @@ export const showSecurityFunction = async () => {
                     };
     
                     dialogHandler.setDialog(null);
-                    dialogHandler.setDialog("showNewUser", datas, key, params);
+                    dialogHandler.setDialog("showNewSecurity", datas, key, params);
                 };
 
             const tr = document.createElement("tr");

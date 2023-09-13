@@ -81,12 +81,12 @@ export const showRequestsByHostIDFunction = async () => {
 
                 const editFunc = () => {
                     const datas = {
-                        "visitorName":requests[key]["visitorName"],
-                        "visitorID":requests[key]["visitorID"],
-                        "visitorPhone":requests[key]["visitorPhone"],
-                        "hostID":requests[key]["hostID"],
-                        "hostName":requests[key]["hostName"],
-                        "hostPhone":requests[key]["hostPhone"]
+                        "visitorNameByHostID":requests[key]["visitorName"],
+                        "visitorIDByHostID":requests[key]["visitorID"],
+                        "visitorPhoneByHostID":requests[key]["visitorPhone"],
+                        "hostIDByHostID":requests[key]["hostID"],
+                        "hostNameByHostID":requests[key]["hostName"],
+                        "hostPhoneByHostID":requests[key]["hostPhone"]
                     };
 
                     const params = {
@@ -94,7 +94,7 @@ export const showRequestsByHostIDFunction = async () => {
                     };
     
                     dialogHandler.setDialog(null);
-                    dialogHandler.setDialog("showNewUser", datas, key, params);
+                    dialogHandler.setDialog("showNewRequestByHostID", datas, key, params);
                 };
 
                 const tr = document.createElement("tr");

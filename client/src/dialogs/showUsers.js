@@ -239,7 +239,7 @@ export const showMyUserFunction = async () => {
                 };
 
                 dialogHandler.setDialog(null);
-                dialogHandler.setDialog("showNewUser", datas, key, params);
+                dialogHandler.setDialog("showNewMyUser", datas, key, params);
             };
 
             const tr = document.createElement("tr");

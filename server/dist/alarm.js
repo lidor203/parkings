@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.throwMesseges = exports.changeAlarmMessegesTime = exports.deleteMessegesFromBlocker = exports.addMessegesToBlocker = exports.calculateTimeToSendMessege = void 0;
+exports.throwMesseges = exports.changeTimeToAlertAlarm = exports.changePhoneToAlertAlarm = exports.changeAlarmMessegesTime = exports.deleteMessegesFromBlocker = exports.addMessegesToBlocker = exports.calculateTimeToSendMessege = void 0;
 const wbm = require('wbm');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let timeAlarm = new Map();
@@ -97,6 +97,48 @@ const changeAlarmMessegesTime = (blockedUserPhone, newLeaveTime) => __awaiter(vo
     }));
 });
 exports.changeAlarmMessegesTime = changeAlarmMessegesTime;
+const changePhoneToAlertAlarm = (oldBlockerUserPhone, newBlockerUserPhone) => __awaiter(void 0, void 0, void 0, function* () {
+    timeAlarm.forEach((key) => __awaiter(void 0, void 0, void 0, function* () {
+        timeAlarm.get(key).forEach((child) => {
+            if (child["phone"] === oldBlockerUserPhone) {
+                child["phone"] = newBlockerUserPhone;
+            }
+        });
+    }));
+});
+exports.changePhoneToAlertAlarm = changePhoneToAlertAlarm;
+const changeTimeToAlertAlarm = (phone, oldBlockerUserTimeToAlert, newBlockerUserTimeToAlert) => __awaiter(void 0, void 0, void 0, function* () {
+    const timeToAlertChange = parseInt(newBlockerUserTimeToAlert) - parseInt(oldBlockerUserTimeToAlert);
+    timeAlarm.forEach((key) => __awaiter(void 0, void 0, void 0, function* () {
+        timeAlarm.get(key).forEach(function (child, index, object) {
+            if (child["phone"] === phone) {
+                const newKey = timeAlarm.get(parseInt(key) + (timeToAlertChange * 60000));
+                //meaning - I want to get an alert later than i wanted before
+                if (timeToAlertChange > 0) {
+                    if (timeAlarm.get(newKey) === undefined) {
+                        timeAlarm.set(newKey, []);
+                    }
+                    timeAlarm.get(newKey).push({ "phone": child["phone"], "messege": child["messege"], "timeToAlert": child["timeToAlert"] });
+                }
+                //meaning - I want to get an alert earlier than i wanted before
+                //needs to check if the time has already passed (and than just make it to alert now)
+                else {
+                    let nowInUTCTime = Date.now();
+                    //the time to alert has already passed
+                    if (nowInUTCTime < newKey) {
+                        const firstKeyElement = timeAlarm.entries().next().value[0];
+                        timeAlarm.get(firstKeyElement).push({ "phone": child["phone"], "messege": child["messege"], "timeToAlert": child["timeToAlert"] });
+                    }
+                    else {
+                        timeAlarm.get(newKey).push({ "phone": child["phone"], "messege": child["messege"], "timeToAlert": child["timeToAlert"] });
+                    }
+                }
+                object.splice(index, 1);
+            }
+        });
+    }));
+});
+exports.changeTimeToAlertAlarm = changeTimeToAlertAlarm;
 const throwMesseges = () => __awaiter(void 0, void 0, void 0, function* () {
     let currentTime = "";
     let previousTime = "";
