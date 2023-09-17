@@ -411,6 +411,17 @@
                 </table>
             </div>
         </div>
+        <div class="dialog" id="showRequestsByVisitorIDDialog">
+            <h2>ניהול בקשות כניסה מאושרות</h2>
+            <div class="autocomplete" style="width:300px;">
+                <input type="text" autocomplete="off" class="textInput" id="myRequestsByVisitorIDInput" placeholder="הכנס שם או מספר תעודה מזהה">
+            </div>
+            <table id="requestsByVisitorIDTable" class="table">
+            </table>
+            <form method="dialog" autocomplete="off">
+                <button id="showRequestsByVisitorIDCloseButton" class="closeDialogButton">סגירה</button>
+            </form>
+        </div>
         <div class="dialog" id="showBlocksDialog">
             <h4>מי חסום על ידך:</h4>
             <table id="meBlockTable" class="table" style="table-layout: fixed; width: 100%;">

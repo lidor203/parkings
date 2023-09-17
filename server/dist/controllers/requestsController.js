@@ -60,6 +60,11 @@ exports.requestsRouter.post('/getRequestsByHostID', (req, res) => __awaiter(void
     res.status(200);
     res.json(requests.data);
 }));
+exports.requestsRouter.post('/getRequestsByVisitorID', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const requests = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requests.json?orderBy=\"visitorID\"&equalTo=\"${req.body.visitorID}\"`);
+    res.status(200);
+    res.json(requests.data);
+}));
 exports.requestsRouter.post('/getRequestByVisitorID', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const request = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requests.json?orderBy=\"visitorID\"&equalTo=\"${req.body.visitorID}\"`);
     res.status(200);

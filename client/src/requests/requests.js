@@ -32,6 +32,20 @@ export class RequestsFunctionality {
             .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
     }
 
+    showRequestsByVisitorID = async (hanldeSuccess, handleFailure) => {
+        document.getElementById('loader-circle').style.visibility = 'visible';
+        
+        const visitorID = global.userID;
+        await axios.post(`${apiURL}/requests/getRequestsByVisitorID`, { visitorID })
+            .then(res => {
+                if (res.status === 200) hanldeSuccess(res.data);
+            })
+            .catch(err=>{
+                handleFailure();
+            })
+            .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
+    }
+
     newRequest = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 

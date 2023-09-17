@@ -1,3 +1,4 @@
+import { Roles } from '../common/roles';
 import { RequestsFunctionality } from '../requests/requests';
 import autocomplete from '../autocomplete/autocomplete';
 
@@ -74,46 +75,48 @@ export const showRequestsByHostIDFunction = async () => {
         requestsTable.appendChild(trHead);
 
         for (const key in requests) {             
-            const deleteFunc = () => requestsFunctionality.deleteRequest(
-                () => { document.getElementById("tr" + requests[key]["visitorID"]).remove(); },
-                () => { alert("התרחשה שגיאה במחיקת בקשת הכניסה"); },
-                key);
+            const deleteFunc = () => {
+                    requestsFunctionality.deleteRequest(
+                    () => { document.getElementById("tr" + requests[key]["visitorID"]).remove(); },
+                    () => { alert("התרחשה שגיאה במחיקת בקשת הכניסה"); },
+                    key);
+            }
 
-                const editFunc = () => {
-                    const datas = {
-                        "visitorNameByHostID":requests[key]["visitorName"],
-                        "visitorIDByHostID":requests[key]["visitorID"],
-                        "visitorPhoneByHostID":requests[key]["visitorPhone"],
-                        "hostIDByHostID":requests[key]["hostID"],
-                        "hostNameByHostID":requests[key]["hostName"],
-                        "hostPhoneByHostID":requests[key]["hostPhone"]
-                    };
-
-                    const params = {
-                        
-                    };
-    
-                    dialogHandler.setDialog(null);
-                    dialogHandler.setDialog("showNewRequestByHostID", datas, key, params);
+            const editFunc = () => {
+                const datas = {
+                    "visitorNameByHostID":requests[key]["visitorName"],
+                    "visitorIDByHostID":requests[key]["visitorID"],
+                    "visitorPhoneByHostID":requests[key]["visitorPhone"],
+                    "hostIDByHostID":requests[key]["hostID"],
+                    "hostNameByHostID":requests[key]["hostName"],
+                    "hostPhoneByHostID":requests[key]["hostPhone"]
                 };
 
-                const tr = document.createElement("tr");
-                tr.id = "tr" + requests[key]["visitorID"];
-                const tdVisitorID = document.createElement("td");
-                tdVisitorID.setAttribute("tagName", "relevant");
-                const tdVisitorName = document.createElement("td");
-                tdVisitorName.setAttribute("tagName", "relevant");
-                const tdHostID = document.createElement("td");
-                const tdHostName = document.createElement("td");
-                const tdRequesterID = document.createElement("td");
-                const tdRequesterName = document.createElement("td");
-                const tdDots = document.createElement("td");
-                tdVisitorID.innerText = requests[key]["visitorID"];
-                tdVisitorName.innerText = requests[key]["visitorName"];
-                tdHostID.innerText = requests[key]["hostID"];
-                tdHostName.innerText = requests[key]["hostName"];
-                tdRequesterID.innerText = requests[key]["requesterID"];
-                tdRequesterName.innerText = requests[key]["requesterName"];
+                const params = {
+                    
+                };
+
+                dialogHandler.setDialog(null);
+                dialogHandler.setDialog("showNewRequestByHostID", datas, key, params);
+            };
+
+            const tr = document.createElement("tr");
+            tr.id = "tr" + requests[key]["visitorID"];
+            const tdVisitorID = document.createElement("td");
+            tdVisitorID.setAttribute("tagName", "relevant");
+            const tdVisitorName = document.createElement("td");
+            tdVisitorName.setAttribute("tagName", "relevant");
+            const tdHostID = document.createElement("td");
+            const tdHostName = document.createElement("td");
+            const tdRequesterID = document.createElement("td");
+            const tdRequesterName = document.createElement("td");
+            const tdDots = document.createElement("td");
+            tdVisitorID.innerText = requests[key]["visitorID"];
+            tdVisitorName.innerText = requests[key]["visitorName"];
+            tdHostID.innerText = requests[key]["hostID"];
+            tdHostName.innerText = requests[key]["hostName"];
+            tdRequesterID.innerText = requests[key]["requesterID"];
+            tdRequesterName.innerText = requests[key]["requesterName"];
 
             const editHref = document.createElement("a");
             editHref.className = "link";

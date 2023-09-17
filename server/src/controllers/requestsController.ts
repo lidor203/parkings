@@ -54,6 +54,12 @@ requestsRouter.post('/getRequestsByHostID', async (req: Request, res: Response) 
     res.json(requests.data);
 });
 
+requestsRouter.post('/getRequestsByVisitorID', async (req: Request, res: Response)  => {
+    const requests = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requests.json?orderBy=\"visitorID\"&equalTo=\"${req.body.visitorID}\"`);
+    res.status(200);
+    res.json(requests.data);
+});
+
 requestsRouter.post('/getRequestByVisitorID', async (req: Request, res: Response)  => {
     const request = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requests.json?orderBy=\"visitorID\"&equalTo=\"${req.body.visitorID}\"`);
     res.status(200);  

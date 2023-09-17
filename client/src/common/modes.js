@@ -7,14 +7,15 @@ export const ScreenMode = {
 export const DialogMode = {
     REQUESTS: "showRequests",
     REQUESTSBYHOSTID: "showRequestsByHostID",
+    REQUESTSBYVISITORID: "showRequestsByVisitorID",
     NEWREQUEST: "showNewRequest",
     USERS: "showUsers",
     NEWUSER: "showNewUser",
     MYUSER: "showMyUser",
-    //BAM: "showBam",
-    //NEWBAM: "showNewBam",
     SECURITY: "showSecurity",
     NEWSECURITY: "showNewSecurity",
     BLOCKS: "showBlocks",
-    NEWBLOCK: "showNewBlock"
+    NEWBLOCK: "showNewBlock"//,
+        //BAM: "showBam",
+    //NEWBAM: "showNewBam",
 };
