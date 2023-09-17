@@ -424,13 +424,14 @@
         </div>
         <div class="dialog" id="showBlocksDialog">
             <h4>מי חסום על ידך:</h4>
-            <table id="meBlockTable" class="table" style="table-layout: fixed; width: 100%;">
+            <table id="meBlockTable" class="table" style="table-layout: fixed; margin-left: auto; margin-right: auto;">
             </table>
             <br>
             <h4>מי חוסם אותך:</h4>
-            <table id="blockMeTable" class="table" style="table-layout: fixed; width: 100%;">
+            <table id="blockMeTable" class="table" style="table-layout: fixed; margin-left: auto; margin-right: auto;">
             </table>
             <table id="blocksUserTable">  
+                <tr><td><br></td></tr>
                 <tr>
                     <td><button id="leftNowButton">יצאתי</button></td>
                     <td><button id="updateParkingDetailsButton">עדכן שעת יציאה</button></td>
@@ -446,22 +447,27 @@
         <div class="dialog" id="showNewBlockDialog">
             <h4>פרטי חסימה:</h4>
             <div>
-                <table>
+                <table style="table-layout: fixed; margin-left: auto; margin-right: auto; width: 25%;">
                     <tr>
-                        <td><label for="blockerCarNumber">מספר הרכב החוסם:</label></td>
-                        <td><input type="text" autocomplete="off" class="textInput" id="blockerCarNumber" required></td>
+                        <td style="width:50%"><label for="blockerCarNumber">מספר הרכב החוסם:</label></td>
+                        <td style="width:50%"><input type="text" autocomplete="off" class="textInput" id="blockerCarNumber" required></td>
                     </tr>
                     <tr>
-                        <td><label for="blockedCarNumber">מספר הרכב החסום:</label></td>
-                        <td><input type="text" autocomplete="off" class="textInput" id="blockedCarNumber" required></td>
+                        <td style="width:50%"><label for="blockedCarNumber">מספר הרכב החסום:</label></td>
+                        <td style="width:50%"><input type="text" autocomplete="off" class="textInput" id="blockedCarNumber" required></td>
                     </tr>
                     <tr><td><br></td></tr>
                     <tr>
-                        <td><button id="showNewBlockCloseButton" class="closeDialogButton">סגירה</button></td>
-                        <td><button id="showNewBlockSubmitButton" class="submit">הוסף חסימה</button></td>
+                        <td style="width:50%;"><button id="showNewBlockCloseButton" class="closeDialogButton">סגירה</button></td>
+                        <td style="width:50%;"><button id="showNewBlockSubmitButton" class="submit">הוסף חסימה</button></td>
                     </tr>
                 </table>
             </div>
+        </div>
+        <div class="dialog" id="showHeatMapDialog">
+            <h4>היסטוריית כניסות:</h4>
+            <table id="heatMapTable" class="table"">
+            </table>
         </div>
     </div>
 </body>

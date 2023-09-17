@@ -156,7 +156,7 @@ ul {
     border-bottom: 1px solid #ddd;
 }
 
-.table tr.header {
+.table th {
     background-color: #f1f1f1;
 }
 

@@ -103,13 +103,12 @@ export const showBlocksFunction = async () => {
                 alert("אי אפשר לעדכן זמן עזיבה ריק או לא שלם");
             }
             else if ((newLeaveTimeHours < new Date().getHours()) || 
-                     ((newLeaveTimeHours === new Date().getHours()) && (newLeaveTimeMinutes < new Date().getMinutes()))) {
-                alert("אי אפשר לעדכן זמן עזיבה בעבר");
-            }
+                    ((newLeaveTimeHours === new Date().getHours()) && (newLeaveTimeMinutes < new Date().getMinutes()))) {
+                        alert("אי אפשר לעדכן זמן עזיבה בעבר");
+                    }
             else {
                 if (await usersFunctionality.changeLeaveTime(newLeaveTime, blockedUserPhone, global.userKey)){
                         global.userLeaveTime = newLeaveTime;
-                        alert(global.userLeaveTime);
                 }
             }
         };
