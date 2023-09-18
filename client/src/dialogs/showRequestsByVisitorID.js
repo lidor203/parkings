@@ -56,14 +56,12 @@ export const showRequestsByVisitorIDFunction = async () => {
         const thHostName = document.createElement("th");
         const thRequesterID = document.createElement("th");
         const thRequesterName = document.createElement("th");
-        const thDots = document.createElement("th");
         thVisitorID.innerText = "מספר תעודת האורח";
         thVisitorName.innerText = "שם האורח";
         thHostID.innerText = "מספר תעודת המארח";
         thHostName.innerText = "שם המארח";
         thRequesterID.innerText = "מספר תעודת המאשר";
         thRequesterName.innerText = "שם המאשר";
-        thDots.innerText = "";
         
         trHead.appendChild(thVisitorID);
         trHead.appendChild(thVisitorName);
@@ -71,7 +69,6 @@ export const showRequestsByVisitorIDFunction = async () => {
         trHead.appendChild(thHostName);
         trHead.appendChild(thRequesterID);
         trHead.appendChild(thRequesterName);
-        trHead.appendChild(thDots);
         requestsTable.appendChild(trHead);
 
         for (const key in requests) {             
@@ -85,7 +82,6 @@ export const showRequestsByVisitorIDFunction = async () => {
             const tdHostName = document.createElement("td");
             const tdRequesterID = document.createElement("td");
             const tdRequesterName = document.createElement("td");
-            const tdDots = document.createElement("td");
             tdVisitorID.innerText = requests[key]["visitorID"];
             tdVisitorName.innerText = requests[key]["visitorName"];
             tdHostID.innerText = requests[key]["hostID"];

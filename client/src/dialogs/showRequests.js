@@ -82,24 +82,6 @@ export const showRequestsFunction = async () => {
                 key);
             }
 
-            const editFunc = () => {
-                const datas = {
-                    "visitorName":requests[key]["visitorName"],
-                    "visitorID":requests[key]["visitorID"],
-                    "visitorPhone":requests[key]["visitorPhone"],
-                    "hostID":requests[key]["hostID"],
-                    "hostName":requests[key]["hostName"],
-                    "hostPhone":requests[key]["hostPhone"]
-                };
-
-                const params = {
-                        
-                };
-
-                dialogHandler.setDialog(null);
-                dialogHandler.setDialog("showNewUser", datas, key, params);
-            };
-
             const insertFunc = () => {
                 requestsFunctionality.insertRequest(
                 () => { document.getElementById("tr" + requests[key]["visitorID"]).remove(); },
@@ -127,16 +109,8 @@ export const showRequestsFunction = async () => {
 
             const editHref = document.createElement("a");
             editHref.className = "link";
-
-            if (global.userRole === Roles.Security) {
-                editHref.innerText = "הכנס";
-                editHref.onclick = insertFunc;
-            }
-            else {
-                editHref.innerText = "ערוך";
-                editHref.onclick = editFunc;
-            }
-
+            editHref.innerText = "הכנס";
+            editHref.onclick = insertFunc;
             const deleteHref = document.createElement("a");
             deleteHref.className = "link";
             deleteHref.innerText = "מחק";
