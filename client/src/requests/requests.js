@@ -162,4 +162,25 @@ export class RequestsFunctionality {
             })
             .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
     }
+
+    insertRequest = async (requesterIDForInsert, requesterNameForInsert, hostIDForInsert, hostNameForInsert, 
+                        hostPhoneForInsert, visitorIDForInsert, visitorNameForInsert, visitorPhoneForInsert, 
+                        hanldeSuccess, handleFailure) => {
+        document.getElementById('loader-circle').style.visibility = 'visible';
+
+        await axios.post(`${apiURL}/requests/insertRequestIntoHistory`, {requesterIDForInsert, requesterNameForInsert, 
+                                                              hostIDForInsert, hostNameForInsert, 
+                                                              hostPhoneForInsert, visitorIDForInsert, 
+                                                              visitorNameForInsert, visitorPhoneForInsert })
+            .then(res => {
+                if (res.status === 200) {
+                    alert(res.data);
+                    hanldeSuccess();
+                }
+            })
+            .catch(err=>{
+                handleFailure();
+            })
+            .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
+    }
 }

@@ -83,10 +83,24 @@ export const showRequestsFunction = async () => {
             }
 
             const insertFunc = () => {
-                requestsFunctionality.insertRequest(
-                () => { document.getElementById("tr" + requests[key]["visitorID"]).remove(); },
-                () => { alert("התרחשה שגיאה במחיקת בקשת הכניסה"); },
-                key);
+                const requesterIDForInsert = requests[key]["requesterID"];
+                const requesterNameForInsert = requests[key]["requesterName"];
+                const hostIDForInsert = requests[key]["hostID"];
+                const hostNameForInsert = requests[key]["hostName"];
+                const hostPhoneForInsert = requests[key]["hostPhone"];
+                const visitorIDForInsert = requests[key]["visitorID"];
+                const visitorNameForInsert = requests[key]["visitorName"];
+                const visitorPhoneForInsert = requests[key]["visitorPhone"];
+
+                requestsFunctionality.insertRequest(requesterIDForInsert, requesterNameForInsert, 
+                                                    hostIDForInsert, hostNameForInsert, 
+                                                    hostPhoneForInsert, visitorIDForInsert,
+                                                    visitorNameForInsert, visitorPhoneForInsert,
+                () => { requestsFunctionality.deleteRequest(
+                        () => { document.getElementById("tr" + requests[key]["visitorID"]).remove(); },
+                        () => { alert("התרחשה שגיאה במחיקת בקשת הכניסה"); },
+                        key); },
+                () => { alert("התרחשה שגיאה בשמירת בקשת הכניסה לארכיון"); });
             }
 
             const tr = document.createElement("tr");

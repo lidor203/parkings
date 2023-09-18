@@ -71,3 +71,27 @@ requestsRouter.post('/deleteRequestByVisitorID', async (req: Request, res: Respo
     res.status(200);
     res.json("בקשת הכניסה נמחקה בהצלחה!");
 });
+
+requestsRouter.post('/insertRequestIntoHistory', async (req: Request, res: Response) => { 
+    const nowTime = new Date();
+    const entranceTime = nowTime.getHours().toString().padStart(2,'0') + ":" + nowTime.getMinutes().toString().padStart(2,'0');
+    const entranceMonth = (nowTime.getMonth()+1) < 10 ? "0" + (nowTime.getMonth()+1).toString() : (nowTime.getMonth()+1).toString();
+    const entranceDate = nowTime.getDate().toString() + "-" + entranceMonth + "-" + nowTime.getFullYear().toString();
+
+    await axios.post("https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requestsHistory.json",
+    {
+
+        "entranceDay" : entranceDate,
+        "entranceTime" : entranceTime,
+        "requesterID" : req.body.requesterIDForInsert,
+        "requesterName" : req.body.requesterNameForInsert,
+        "visitorName" : req.body.visitorNameForInsert, 
+        "visitorID" : req.body.visitorIDForInsert, 
+        "visitorPhone" : req.body.visitorPhoneForInsert,
+        "hostID" : req.body.hostIDForInsert, 
+        "hostName" : req.body.hostNameForInsert, 
+        "hostPhone" : req.body.hostPhoneForInsert
+    });
+    res.status(200);
+    res.json("בקשת הכניסה נשמרה בהיסטוריה בהצלחה!");
+});
