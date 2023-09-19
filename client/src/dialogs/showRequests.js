@@ -1,4 +1,3 @@
-import { Roles } from '../common/roles';
 import { RequestsFunctionality } from '../requests/requests';
 import autocomplete from '../autocomplete/autocomplete';
 

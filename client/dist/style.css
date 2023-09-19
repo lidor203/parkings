@@ -150,6 +150,7 @@ ul {
 .table td {
   text-align: center;
   padding: 12px;
+  direction: ltr;
 }
 
 .table tr {

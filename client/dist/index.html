@@ -469,6 +469,18 @@
             <table id="heatMapTable" class="table"">
             </table>
         </div>
+        <div class="dialog" id="showVisitorStatsDialog">
+            <h2>סטטיסטיקות אורחים</h2>
+            <div class="autocomplete" style="width:300px;">
+                <input type="text" autocomplete="off" class="textInput" id="myVisitorStatsInput" placeholder="הכנס שם או מספר תעודה מזהה">
+            </div>
+            <table id="visitorStatsTable" class="table">
+            </table>
+            <br>
+            <form method="dialog" autocomplete="off">
+                <button id="showVisitorStatsCloseButton" class="closeDialogButton">סגירה</button>
+            </form>
+        </div>
     </div>
 </body>
 <script src="bundle.js"></script>

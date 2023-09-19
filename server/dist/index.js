@@ -14,6 +14,7 @@ const bamController_1 = require("./controllers/bamController");
 const securityController_1 = require("./controllers/securityController");
 const jobsController_1 = require("./controllers/jobsController");
 const blocksController_1 = require("./controllers/blocksController");
+const visitorStatsController_1 = require("./controllers/visitorStatsController");
 const alarm_1 = require("./alarm");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -33,6 +34,7 @@ app.use("/bam", bamController_1.bamRouter);
 app.use("/security", securityController_1.securityRouter);
 app.use("/jobs", jobsController_1.jobsRouter);
 app.use("/blocks", blocksController_1.blocksRouter);
+app.use("/visitorStats", visitorStatsController_1.visitorStatsRouter);
 app.get('/', (req, res) => {
     res.send("alive");
 });

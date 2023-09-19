@@ -9,6 +9,7 @@ import { bamRouter } from './controllers/bamController';
 import { securityRouter } from './controllers/securityController';
 import { jobsRouter } from './controllers/jobsController';
 import { blocksRouter } from './controllers/blocksController';
+import { visitorStatsRouter } from './controllers/visitorStatsController';
 import { throwMesseges } from './alarm';
 
 dotenv.config();
@@ -34,6 +35,7 @@ app.use("/bam", bamRouter);
 app.use("/security", securityRouter);
 app.use("/jobs", jobsRouter);
 app.use("/blocks", blocksRouter);
+app.use("/visitorStats", visitorStatsRouter);
 
 app.get('/', (req: Request, res: Response) => {
   res.send("alive");

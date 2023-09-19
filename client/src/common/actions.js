@@ -12,6 +12,7 @@ export const actions = [
     { desc: "חסימות רכבים", role: Roles.Host, dialogId: DialogMode.NEWBLOCK },
     { desc: "משתמש חדש", role: Roles.Approver, dialogId: DialogMode.NEWUSER },
     { desc: "משתמשים", role: Roles.Approver, dialogId: DialogMode.USERS },
+    { desc: "סטטיסטיקות אורחים", role: Roles.Approver, dialogId: DialogMode.VISITORSTATS },
     { desc: "בקשה חדשה", role: Roles.Approver, dialogId: DialogMode.NEWREQUEST },
     { desc: "הבקשות שלי", role: Roles.Approver, dialogId: DialogMode.REQUESTSBYHOSTID },
     { desc: "המשתמש שלי", role: Roles.Approver, dialogId: DialogMode.MYUSER },
