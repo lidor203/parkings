@@ -464,13 +464,17 @@
                 </table>
             </div>
         </div>
-        <div class="dialog" id="showHeatMapDialog">
-            <h4>היסטוריית כניסות:</h4>
-            <table id="heatMapTable" class="table"">
+        <div class="dialog" id="showEntranceStatsDialog">
+            <h2>סטטיסטיקות כניסות</h2>
+            <table id="entranceStatsTable" class="table">
             </table>
+            <br>
+            <form method="dialog" autocomplete="off">
+                <button id="showEntranceStatsCloseButton" class="closeDialogButton">סגירה</button>
+            </form>
         </div>
         <div class="dialog" id="showVisitorStatsDialog">
-            <h2>סטטיסטיקות אורחים</h2>
+            <h2>סטטיסטיקת אורחים</h2>
             <div class="autocomplete" style="width:300px;">
                 <input type="text" autocomplete="off" class="textInput" id="myVisitorStatsInput" placeholder="הכנס שם או מספר תעודה מזהה">
             </div>

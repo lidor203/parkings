@@ -16,6 +16,7 @@ export const DialogMode = {
     NEWSECURITY: "showNewSecurity",
     BLOCKS: "showBlocks",
     VISITORSTATS: "showVisitorStats",
+    ENTRANCESTATS: "showEntranceStats",
     NEWBLOCK: "showNewBlock"//,
         //BAM: "showBam",
     //NEWBAM: "showNewBam",
