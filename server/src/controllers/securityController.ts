@@ -17,19 +17,31 @@ securityRouter.post('/deleteSecurity', async (req: Request, res: Response)  => {
 });
 
 securityRouter.post('/newSecurity', async (req: Request, res: Response) => { 
+    const nowTime = new Date();
+    const month = (nowTime.getMonth()+1) < 10 ? "0" + (nowTime.getMonth()+1).toString() : (nowTime.getMonth()+1).toString();
+    const date = nowTime.getDate().toString() + "-" + month + "-" + nowTime.getFullYear().toString();
+
     await axios.post("https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/securityDisclaimers.json",
     {
         "ID" : req.body.IDToCreate,
-        "reason" : req.body.reasonToCreate
+        "name" : req.body.nameToCreate,
+        "reason" : req.body.reasonToCreate,
+        "date" : date
     });
     res.status(200);
     res.json("חסימת האבטחה נוצרה בהצלחה!");
 });
 
 securityRouter.post('/editSecurity', async (req: Request, res: Response)  => {
+    const nowTime = new Date();
+    const month = (nowTime.getMonth()+1) < 10 ? "0" + (nowTime.getMonth()+1).toString() : (nowTime.getMonth()+1).toString();
+    const date = nowTime.getDate().toString() + "-" + month + "-" + nowTime.getFullYear().toString();
+
     await axios.patch(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/securityDisclaimers/${req.body.key}.json`,
     {
-        "reason" : req.body.reasonToUpdate
+        "name" : req.body.disclaimedNameToUpadte, 
+        "reason" : req.body.disclaimedReasonToUpdate,
+        "date" : date
     });
     res.status(200);
     res.json("חסימת האבטחה עודכנה בהצלחה!");

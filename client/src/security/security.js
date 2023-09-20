@@ -55,10 +55,11 @@ export class SecurityFunctionality {
     editSecurity = async (hanldeSuccess, handleFailure) => {
         document.getElementById('loader-circle').style.visibility = 'visible';
 
-        const reasonToUpdate = document.getElementById("securityReasonForSecurity").value;
+        const disclaimedNameToUpadte = document.getElementById("securityNameForSecurity").value;
+        const disclaimedReasonToUpdate = document.getElementById("securityReasonForSecurity").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post(`${apiURL}/security/editSecurity`, { reasonToUpdate, key})
+        await axios.post(`${apiURL}/security/editSecurity`, { disclaimedNameToUpadte, disclaimedReasonToUpdate, key})
             .then(res => {
                 if (res.status === 200)
                 {

@@ -42,6 +42,7 @@ export const showSecurityFunction = async () => {
                 }
             }
         };
+
         let securityInput = document.getElementById("mySecurityInput");
         securityInput.onkeyup = reduceTable;
         let securityTable = document.getElementById("securityTable");
@@ -50,14 +51,20 @@ export const showSecurityFunction = async () => {
         const trHead = document.createElement("tr");
         trHead.className="header";
         const thDisclaimedID = document.createElement("th");
-        const thReason = document.createElement("th");
+        const thDisclaimedName = document.createElement("th");
+        const thDisclaimedReason = document.createElement("th");
+        const thDisclaimedDate = document.createElement("th");
         const thDots = document.createElement("th");
         thDisclaimedID.innerText = "מזהה";
-        thReason.innerText = "סיבה";
+        thDisclaimedName.innerText = "שם";
+        thDisclaimedReason.innerText = "סיבה";
+        thDisclaimedDate.innerText = "תאריך";
         thDots.innerText = "";
  
         trHead.appendChild(thDisclaimedID);
-        trHead.appendChild(thReason);
+        trHead.appendChild(thDisclaimedName);
+        trHead.appendChild(thDisclaimedReason);
+        trHead.appendChild(thDisclaimedDate);
         trHead.appendChild(thDots);
         securityTable.appendChild(trHead);
 
@@ -67,29 +74,35 @@ export const showSecurityFunction = async () => {
                 () => { alert("התרחשה שגיאה במחיקת הערת האבטחה"); },
                 key);
 
-                const editFunc = () => {
-                    const datas = {
-                        "securityIDForSecurity": security[key]["ID"],
-                        "securityReasonForSecurity" : security[key]["reason"]
-                    };
-
-                    const params = {
-                        
-                    };
-    
-                    dialogHandler.setDialog(null);
-                    dialogHandler.setDialog("showNewSecurity", datas, key, params);
+            const editFunc = () => {
+                const datas = {
+                    "securityIDForSecurity": security[key]["ID"],
+                    "securityNameForSecurity": security[key]["name"],
+                    "securityReasonForSecurity" : security[key]["reason"]
                 };
+
+                const params = {
+                    
+                };
+
+                dialogHandler.setDialog(null);
+                dialogHandler.setDialog("showNewSecurity", datas, key, params);
+            };
 
             const tr = document.createElement("tr");
             tr.id = "tr" + security[key]["ID"];
             const tdDisclaimedID = document.createElement("td");
             tdDisclaimedID.setAttribute("tagName", "relevant");
-            const tdReason = document.createElement("td");
-            tdReason.setAttribute("tagName", "relevant");
+            const tdDisclaimedName = document.createElement("td");
+            tdDisclaimedName.setAttribute("tagName", "relavent");
+            const tdDisclaimedReason = document.createElement("td");
+            tdDisclaimedReason.setAttribute("tagName", "relevant");
+            const tdDisclaimedDate = document.createElement("td");
             const tdDots = document.createElement("td");
             tdDisclaimedID.innerText = security[key]["ID"];
-            tdReason.innerText = security[key]["reason"];
+            tdDisclaimedName.innerText = security[key]["name"];
+            tdDisclaimedReason.innerText = security[key]["reason"];
+            tdDisclaimedDate.innerText = security[key]["date"];
 
             const editHref = document.createElement("a");
             editHref.className = "link";
@@ -130,10 +143,13 @@ export const showSecurityFunction = async () => {
             tdDots.appendChild(containerDiv);
 
             tr.appendChild(tdDisclaimedID);
-            tr.appendChild(tdReason);
+            tr.appendChild(tdDisclaimedName);
+            tr.appendChild(tdDisclaimedReason);
+            tr.appendChild(tdDisclaimedDate);
             tr.appendChild(tdDots);
             securityTable.appendChild(tr);
             securityArray.push(security[key]["ID"]);
+            securityArray.push(security[key]["name"]);
             securityArray.push(security[key]["reason"]);
         }
 

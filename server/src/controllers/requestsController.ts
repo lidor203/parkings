@@ -80,7 +80,6 @@ requestsRouter.post('/insertRequestIntoHistory', async (req: Request, res: Respo
 
     await axios.post("https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requestsHistory.json",
     {
-
         "entranceDay" : entranceDate,
         "entranceTime" : entranceTime,
         "requesterID" : req.body.requesterIDForInsert,
