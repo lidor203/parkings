@@ -4,6 +4,16 @@ const entranceStatsFunctionality = new EntranceStatsFunctionality();
 
 export const showEntranceStatsFunction = async () => {
     await entranceStatsFunctionality.showEntranceStats((entranceStats) => {
+        const nowTime = new Date();
+        const nowMonth = (nowTime.getMonth()+1) < 10 ? "0" + (nowTime.getMonth()+1).toString() : (nowTime.getMonth()+1).toString();
+        const nowDate = nowTime.getDate().toString() + "-" + nowMonth + "-" + nowTime.getFullYear().toString();
+        let pastTime = new Date();
+        pastTime.setDate(pastTime.getDate() - 30);
+        const pastMonth = (nowTime.getMonth()+1) < 10 ? "0" + (pastTime.getMonth()+1).toString() : (pastTime.getMonth()+1).toString();
+        const pastDate = pastTime.getDate().toString() + "-" + pastMonth + "-" + pastTime.getFullYear().toString();
+        const datesRangeForVisitorStats = document.getElementById("datesRangeForEntranceStats");
+        datesRangeForVisitorStats.innerText = "טווח תאריכים מ " + pastDate + " עד " + nowDate;
+
         let entranceStatsTable = document.getElementById("entranceStatsTable");
 
         const trHead = document.createElement("tr");

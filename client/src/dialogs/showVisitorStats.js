@@ -47,6 +47,16 @@ export const showVisitorStatsFunction = async () => {
         let visitorStatsTable = document.getElementById("visitorStatsTable");
         let visitorStatsArray = [];
 
+        const nowTime = new Date();
+        const nowMonth = (nowTime.getMonth()+1) < 10 ? "0" + (nowTime.getMonth()+1).toString() : (nowTime.getMonth()+1).toString();
+        const nowDate = nowTime.getDate().toString() + "-" + nowMonth + "-" + nowTime.getFullYear().toString();
+        let pastTime = new Date();
+        pastTime.setDate(pastTime.getDate() - 30);
+        const pastMonth = (nowTime.getMonth()+1) < 10 ? "0" + (pastTime.getMonth()+1).toString() : (pastTime.getMonth()+1).toString();
+        const pastDate = pastTime.getDate().toString() + "-" + pastMonth + "-" + pastTime.getFullYear().toString();
+        const datesRangeForVisitorStats = document.getElementById("datesRangeForVisitorStats");
+        datesRangeForVisitorStats.innerText = "טווח תאריכים מ " + pastDate + " עד " + nowDate;
+
         const trHead = document.createElement("tr");
         trHead.className="header";
         const thVisitorID = document.createElement("th");

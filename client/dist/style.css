@@ -111,10 +111,11 @@ button {
     overflow-y: auto;
     padding-top: 20px;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 10%;
+    bottom: 10%;
+    left: 10%;
+    right: 10%;
+    max-height: 75%;
     direction: rtl;
     text-align: center;
     background: white;
