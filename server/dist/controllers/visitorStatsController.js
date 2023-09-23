@@ -22,3 +22,8 @@ exports.visitorStatsRouter.post('/getVisitorStats', (req, res) => __awaiter(void
     res.status(200);
     res.json(visitorStats.data);
 }));
+exports.visitorStatsRouter.post('/getVisitorStatsByHostID', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const visitorStats = yield axios_1.default.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requestsHistory.json?orderBy=\"hostID\"&equalTo=\"${req.body.hostID}\"`);
+    res.status(200);
+    res.json(visitorStats.data);
+}));

@@ -150,7 +150,7 @@ export class RequestsFunctionality {
         const hostPhone = document.getElementById("hostPhoneByHostID").value;
         const key = dialogHandler.keyToUpdate;
 
-        await axios.post(`${apiURL}/requests/editRequest`, {requesterID, requesterName, visitorID, visitorName, visitorPhone, hostID, hostName, hostPhone, key })
+        await axios.post(`${apiURL}/requests/editRequest`, { requesterID, requesterName, visitorID, visitorName, visitorPhone, hostID, hostName, hostPhone, key })
             .then(res => {
                 if (res.status === 200) {
                     alert(res.data);

@@ -22,6 +22,7 @@ export const actions = [
     { desc: "הערות אבטחה", role: Roles.Security, dialogId: DialogMode.SECURITY },
     { desc: "הערת אבטחה חדשה", role: Roles.Security, dialogId: DialogMode.NEWSECURITY },
     { desc: "סטטיסטיקת כניסות", role: Roles.Security, dialogId: DialogMode.ENTRANCESTATS },
+    { desc: "סטטיסטיקת מארחים", role: Roles.Security, dialogId: DialogMode.HOSTSTATS },
     { desc: "המשתמש שלי", role: Roles.Security, dialogId: DialogMode.MYUSER },
     { desc: "מגרש החניה שלי", role: Roles.Security, dialogId: DialogMode.BLOCKS },
     { desc: "חסימות רכבים", role: Roles.Security, dialogId: DialogMode.NEWBLOCK },

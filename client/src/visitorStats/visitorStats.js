@@ -14,4 +14,17 @@ export class VisitorStatsFunctionality {
             })
             .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
     }
+
+    showVisitorStatsByHostID = async (hostID, hanldeSuccess, handleFailure) => {
+        document.getElementById('loader-circle').style.visibility = 'visible';
+
+        await axios.post(`${apiURL}/visitorStats/getVisitorStatsByHostID`, { hostID })
+            .then(res => {
+                if (res.status === 200) hanldeSuccess(res.data);
+            })
+            .catch(err=>{
+                handleFailure();
+            })
+            .finally(() => document.getElementById('loader-circle').style.visibility = 'hidden' );
+    }
 }

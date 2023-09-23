@@ -9,3 +9,9 @@ visitorStatsRouter.post('/getVisitorStats', async (req: Request, res: Response) 
     res.status(200);
     res.json(visitorStats.data);
 });
+
+visitorStatsRouter.post('/getVisitorStatsByHostID', async (req: Request, res: Response) => {
+    const visitorStats = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/requestsHistory.json?orderBy=\"hostID\"&equalTo=\"${req.body.hostID}\"`);
+    res.status(200);
+    res.json(visitorStats.data);
+});

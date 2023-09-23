@@ -493,6 +493,34 @@
                 <button id="showVisitorStatsCloseButton" class="closeDialogButton">סגירה</button>
             </form>
         </div>
+        <div class="dialog" id="showVisitorStatsByHostIDDialog">
+            <h2>סטטיסטיקת אורחים</h2>
+            <h5 id="datesRangeForVisitorStatsByHostID"></h5>
+            <br>
+            <div class="autocomplete" style="width:300px;">
+                <input type="text" autocomplete="off" class="textInput" id="myVisitorStatsByHostIDInput" placeholder="הכנס שם או מספר תעודה מזהה">
+            </div>
+            <table id="visitorStatsByHostIDTable" class="table">
+            </table>
+            <br>
+            <form method="dialog" autocomplete="off">
+                <button id="showVisitorStatsByHostIDCloseButton" class="closeDialogButton">סגירה</button>
+            </form>
+        </div>
+        <div class="dialog" id="showHostStatsDialog">
+            <h2>סטטיסטיקת אורחים</h2>
+            <h5 id="datesRangeForHostStats"></h5>
+            <br>
+            <div class="autocomplete" style="width:300px;">
+                <input type="text" autocomplete="off" class="textInput" id="myHostStatsInput" placeholder="הכנס שם או מספר תעודה מזהה">
+            </div>
+            <table id="hostStatsTable" class="table">
+            </table>
+            <br>
+            <form method="dialog" autocomplete="off">
+                <button id="showHostStatsCloseButton" class="closeDialogButton">סגירה</button>
+            </form>
+        </div>
     </div>
 </body>
 <script src="bundle.js"></script>
