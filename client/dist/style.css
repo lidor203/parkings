@@ -126,6 +126,10 @@ button {
     background: white;
 }
 
+.dialog::-webkit-scrollbar {
+  display: none;
+}
+
 .dialog>div:last-child {
   margin-top: 20px;
 }
