@@ -81,6 +81,7 @@ export class DialogHandler {
             }
 
             this.keyToUpdate = null;
+
             document.getElementById(this.dialogMode + "Dialog").classList.remove('open');
             document.getElementById('loader-circle').style.visibility = 'hidden';
         }
@@ -101,7 +102,12 @@ export class DialogHandler {
             code = code + ")";
             await eval(code);
 
+            if (this.dialogMode !== null) {
+                document.getElementById(this.dialogMode + "Dialog").classList.remove('open');
+            }
+
             document.getElementById(mode + "Dialog").classList.add('open');  
+            document.getElementById('loader-circle').style.visibility = 'hidden';
             
             //console.log(datas);
             for (const key in datas) {
@@ -114,6 +120,7 @@ export class DialogHandler {
                 this.keyToUpdate = key;
             }
         }
+
         this.dialogMode = mode;
     }
     

@@ -4,12 +4,12 @@ import autocomplete from '../autocomplete/autocomplete';
 const visitorStatsByHostIDFunctionality = new VisitorStatsFunctionality();
 
 export const showVisitorStatsByHostIDFunction = async (hostID) => {
-    await visitorStatsByHostIDFunctionality.showVisitorStatsByHostID(hostID, (visitorStats) => {
+    await visitorStatsByHostIDFunctionality.showVisitorStatsByHostID(hostID, (visitorStatsByHostID) => {
         const reduceTable = (e) => {
             if ((e.key === "Enter") || (e.key === "Backspace")) {
                 let trArray = document.getElementById("visitorStatsByHostIDTable").rows;
                 let tdArray = [];
-                let chosenInput = visitorStatsInput.value;
+                let chosenInput = visitorStatsByHostIDInput.value;
 
                 if (chosenInput === "") {
                     for (let i = 0; i < trArray.length; i++) {
@@ -74,8 +74,8 @@ export const showVisitorStatsByHostIDFunction = async (hostID) => {
         trHead.appendChild(thVisitorEntrancesCount);
         visitorStatsByHostIDTable.appendChild(trHead);
 
-        for (const key in visitorStats) {
-            const td = document.getElementById("td" + visitorStats[key]["visitorID"]);
+        for (const key in visitorStatsByHostID) {
+            const td = document.getElementById("td" + visitorStatsByHostID[key]["visitorID"]);
 
             if (td !== null) {
                 const visitorEntrancesCount = parseInt(td.innerText);
@@ -83,17 +83,17 @@ export const showVisitorStatsByHostIDFunction = async (hostID) => {
             }
             else {             
                 const tr = document.createElement("tr");
-                tr.id = "tr" + visitorStats[key]["visitorID"];
+                tr.id = "tr" + visitorStatsByHostID[key]["visitorID"];
                 const tdVisitorID = document.createElement("td");
                 tdVisitorID.setAttribute("tagName", "relevant");
                 const tdVisitorName = document.createElement("td");
                 tdVisitorName.setAttribute("tagName", "relevant");
                 const tdVisitorPhone = document.createElement("td");
                 const tdVisitorEntrancesCount = document.createElement("td");
-                tdVisitorEntrancesCount.id = "td" + visitorStats[key]["visitorID"];
-                tdVisitorID.innerText = visitorStats[key]["visitorID"];
-                tdVisitorName.innerText = visitorStats[key]["visitorName"];
-                tdVisitorPhone.innerText = visitorStats[key]["visitorPhone"];
+                tdVisitorEntrancesCount.id = "td" + visitorStatsByHostID[key]["visitorID"];
+                tdVisitorID.innerText = visitorStatsByHostID[key]["visitorID"];
+                tdVisitorName.innerText = visitorStatsByHostID[key]["visitorName"];
+                tdVisitorPhone.innerText = visitorStatsByHostID[key]["visitorPhone"];
                 tdVisitorEntrancesCount.innerText = "1";
                 
                 tr.appendChild(tdVisitorID);
@@ -101,12 +101,12 @@ export const showVisitorStatsByHostIDFunction = async (hostID) => {
                 tr.appendChild(tdVisitorPhone);
                 tr.appendChild(tdVisitorEntrancesCount);
                 visitorStatsByHostIDTable.appendChild(tr);
-                visitorStatsByHostIDArray.push(visitorStats[key]["visitorID"]);
-                visitorStatsByHostIDArray.push(visitorStats[key]["visitorName"]);
+                visitorStatsByHostIDArray.push(visitorStatsByHostID[key]["visitorID"]);
+                visitorStatsByHostIDArray.push(visitorStatsByHostID[key]["visitorName"]);
             }
         }
 
-        autocomplete(document.getElementById("myVisitorStatsInput"), visitorStatsByHostIDArray);
+        autocomplete(document.getElementById("myVisitorStatsByHostIDInput"), visitorStatsByHostIDArray);
     },
         () => { alert("התרחשה שגיאה בשליפת בקשות הכניסה"); })
 }

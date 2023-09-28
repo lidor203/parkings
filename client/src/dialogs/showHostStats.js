@@ -90,7 +90,8 @@ export const showHostStatsFunction = async () => {
                         "hostID":hostStats[key]["hostID"]
                     };
     
-                    dialogHandler.setDialog(null);
+                    //dialogHandler.setDialog(null); There is no need to clear the tables because we might come back to them later
+                    document.getElementById('loader-circle').style.visibility = 'visible';
                     dialogHandler.setDialog("showVisitorStatsByHostID", datas, key, params);
                 };
 
