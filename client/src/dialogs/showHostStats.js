@@ -81,7 +81,9 @@ export const showHostStatsFunction = async () => {
                 const hostEntrancesCount = parseInt(td.innerText);
                 td.innerText = (hostEntrancesCount + 1).toString();
             }
-            else {       
+            else {      
+                document.getElementById('loader-circle').style.visibility = 'visible';
+ 
                 const getVisitorsByHost = () => {
                     const datas = {
                     };
@@ -91,7 +93,6 @@ export const showHostStatsFunction = async () => {
                     };
     
                     //dialogHandler.setDialog(null); There is no need to clear the tables because we might come back to them later
-                    document.getElementById('loader-circle').style.visibility = 'visible';
                     dialogHandler.setDialog("showVisitorStatsByHostID", datas, key, params);
                 };
 

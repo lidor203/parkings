@@ -107,7 +107,6 @@ export class DialogHandler {
             }
 
             document.getElementById(mode + "Dialog").classList.add('open');  
-            document.getElementById('loader-circle').style.visibility = 'hidden';
             
             //console.log(datas);
             for (const key in datas) {
