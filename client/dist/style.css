@@ -140,7 +140,8 @@ button {
   align-items: center;
 }
 
-ul {
+.ul {
+    padding-left: 0px;
     padding-right: 0px;
     width: 80px;
     height: 80px;
