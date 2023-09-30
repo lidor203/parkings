@@ -216,11 +216,6 @@ export const showMyUserFunction = async () => {
         myUserTable.appendChild(trHead);
 
         for (const key in users) {  
-            const deleteFunc = () => usersFunctionality.deleteUser(
-                () => {document.getElementById("tr" + users[key]["ID"]).remove(); },
-                () => { alert("התרחשה שגיאה במחיקת המשתמש"); },
-                key);
-
             const editFunc = () => {
                 const datas = {
                     "userIDForMyUser":users[key]["ID"],
@@ -268,12 +263,7 @@ export const showMyUserFunction = async () => {
             editHref.className = "link";
             editHref.innerText = "ערוך";
             editHref.onclick = editFunc;
-            const deleteHref = document.createElement("a");
-            deleteHref.className = "link";
-            deleteHref.innerText = "מחק";
-            deleteHref.onclick = deleteFunc;
             const editLi = document.createElement("li");
-            const deleteLi = document.createElement("li");
             const ulul = document.createElement("ul");
             ulul.className = "ul";
             const menuDiv = document.createElement("div");
@@ -291,9 +281,7 @@ export const showMyUserFunction = async () => {
             containerDiv.id = "container";
             
             editLi.appendChild(editHref);
-            deleteLi.appendChild(deleteHref);
             ulul.appendChild(editLi);
-            ulul.appendChild(deleteLi);
             menuDiv.appendChild(ulul);
             dotsDiv.appendChild(emptyDiv);
             menuWrapDiv.appendChild(inputRequest);

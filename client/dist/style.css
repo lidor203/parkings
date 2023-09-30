@@ -6,7 +6,7 @@ body {
 
 }
 
-.closeDialogButton {
+.closeDialogButton:not(td *) {
     position: fixed; 
     left:45%; 
     bottom: 15%;
@@ -155,7 +155,8 @@ button {
 
 table {
     position: absolute;
-    left:41%
+    left:33%;
+    max-height: 80%;
 }
 
 .table {
