@@ -1,56 +1,56 @@
 * { box-sizing: border-box; }
 
 body {
-    font: 16px Arial;
+   font: 16px Arial;
     background-color: aquamarine;
 
 }
 
 .closeDialogButton {
-  position: fixed; 
-  left:45%; 
-  bottom: 15%;
+    position: fixed; 
+    left:45%; 
+    bottom: 15%;
 }
 
 .autocomplete {
-  /*the container must be positioned relative:*/
-  position: relative;
-  display: inline-block;
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
 }
 
 .autocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 100%;
-  left: 0;
-  right: 0;
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
 }
 .autocomplete-items div {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
 }
 .autocomplete-items div:hover {
-  /*when hovering an item:*/
-  background-color: #e9e9e9;
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
 }
 .autocomplete-active {
-  /*when navigating through the items using the arrow keys:*/
-  background-color: DodgerBlue !important;
-  color: #ffffff;
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
 }
 
 input[type=text] {
-  width: 100%;
+    width: 100%;
 }
 input[type=submit] {
-  background-color: DodgerBlue;
-  color: #fff;
+    background-color: DodgerBlue;
+    color: #fff;
 }
 
 button {
@@ -70,9 +70,9 @@ button {
 }
 
 .inputDiv{
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 7px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 7px;
 }
 
 .inputDiv label{
@@ -103,7 +103,7 @@ button {
 }
 
 .screen::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .dialogOpener {
@@ -133,17 +133,17 @@ button {
 }
 
 .dialog::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .dialog>div:last-child {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .dialog.open {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .ul {
@@ -153,11 +153,18 @@ button {
     height: 80px;
 }
 
+table {
+    position: absolute;
+    left:41%
+}
+
 .table {
+    position: initial;
     border-collapse: collapse;
     border: 1px solid #ddd;
     margin-top: 10px;
     table-layout: fixed; 
+    max-height: 85%;
 }
 
 .table th {
