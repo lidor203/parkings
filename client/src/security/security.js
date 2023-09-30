@@ -3,7 +3,7 @@ import { apiURL } from "../../config";
 
 export class SecurityFunctionality {
     showSecurity = async (hanldeSuccess, handleFailure) => {
-        document.getElementById('loader-circle').style.visibility = 'visible';
+        //document.getElementById('loader-circle').style.visibility = 'visible';
         
         await axios.post(`${apiURL}/security/getSecurity`)
             .then(res => {
