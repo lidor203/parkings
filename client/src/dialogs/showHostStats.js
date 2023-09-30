@@ -83,6 +83,8 @@ export const showHostStatsFunction = async () => {
             }
             else {      
                 const getVisitorsByHost = () => {
+                    document.getElementById('loader-circle').style.visibility = 'visible';
+
                     const datas = {
                     };
     

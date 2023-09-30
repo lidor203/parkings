@@ -86,7 +86,6 @@ export class DialogHandler {
             document.getElementById('loader-circle').style.visibility = 'hidden';
         }
         else {
-            document.getElementById('loader-circle').style.visibility = 'visible';
             var code = mode + "(";
             
             //console.log(params);

@@ -6,6 +6,12 @@ body {
 
 }
 
+.closeDialogButton {
+  position: fixed; 
+  left:45%; 
+  bottom: 15%;
+}
+
 .autocomplete {
   /*the container must be positioned relative:*/
   position: relative;
