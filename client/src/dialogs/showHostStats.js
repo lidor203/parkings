@@ -74,50 +74,60 @@ export const showHostStatsFunction = async () => {
         trHead.appendChild(thHostEntrancesCount);
         hostStatsTable.appendChild(trHead);
 
-        for (const key in hostStats) {
-            const td = document.getElementById("td" + hostStats[key]["hostID"]);
+        if (JSON.stringify(hostStats) === "{}") {
+            const tr = document.createElement("tr");
+            const td = document.createElement("td");
+            td.setAttribute("colspan", 4);
+            td.innerText = "אין נתוני מארחים";
+            tr.appendChild(td);
+            hostStatsTable.appendChild(tr);
+        }
+        else {
+            for (const key in hostStats) {
+                const td = document.getElementById("td" + hostStats[key]["hostID"]);
 
-            if (td !== null) {
-                const hostEntrancesCount = parseInt(td.innerText);
-                td.innerText = (hostEntrancesCount + 1).toString();
-            }
-            else {      
-                const getVisitorsByHost = () => {
-                    document.getElementById('loader-circle').style.visibility = 'visible';
+                if (td !== null) {
+                    const hostEntrancesCount = parseInt(td.innerText);
+                    td.innerText = (hostEntrancesCount + 1).toString();
+                }
+                else {      
+                    const getVisitorsByHost = () => {
+                        document.getElementById('loader-circle').style.visibility = 'visible';
 
-                    const datas = {
+                        const datas = {
+                        };
+        
+                        const params = {
+                            "hostID":hostStats[key]["hostID"]
+                        };
+        
+                        //dialogHandler.setDialog(null); //There is no need to clear the tables because we might come back to them later
+                        dialogHandler.setDialog("showVisitorStatsByHostID", datas, key, params);
                     };
-    
-                    const params = {
-                        "hostID":hostStats[key]["hostID"]
-                    };
-    
-                    //dialogHandler.setDialog(null); //There is no need to clear the tables because we might come back to them later
-                    dialogHandler.setDialog("showVisitorStatsByHostID", datas, key, params);
-                };
 
-                const tr = document.createElement("tr");
-                tr.id = "tr" + hostStats[key]["hostID"];
-                tr.onclick = getVisitorsByHost;
-                const tdHostID = document.createElement("td");
-                tdHostID.setAttribute("tagName", "relevant");
-                const tdHostName = document.createElement("td");
-                tdHostName.setAttribute("tagName", "relevant");
-                const tdHostPhone = document.createElement("td");
-                const tdHostEntrancesCount = document.createElement("td");
-                tdHostEntrancesCount.id = "td" + hostStats[key]["hostID"];
-                tdHostID.innerText = hostStats[key]["hostID"];
-                tdHostName.innerText = hostStats[key]["hostName"];
-                tdHostPhone.innerText = hostStats[key]["hostPhone"];
-                tdHostEntrancesCount.innerText = "1";
-                
-                tr.appendChild(tdHostID);
-                tr.appendChild(tdHostName);
-                tr.appendChild(tdHostPhone);
-                tr.appendChild(tdHostEntrancesCount);
-                hostStatsTable.appendChild(tr);
-                hostStatsArray.push(hostStats[key]["hostID"]);
-                hostStatsArray.push(hostStats[key]["hostName"]);
+                    const tr = document.createElement("tr");
+                    tr.id = "tr" + hostStats[key]["hostID"];
+                    tr.onclick = getVisitorsByHost;
+                    const tdHostID = document.createElement("td");
+                    tdHostID.setAttribute("tagName", "relevant");
+                    const tdHostName = document.createElement("td");
+                    tdHostName.setAttribute("tagName", "relevant");
+                    const tdHostPhone = document.createElement("td");
+                    const tdHostEntrancesCount = document.createElement("td");
+                    tdHostEntrancesCount.id = "td" + hostStats[key]["hostID"];
+                    tdHostID.innerText = hostStats[key]["hostID"];
+                    tdHostName.innerText = hostStats[key]["hostName"];
+                    tdHostPhone.innerText = hostStats[key]["hostPhone"];
+                    tdHostEntrancesCount.innerText = "1";
+                    
+                    tr.appendChild(tdHostID);
+                    tr.appendChild(tdHostName);
+                    tr.appendChild(tdHostPhone);
+                    tr.appendChild(tdHostEntrancesCount);
+                    hostStatsTable.appendChild(tr);
+                    hostStatsArray.push(hostStats[key]["hostID"]);
+                    hostStatsArray.push(hostStats[key]["hostName"]);
+                }
             }
         }
 

@@ -71,7 +71,6 @@ export const showRequestsByVisitorIDFunction = async () => {
         trHead.appendChild(thRequesterName);
         requestsTable.appendChild(trHead);
 
-        console.log(requests);
         if (requests.length === 0) {
             const tr = document.createElement("tr");
             const td = document.createElement("td");

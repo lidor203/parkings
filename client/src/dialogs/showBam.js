@@ -67,88 +67,98 @@ export const showBamFunction = async () => {
         trHead.appendChild(thDots);
         bamTable.appendChild(trHead);
 
-        for (const key in bam) {
-            const deleteFunc = () => bamFunctionality.deleteBam(
-                () => { document.getElementById("tr" + bam[key]["ID"]).remove(); },
-                () => { alert("התרחשה שגיאה במחיקת הסיווג"); },
-                key);
-
-                const editFunc = () => {
-                    const datas = {
-                        "userIDForBam":bam[key]["ID"],
-                        "userNameForBam":bam[key]["name"],
-                        "userStatusForBam":bam[key]["bamStatus"],
-                        "userValidDateForBam":bam[key]["validDate"]
-                    };
-
-                    const params = {
-                        
-                    };
-    
-                    dialogHandler.setDialog(null);
-                    dialogHandler.setDialog("showNewUser", datas, key, params);
-                };
-
+        if (JSON.stringify(bam) === "{}") {
             const tr = document.createElement("tr");
-            tr.id = "tr" + bam[key]["ID"];
-            const tdUserID = document.createElement("td");
-            tdUserID.setAttribute("tagName", "relevant");
-            const tdUserName = document.createElement("td");
-            tdUserName.setAttribute("tagName", "relevant");
-            const tdBamStatus = document.createElement("td");   
-            const tdValidDate = document.createElement("td");          
-            const tdDots = document.createElement("td");
-            tdUserID.innerText = bam[key]["ID"];           
-            tdUserName.innerText = bam[key]["name"];
-            tdBamStatus.innerText = bam[key]["bamStatus"];
-            tdValidDate.innerText = bam[key]["validDate"];
-
-            const editHref = document.createElement("a");
-            editHref.className = "link";
-            editHref.innerText = "ערוך";
-            editHref.onclick = editFunc;
-            const deleteHref = document.createElement("a");
-            deleteHref.className = "link";
-            deleteHref.innerText = "מחק";
-            deleteHref.onclick = deleteFunc;
-            const editLi = document.createElement("li");
-            const deleteLi = document.createElement("li");
-            const ulul = document.createElement("ul");
-            ulul.className = "ul";
-            const menuDiv = document.createElement("div");
-            menuDiv.className = "menu";
-            const emptyDiv = document.createElement("div");
-            const dotsDiv = document.createElement("div");
-            dotsDiv.className = "dots";
-            const inputRequest = document.createElement("input");
-            inputRequest.id="input" + bam[key]["ID"];
-            inputRequest.type = "checkbox";
-            inputRequest.className = "toggler";
-            const menuWrapDiv = document.createElement("div");
-            menuWrapDiv.id = "menu-wrap";
-            const containerDiv = document.createElement("div");
-            containerDiv.id = "container";
-            
-            editLi.appendChild(editHref);
-            deleteLi.appendChild(deleteHref);
-            ulul.appendChild(editLi);
-            ulul.appendChild(deleteLi);
-            menuDiv.appendChild(ulul);
-            dotsDiv.appendChild(emptyDiv);
-            menuWrapDiv.appendChild(inputRequest);
-            menuWrapDiv.appendChild(dotsDiv);
-            menuWrapDiv.appendChild(menuDiv);
-            containerDiv.appendChild(menuWrapDiv);
-            tdDots.appendChild(containerDiv);
-
-            tr.appendChild(tdUserID);
-            tr.appendChild(tdUserName);
-            tr.appendChild(tdBamStatus);
-            tr.appendChild(tdValidDate);
-            tr.appendChild(tdDots);
+            const td = document.createElement("td");
+            td.setAttribute("colspan", 5);
+            td.innerText = "אין סיווגים";
+            tr.appendChild(td);
             bamTable.appendChild(tr);
-            bamArray.push(bam[key]["ID"]);
-            bamArray.push(bam[key]["name"]);
+        }
+        else {
+            for (const key in bam) {
+                const deleteFunc = () => bamFunctionality.deleteBam(
+                    () => { document.getElementById("tr" + bam[key]["ID"]).remove(); },
+                    () => { alert("התרחשה שגיאה במחיקת הסיווג"); },
+                    key);
+
+                    const editFunc = () => {
+                        const datas = {
+                            "userIDForBam":bam[key]["ID"],
+                            "userNameForBam":bam[key]["name"],
+                            "userStatusForBam":bam[key]["bamStatus"],
+                            "userValidDateForBam":bam[key]["validDate"]
+                        };
+
+                        const params = {
+                            
+                        };
+        
+                        dialogHandler.setDialog(null);
+                        dialogHandler.setDialog("showNewUser", datas, key, params);
+                    };
+
+                const tr = document.createElement("tr");
+                tr.id = "tr" + bam[key]["ID"];
+                const tdUserID = document.createElement("td");
+                tdUserID.setAttribute("tagName", "relevant");
+                const tdUserName = document.createElement("td");
+                tdUserName.setAttribute("tagName", "relevant");
+                const tdBamStatus = document.createElement("td");   
+                const tdValidDate = document.createElement("td");          
+                const tdDots = document.createElement("td");
+                tdUserID.innerText = bam[key]["ID"];           
+                tdUserName.innerText = bam[key]["name"];
+                tdBamStatus.innerText = bam[key]["bamStatus"];
+                tdValidDate.innerText = bam[key]["validDate"];
+
+                const editHref = document.createElement("a");
+                editHref.className = "link";
+                editHref.innerText = "ערוך";
+                editHref.onclick = editFunc;
+                const deleteHref = document.createElement("a");
+                deleteHref.className = "link";
+                deleteHref.innerText = "מחק";
+                deleteHref.onclick = deleteFunc;
+                const editLi = document.createElement("li");
+                const deleteLi = document.createElement("li");
+                const ulul = document.createElement("ul");
+                ulul.className = "ul";
+                const menuDiv = document.createElement("div");
+                menuDiv.className = "menu";
+                const emptyDiv = document.createElement("div");
+                const dotsDiv = document.createElement("div");
+                dotsDiv.className = "dots";
+                const inputRequest = document.createElement("input");
+                inputRequest.id="input" + bam[key]["ID"];
+                inputRequest.type = "checkbox";
+                inputRequest.className = "toggler";
+                const menuWrapDiv = document.createElement("div");
+                menuWrapDiv.id = "menu-wrap";
+                const containerDiv = document.createElement("div");
+                containerDiv.id = "container";
+                
+                editLi.appendChild(editHref);
+                deleteLi.appendChild(deleteHref);
+                ulul.appendChild(editLi);
+                ulul.appendChild(deleteLi);
+                menuDiv.appendChild(ulul);
+                dotsDiv.appendChild(emptyDiv);
+                menuWrapDiv.appendChild(inputRequest);
+                menuWrapDiv.appendChild(dotsDiv);
+                menuWrapDiv.appendChild(menuDiv);
+                containerDiv.appendChild(menuWrapDiv);
+                tdDots.appendChild(containerDiv);
+
+                tr.appendChild(tdUserID);
+                tr.appendChild(tdUserName);
+                tr.appendChild(tdBamStatus);
+                tr.appendChild(tdValidDate);
+                tr.appendChild(tdDots);
+                bamTable.appendChild(tr);
+                bamArray.push(bam[key]["ID"]);
+                bamArray.push(bam[key]["name"]);
+            }
         }
 
         autocomplete(document.getElementById("myBamInput"), bamArray);

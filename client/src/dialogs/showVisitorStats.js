@@ -74,38 +74,48 @@ export const showVisitorStatsFunction = async () => {
         trHead.appendChild(thVisitorEntrancesCount);
         visitorStatsTable.appendChild(trHead);
 
-        for (const key in visitorStats) {
-            const td = document.getElementById("td" + visitorStats[key]["visitorID"]);
+        if (JSON.stringify(visitorStats) === "{}") {
+            const tr = document.createElement("tr");
+            const td = document.createElement("td");
+            td.setAttribute("colspan", 4);
+            td.innerText = "אין נתוני מבקרים";
+            tr.appendChild(td);
+            visitorStatsTable.appendChild(tr);
+        }
+        else {
+            for (const key in visitorStats) {
+                const td = document.getElementById("td" + visitorStats[key]["visitorID"]);
 
-            if (td !== null) {
-                const visitorEntrancesCount = parseInt(td.innerText);
-                td.innerText = (visitorEntrancesCount + 1).toString();
-            }
-            else {             
-                const tr = document.createElement("tr");
-                tr.id = "tr" + visitorStats[key]["visitorID"];
-                const tdVisitorID = document.createElement("td");
-                tdVisitorID.setAttribute("tagName", "relevant");
-                const tdVisitorName = document.createElement("td");
-                tdVisitorName.setAttribute("tagName", "relevant");
-                const tdVisitorPhone = document.createElement("td");
-                const tdVisitorEntrancesCount = document.createElement("td");
-                tdVisitorEntrancesCount.id = "td" + visitorStats[key]["visitorID"];
-                tdVisitorID.innerText = visitorStats[key]["visitorID"];
-                tdVisitorName.innerText = visitorStats[key]["visitorName"];
-                tdVisitorPhone.innerText = visitorStats[key]["visitorPhone"];
-                tdVisitorEntrancesCount.innerText = "1";
-                
-                tr.appendChild(tdVisitorID);
-                tr.appendChild(tdVisitorName);
-                tr.appendChild(tdVisitorPhone);
-                tr.appendChild(tdVisitorEntrancesCount);
-                visitorStatsTable.appendChild(tr);
-                visitorStatsArray.push(visitorStats[key]["visitorID"]);
-                visitorStatsArray.push(visitorStats[key]["visitorName"]);
+                if (td !== null) {
+                    const visitorEntrancesCount = parseInt(td.innerText);
+                    td.innerText = (visitorEntrancesCount + 1).toString();
+                }
+                else {             
+                    const tr = document.createElement("tr");
+                    tr.id = "tr" + visitorStats[key]["visitorID"];
+                    const tdVisitorID = document.createElement("td");
+                    tdVisitorID.setAttribute("tagName", "relevant");
+                    const tdVisitorName = document.createElement("td");
+                    tdVisitorName.setAttribute("tagName", "relevant");
+                    const tdVisitorPhone = document.createElement("td");
+                    const tdVisitorEntrancesCount = document.createElement("td");
+                    tdVisitorEntrancesCount.id = "td" + visitorStats[key]["visitorID"];
+                    tdVisitorID.innerText = visitorStats[key]["visitorID"];
+                    tdVisitorName.innerText = visitorStats[key]["visitorName"];
+                    tdVisitorPhone.innerText = visitorStats[key]["visitorPhone"];
+                    tdVisitorEntrancesCount.innerText = "1";
+                    
+                    tr.appendChild(tdVisitorID);
+                    tr.appendChild(tdVisitorName);
+                    tr.appendChild(tdVisitorPhone);
+                    tr.appendChild(tdVisitorEntrancesCount);
+                    visitorStatsTable.appendChild(tr);
+                    visitorStatsArray.push(visitorStats[key]["visitorID"]);
+                    visitorStatsArray.push(visitorStats[key]["visitorName"]);
+                }
             }
         }
-
+        
         autocomplete(document.getElementById("myVisitorStatsInput"), visitorStatsArray);
     },
         () => { alert("התרחשה שגיאה בשליפת בקשות הכניסה"); })

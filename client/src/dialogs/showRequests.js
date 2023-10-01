@@ -73,10 +73,11 @@ export const showRequestsFunction = async () => {
         trHead.appendChild(thDots);
         requestsTable.appendChild(trHead);
 
-        if (requests.length === 0) {
+        if (JSON.stringify(requests) === "{}") {
             const tr = document.createElement("tr");
             const td = document.createElement("td");
-            td.innerText = "אין בקשות כניסה";
+            td.setAttribute("colspan", 7);
+            td.innerText = "אין בקשות כניסה פעילות";
             tr.appendChild(td);
             requestsTable.appendChild(tr);
         }

@@ -74,7 +74,6 @@ export const showRequestsByHostIDFunction = async () => {
         trHead.appendChild(thDots);
         requestsTable.appendChild(trHead);
 
-        console.log(requests);
         if (JSON.stringify(requests) === "{}") {
             const tr = document.createElement("tr");
             const td = document.createElement("td");
