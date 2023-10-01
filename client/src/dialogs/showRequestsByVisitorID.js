@@ -71,34 +71,44 @@ export const showRequestsByVisitorIDFunction = async () => {
         trHead.appendChild(thRequesterName);
         requestsTable.appendChild(trHead);
 
-        for (const key in requests) {             
+        console.log(requests);
+        if (requests.length === 0) {
             const tr = document.createElement("tr");
-            tr.id = "tr" + requests[key]["visitorID"];
-            const tdVisitorID = document.createElement("td");
-            tdVisitorID.setAttribute("tagName", "relevant");
-            const tdVisitorName = document.createElement("td");
-            tdVisitorName.setAttribute("tagName", "relevant");
-            const tdHostID = document.createElement("td");
-            const tdHostName = document.createElement("td");
-            const tdRequesterID = document.createElement("td");
-            const tdRequesterName = document.createElement("td");
-            tdVisitorID.innerText = requests[key]["visitorID"];
-            tdVisitorName.innerText = requests[key]["visitorName"];
-            tdHostID.innerText = requests[key]["hostID"];
-            tdHostName.innerText = requests[key]["hostName"];
-            tdRequesterID.innerText = requests[key]["requesterID"];
-            tdRequesterName.innerText = requests[key]["requesterName"];
-
-            tr.appendChild(tdVisitorID);
-            tr.appendChild(tdVisitorName);
-            tr.appendChild(tdHostID);
-            tr.appendChild(tdHostName);
-            tr.appendChild(tdRequesterID);
-            tr.appendChild(tdRequesterName);       
-            
+            const td = document.createElement("td");
+            td.innerText = "אין בקשות כניסה שנפתחו עבורך";
+            tr.appendChild(td);
             requestsTable.appendChild(tr);
-            requestsArray.push(requests[key]["visitorID"]);
-            requestsArray.push(requests[key]["visitorName"]);
+        }
+        else {
+            for (const key in requests) {             
+                const tr = document.createElement("tr");
+                tr.id = "tr" + requests[key]["visitorID"];
+                const tdVisitorID = document.createElement("td");
+                tdVisitorID.setAttribute("tagName", "relevant");
+                const tdVisitorName = document.createElement("td");
+                tdVisitorName.setAttribute("tagName", "relevant");
+                const tdHostID = document.createElement("td");
+                const tdHostName = document.createElement("td");
+                const tdRequesterID = document.createElement("td");
+                const tdRequesterName = document.createElement("td");
+                tdVisitorID.innerText = requests[key]["visitorID"];
+                tdVisitorName.innerText = requests[key]["visitorName"];
+                tdHostID.innerText = requests[key]["hostID"];
+                tdHostName.innerText = requests[key]["hostName"];
+                tdRequesterID.innerText = requests[key]["requesterID"];
+                tdRequesterName.innerText = requests[key]["requesterName"];
+
+                tr.appendChild(tdVisitorID);
+                tr.appendChild(tdVisitorName);
+                tr.appendChild(tdHostID);
+                tr.appendChild(tdHostName);
+                tr.appendChild(tdRequesterID);
+                tr.appendChild(tdRequesterName);       
+                
+                requestsTable.appendChild(tr);
+                requestsArray.push(requests[key]["visitorID"]);
+                requestsArray.push(requests[key]["visitorName"]);
+            }
         }
 
         autocomplete(document.getElementById("myRequestsByVisitorIDInput"), requestsArray);
