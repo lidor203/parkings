@@ -14,11 +14,11 @@ export class Profile {
         else {
             usersFunctionality.getRolesDescriptions();
             return actions.filter(action =>
-                action.role == global.userRole //|| 
-                //action.role == Roles.Visitor ||
-                //action.role == Roles.Simple ||
-                //action.role == Roles.Approver || 
-                //action.role == Roles.Security //|| 
+                action.role == global.userRole || 
+                action.role == Roles.Visitor ||
+                action.role == Roles.Simple ||
+                action.role == Roles.Approver || 
+                action.role == Roles.Security //|| 
                 ////action.role == Roles.Bam
         );}
     }

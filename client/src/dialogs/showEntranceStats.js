@@ -4,7 +4,7 @@ const entranceStatsFunctionality = new EntranceStatsFunctionality();
 
 export const showEntranceStatsFunction = async () => {
     await entranceStatsFunctionality.showEntranceStats((entranceStats) => {
-        const timeSlotsNumber = 2;
+        const entranceNumberToInform = 19;
         const nowTime = new Date();
         const nowMonth = (nowTime.getMonth()+1) < 10 ? "0" + (nowTime.getMonth()+1).toString() : (nowTime.getMonth()+1).toString();
         const nowDate = nowTime.getDate().toString() + "-" + nowMonth + "-" + nowTime.getFullYear().toString();
@@ -89,11 +89,11 @@ export const showEntranceStatsFunction = async () => {
 		const td1_1000 = document.createElement("td");
         td1_0700.id = "td1_07:00-07:30";
         td1_0730.id = "td1_07:30-08:00";
-        td1_0800.id = "td0_08:00-08:30";
-		td1_0830.id = "td0_08:30-09:00";
-		td1_0900.id = "td0_09:00-09:30";
-		td1_0930.id = "td0_09:30-10:00";
-		td1_1000.id = "td0_10:00-10:30";
+        td1_0800.id = "td1_08:00-08:30";
+		td1_0830.id = "td1_08:30-09:00";
+		td1_0900.id = "td1_09:00-09:30";
+		td1_0930.id = "td1_09:30-10:00";
+		td1_1000.id = "td1_10:00-10:30";
         tdMonday.innerText = "יום שני";
         td1_0700.innerText = "0";
         td1_0730.innerText = "0";
@@ -121,11 +121,11 @@ export const showEntranceStatsFunction = async () => {
 		const td2_1000 = document.createElement("td");
         td2_0700.id = "td2_07:00-07:30";
         td2_0730.id = "td2_07:30-08:00";
-        td2_0800.id = "td0_08:00-08:30";
-		td2_0830.id = "td0_08:30-09:00";
-		td2_0900.id = "td0_09:00-09:30";
-		td2_0930.id = "td0_09:30-10:00";
-		td2_1000.id = "td0_10:00-10:30";
+        td2_0800.id = "td2_08:00-08:30";
+		td2_0830.id = "td2_08:30-09:00";
+		td2_0900.id = "td2_09:00-09:30";
+		td2_0930.id = "td2_09:30-10:00";
+		td2_1000.id = "td2_10:00-10:30";
         tdTuesday.innerText = "יום שלישי";
         td2_0700.innerText = "0";
         td2_0730.innerText = "0";
@@ -153,11 +153,11 @@ export const showEntranceStatsFunction = async () => {
 		const td3_1000 = document.createElement("td");
         td3_0700.id = "td3_07:00-07:30";
         td3_0730.id = "td3_07:30-08:00";
-        td3_0800.id = "td0_08:00-08:30";
-		td3_0830.id = "td0_08:30-09:00";
-		td3_0900.id = "td0_09:00-09:30";
-		td3_0930.id = "td0_09:30-10:00";
-		td3_1000.id = "td0_10:00-10:30";
+        td3_0800.id = "td3_08:00-08:30";
+		td3_0830.id = "td3_08:30-09:00";
+		td3_0900.id = "td3_09:00-09:30";
+		td3_0930.id = "td3_09:30-10:00";
+		td3_1000.id = "td3_10:00-10:30";
         tdWednsday.innerText = "יום רביעי";
         td3_0700.innerText = "0";
         td3_0730.innerText = "0";
@@ -185,11 +185,11 @@ export const showEntranceStatsFunction = async () => {
 		const td4_1000 = document.createElement("td");	
         td4_0700.id = "td4_07:00-07:30";
         td4_0730.id = "td4_07:30-08:00";
-        td4_0800.id = "td0_08:00-08:30";
-		td4_0830.id = "td0_08:30-09:00";
-		td4_0900.id = "td0_09:00-09:30";
-		td4_0930.id = "td0_09:30-10:00";
-		td4_1000.id = "td0_10:00-10:30";	
+        td4_0800.id = "td4_08:00-08:30";
+		td4_0830.id = "td4_08:30-09:00";
+		td4_0900.id = "td4_09:00-09:30";
+		td4_0930.id = "td4_09:30-10:00";
+		td4_1000.id = "td4_10:00-10:30";	
         tdThursday.innerText = "יום חמישי";
         td4_0700.innerText = "0";
         td4_0730.innerText = "0";
@@ -244,7 +244,7 @@ export const showEntranceStatsFunction = async () => {
                 entrancesCount = entrancesCount + 1;
                 td.innerText = (entrancesCount).toString();
 
-                if (entrancesCount > 0) {
+                if (entrancesCount > entranceNumberToInform) {
                     td.setAttribute("bgcolor", "green");
                 }
             }            
