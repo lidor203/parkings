@@ -55,7 +55,7 @@ export const showHostStatsFunction = async () => {
         const pastMonth = (nowTime.getMonth()+1) < 10 ? "0" + (pastTime.getMonth()+1).toString() : (pastTime.getMonth()+1).toString();
         const pastDate = pastTime.getDate().toString() + "-" + pastMonth + "-" + pastTime.getFullYear().toString();
         const datesRangeForHostStats = document.getElementById("datesRangeForHostStats");
-        datesRangeForHostStats.innerText = "טווח תאריכים מ " + pastDate + " עד ה" + nowDate;
+        datesRangeForHostStats.innerText = "טווח תאריכים מה " + pastDate + " עד ה " + nowDate;
         
         const trHead = document.createElement("tr");
         trHead.className="header";
