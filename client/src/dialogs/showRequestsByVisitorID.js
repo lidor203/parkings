@@ -71,9 +71,10 @@ export const showRequestsByVisitorIDFunction = async () => {
         trHead.appendChild(thRequesterName);
         requestsTable.appendChild(trHead);
 
-        if (requests.length === 0) {
+        if (JSON.stringify(requests) === "{}") {
             const tr = document.createElement("tr");
             const td = document.createElement("td");
+            td.setAttribute("colspan", 6);
             td.innerText = "אין בקשות כניסה שנפתחו עבורך";
             tr.appendChild(td);
             requestsTable.appendChild(tr);
