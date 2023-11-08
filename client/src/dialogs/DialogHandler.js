@@ -71,10 +71,10 @@ export class DialogHandler {
     setDialog = async (mode, datas, key, params) => {
         if (mode == null) {
             const tables = document.getElementsByClassName("table");
-            for (let i = 0; i < tables.length; i++) {
-                tables[i].innerHTML = "";
+            for (let i = 0; i < tables.length; i++) {       
+                tables[i].innerHTML = null;
             }
-            
+
             const inputs = document.getElementsByClassName("textInput");
             for (let i = 0; i < inputs.length; i++) {
                 inputs[i].value = null;
