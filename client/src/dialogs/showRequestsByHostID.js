@@ -78,7 +78,7 @@ export const showRequestsByHostIDFunction = async () => {
             const tr = document.createElement("tr");
             const td = document.createElement("td");
             td.setAttribute("colspan", 7);
-            td.innerText = "אין בקשות כניסה פעילות שנוצרו על ידך";
+            td.innerText = "אין בקשות כניסה פעילות שאת.ה המארח.ת שלהן";
             tr.appendChild(td);
             requestsTable.appendChild(tr);
         }
