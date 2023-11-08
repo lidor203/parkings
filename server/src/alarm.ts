@@ -61,16 +61,20 @@ export const addMessegesToBlocker = async (timeToSendMessege:string, phone:strin
 export const deleteMessegesFromBlocker = (phone:string) => {
     let newMessegeList: any[] = [];
 
-    timeAlarm.forEach(async (key) => {
-        timeAlarm.get(key).forEach((child:any) => {
+    timeAlarm.forEach(async (value, key) => {
+        value.forEach((child:any) => {
             if (child["phone"] !== phone) {
                 newMessegeList.push(child);
             }
         })
 
-        timeAlarm.delete(key);
-        timeAlarm.set(key, []);
-        timeAlarm.get(key).push(newMessegeList);
+        if (newMessegeList.length === 0) {
+            timeAlarm.delete(key);
+        }
+        else {
+            timeAlarm.set(key, newMessegeList);
+        }
+
         newMessegeList = [];
     })  
 }
@@ -79,8 +83,8 @@ export const changeAlarmMessegesTime = async (blockedUserPhone: string, newLeave
     let newMessegeList: any[] = [];
     let oldMessegeList: any[] = [];
 
-    timeAlarm.forEach(async (key) => {
-        timeAlarm.get(key).forEach((child:any) => {
+    timeAlarm.forEach(async (value, key) => {
+        value.forEach((child:any) => {
             if (child["messege"].includes(blockedUserPhone)) {
                 newMessegeList.push(child);
             }
@@ -107,8 +111,8 @@ export const changeAlarmMessegesTime = async (blockedUserPhone: string, newLeave
 }
 
 export const changePhoneToAlertAlarm = async (oldBlockerUserPhone: string, newBlockerUserPhone: string) => {
-    timeAlarm.forEach(async (key) => {
-        timeAlarm.get(key).forEach((child:any) => {
+    timeAlarm.forEach(async (value) => {
+        value.forEach((child:any) => {
             if (child["phone"] === oldBlockerUserPhone) {
                 child["phone"] = newBlockerUserPhone;
             }
@@ -119,8 +123,8 @@ export const changePhoneToAlertAlarm = async (oldBlockerUserPhone: string, newBl
 
 export const changeTimeToAlertAlarm = async (phone: string, oldBlockerUserTimeToAlert: string, newBlockerUserTimeToAlert: string) => {
     const timeToAlertChange = parseInt(newBlockerUserTimeToAlert) - parseInt(oldBlockerUserTimeToAlert);
-    timeAlarm.forEach(async (key) => {
-        timeAlarm.get(key).forEach(function(child:any, index:any, object:any) {
+    timeAlarm.forEach(async (value, key) => {
+        value.forEach(function(child:any, index:any, object:any) {
             if (child["phone"] === phone) {
                 const newKey = timeAlarm.get(parseInt(key) + (timeToAlertChange * 60000));
 

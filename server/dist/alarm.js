@@ -59,15 +59,18 @@ const addMessegesToBlocker = (timeToSendMessege, phone, messege, timeToAlert) =>
 exports.addMessegesToBlocker = addMessegesToBlocker;
 const deleteMessegesFromBlocker = (phone) => {
     let newMessegeList = [];
-    timeAlarm.forEach((key) => __awaiter(void 0, void 0, void 0, function* () {
-        timeAlarm.get(key).forEach((child) => {
+    timeAlarm.forEach((value, key) => __awaiter(void 0, void 0, void 0, function* () {
+        value.forEach((child) => {
             if (child["phone"] !== phone) {
                 newMessegeList.push(child);
             }
         });
-        timeAlarm.delete(key);
-        timeAlarm.set(key, []);
-        timeAlarm.get(key).push(newMessegeList);
+        if (newMessegeList.length === 0) {
+            timeAlarm.delete(key);
+        }
+        else {
+            timeAlarm.set(key, newMessegeList);
+        }
         newMessegeList = [];
     }));
 };
@@ -75,8 +78,8 @@ exports.deleteMessegesFromBlocker = deleteMessegesFromBlocker;
 const changeAlarmMessegesTime = (blockedUserPhone, newLeaveTime) => __awaiter(void 0, void 0, void 0, function* () {
     let newMessegeList = [];
     let oldMessegeList = [];
-    timeAlarm.forEach((key) => __awaiter(void 0, void 0, void 0, function* () {
-        timeAlarm.get(key).forEach((child) => {
+    timeAlarm.forEach((value, key) => __awaiter(void 0, void 0, void 0, function* () {
+        value.forEach((child) => {
             if (child["messege"].includes(blockedUserPhone)) {
                 newMessegeList.push(child);
             }
@@ -98,8 +101,8 @@ const changeAlarmMessegesTime = (blockedUserPhone, newLeaveTime) => __awaiter(vo
 });
 exports.changeAlarmMessegesTime = changeAlarmMessegesTime;
 const changePhoneToAlertAlarm = (oldBlockerUserPhone, newBlockerUserPhone) => __awaiter(void 0, void 0, void 0, function* () {
-    timeAlarm.forEach((key) => __awaiter(void 0, void 0, void 0, function* () {
-        timeAlarm.get(key).forEach((child) => {
+    timeAlarm.forEach((value) => __awaiter(void 0, void 0, void 0, function* () {
+        value.forEach((child) => {
             if (child["phone"] === oldBlockerUserPhone) {
                 child["phone"] = newBlockerUserPhone;
             }
@@ -109,8 +112,8 @@ const changePhoneToAlertAlarm = (oldBlockerUserPhone, newBlockerUserPhone) => __
 exports.changePhoneToAlertAlarm = changePhoneToAlertAlarm;
 const changeTimeToAlertAlarm = (phone, oldBlockerUserTimeToAlert, newBlockerUserTimeToAlert) => __awaiter(void 0, void 0, void 0, function* () {
     const timeToAlertChange = parseInt(newBlockerUserTimeToAlert) - parseInt(oldBlockerUserTimeToAlert);
-    timeAlarm.forEach((key) => __awaiter(void 0, void 0, void 0, function* () {
-        timeAlarm.get(key).forEach(function (child, index, object) {
+    timeAlarm.forEach((value, key) => __awaiter(void 0, void 0, void 0, function* () {
+        value.forEach(function (child, index, object) {
             if (child["phone"] === phone) {
                 const newKey = timeAlarm.get(parseInt(key) + (timeToAlertChange * 60000));
                 //meaning - I want to get an alert later than i wanted before

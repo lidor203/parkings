@@ -44,7 +44,6 @@ blocksRouter.post('/newBlock', async (req: Request, res: Response) => {
 
 blocksRouter.post('/deleteBlock', async (req: Request, res: Response)  => {  
     const blocks = await axios.get(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks.json?orderBy=\"blockerCarNumber\"&equalTo=\"${req.body.userCarNumber}\"`);
-    
     for (const key in blocks.data) {
         await axios.delete(`https://blockedparkings-default-rtdb.europe-west1.firebasedatabase.app/blocks/${key}.json`);
     }
